@@ -181,6 +181,22 @@ module.exports = function(grunt) {
       }
     },
 
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: "app/js",
+          mainConfigFile: "app/js/main.js",
+          include: ["main"],
+          out: "dist/js/main.js",
+          optimize: "none",
+          preserveLicenseComments: false,
+          useStrict: true,
+          wrap: true
+        }
+      }
+    },
+
+
     // useminPrepare scans files for <!-- build:(js|css) --> blocks
     // and injects config into the grunt-contrib-concat task
     useminPrepare: {
