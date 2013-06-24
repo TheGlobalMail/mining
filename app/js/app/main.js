@@ -1,14 +1,17 @@
 define([
   'jquery',
+  'lodash',
   'events',
   './layout',
-  './media'
-], function($, events, layout, media) {
+  './media',
+  './scroll'
+], function($, _, events, layout, media, scroll) {
   'use strict';
 
   var init = function() {
     layout.init();
     media.init();
+    _.defer(scroll.init);
   };
 
   return {

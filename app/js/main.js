@@ -5,7 +5,8 @@ require.config({
     backbone: '../components/backbone/backbone',
     config: './config',
     events: './utils/events',
-    soundManager: '../components/soundmanager/script/soundmanager2'
+    soundManager: '../components/soundmanager/script/soundmanager2',
+    videojs: '../components/video.js/video'
   },
   shim: {
     backbone: {
@@ -14,16 +15,19 @@ require.config({
     },
     soundManager: {
       exports: 'soundManager'
+    },
+    videojs: {
+      exports: 'videojs'
     }
   }
 });
 
 require([
   'jquery',
-  './app/main',
-  // Dependencies
-  'events'
+  // keep events high so that everything can use the one dispatcher
+  'events',
+  './app/main'
 ],
-function ($, app) {
+function($, events, app) {
   $(app.init);
 });

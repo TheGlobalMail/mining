@@ -8,6 +8,7 @@
     "requirejs": "~2.1.6",
     "requirejs-plugins": "~1.0.2",
     "lodash": "~1.3.1",
-    "soundmanager": "latest"
+    "soundmanager": "latest",
+    "video.js": "~4.0.3"
   }
 }

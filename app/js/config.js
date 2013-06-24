@@ -2,8 +2,12 @@ define(function() {
 
   // Defaults
   var config = {
+    // flags
     quiet: false,
-    debug: false
+    debug: false,
+    // variables
+    enterViewportEvent: 'scroll/enter/',
+    exitViewportEvent: 'scroll/exit/'
   };
 
   if (location.search.indexOf('quiet') != -1) {
