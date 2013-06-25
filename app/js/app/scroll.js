@@ -45,13 +45,13 @@ define([
     for (var i = 0; i < elementsToWatch.length; i++) {
       var obj = elementsToWatch[i];
       var offset = obj.offset;
+      var event = null;
 
       var inViewport = (
         (offset.top >= scrollY) && (offset.top <= scrollY + windowHeight) ||
         (offset.bottom >= scrollY) && (offset.bottom <= scrollY + windowHeight)
       );
 
-      var event;
       if (!obj.inViewport && inViewport) {
         obj.inViewport = true;
         event = config.enterViewportEvent + obj.eventIdentifier;
@@ -60,10 +60,10 @@ define([
         event = config.exitViewportEvent + obj.eventIdentifier;
       }
       if (event) {
-        events.trigger(event);
         if (config.debug) {
           console.log('scroll event: ', event);
         }
+        events.trigger(event);
       }
     }
   };
@@ -88,7 +88,7 @@ define([
     windowHeight = window.innerHeight;
     initElements();
     setBindings();
-    events.on('media/intro/load', checkElements);
+    _.defer(checkElements);
   };
 
   return {

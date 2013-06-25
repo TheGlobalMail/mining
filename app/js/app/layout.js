@@ -8,7 +8,8 @@ define([
   var introImage;
 
   var scaleIntro = function() {
-    var introHeight = window.innerHeight - navBar.height() - (introContainer.outerHeight() - introContainer.height());
+    // Window height minus the navbar minus the intro container's padding
+    var introHeight = window.innerHeight - navBar.outerHeight() - (introContainer.outerHeight() - introContainer.height());
     introContainer.css({
       height: introHeight
     });

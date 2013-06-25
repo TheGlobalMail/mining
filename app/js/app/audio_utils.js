@@ -1,39 +1,98 @@
 define([
-  'soundManager'
-], function(soundManager) {
+  'lodash',
+  'config'
+], function(_, config) {
 
-  var fadeIn = function(sound, amount, callback) {
-    var vol = sound.volume;
-    if (vol === 100) {
-      if (callback) {
-        callback();
-      }
-      return;
-    }
-    if (amount < 0) {
-      amount = amount * -1;
-    }
-    sound.setVolume(Math.min(100, vol + amount));
-    setTimeout(function() {
-      fadeIn(sound, amount, callback)
-    }, 20);
+  var fadeStepDelay = 20;
+  var volumeMax = 100;
+  var volumeMin = 0;
+
+  var fadeTimeouts = [];
+
+  var defaultFadeInOptions = {
+    amount: 2, // step amount, % percentage increase per step
+    complete: null // callback
   };
 
-  var fadeOut = function(sound, amount, callback) {
-    var vol = sound.volume;
-    if (vol === 0) {
-      if (callback) {
-        callback();
-      }
+  var defaultFadeOutOptions = {
+    amount: 2, // step amount, % percentage decrease per step
+    complete: null // callback
+  };
+
+  var clearFadeTimeouts = function() {
+    _.each(fadeTimeouts, function(id) {
+      console.log(clearTimeout(id));
+    });
+    fadeTimeouts = [];
+  };
+
+  var fadeIn = function(sound, options) {
+    clearFadeTimeouts();
+
+//    console.log('fade in', +new Date);
+    options = _.extend(defaultFadeInOptions, options);
+    options.amount = Math.abs(options.amount);
+
+    sound.setVolume(0).play();
+
+    if (config.quiet) {
       return;
     }
-    if (amount > 0) {
-      amount = amount * -1;
+
+    // The step function
+    var _fadeIn = function(sound, options) {
+      var vol = sound.volume;
+
+      if (vol >= volumeMax) {
+        if (options.complete) {
+          options.complete();
+        }
+        return;
+      }
+
+      sound.setVolume(Math.min(volumeMax, vol + options.amount));
+
+      var timeoutID = setTimeout(function() {
+        _fadeIn(sound, options);
+      }, fadeStepDelay);
+      fadeTimeouts.push(timeoutID);
+    };
+
+    _fadeIn(sound, options);
+  };
+
+  var fadeOut = function(sound, options) {
+    clearFadeTimeouts();
+
+//    console.log('fade out', +new Date);
+    options = _.extend(defaultFadeOutOptions, options);
+    options.amount = Math.abs(options.amount);
+
+    if (config.quiet) {
+      return;
     }
-    sound.setVolume(Math.max(0, vol + amount));
-    setTimeout(function() {
-      fadeOut(sound, amount, callback)
-    }, 20);
+
+    // The step function
+    var _fadeOut = function(sound, options) {
+      var vol = sound.volume;
+
+      if (vol <= volumeMin) {
+        sound.pause();
+        if (options.complete) {
+          options.complete();
+        }
+        return;
+      }
+
+      sound.setVolume(Math.max(volumeMin, vol - options.amount));
+
+      var timeoutID = setTimeout(function() {
+        _fadeOut(sound, options);
+      }, fadeStepDelay);
+      fadeTimeouts.push(timeoutID);
+    };
+
+    _fadeOut(sound, options);
   };
 
   var loopSound = function(sound) {

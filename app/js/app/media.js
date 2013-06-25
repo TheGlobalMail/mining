@@ -23,12 +23,9 @@ define([
       url: AUDIO_FILES.intro,
       autoLoad: true,
       onload: function() {
-        events.trigger('media/intro/load');
+        audio_utils.fadeIn(this, 4);
       }
     });
-    introAudio.setVolume(0);
-    audio_utils.loopSound(introAudio);
-    introAudio.pause();
   };
 
   var initTestVideo = function() {
@@ -36,8 +33,7 @@ define([
       loop: true,
       width: '100%',
       height: 'auto'
-    });
-    testVideo.volume(0);
+    }).volume(0);
   };
 
   var soundManagerOnReady = function() {
@@ -46,14 +42,14 @@ define([
 
   var setBindings = function() {
     events.on(config.enterViewportEvent + 'intro', function() {
-      introAudio.resume();
-      introAudio.setVolume(0);
-      if (!config.quiet) {
-        audio_utils.fadeIn(introAudio, 4);
+      if (introAudio && introAudio.paused) {
+            console.log('fade in', +new Date);
+        audio_utils.fadeIn(introAudio);
       }
     });
     events.on(config.exitViewportEvent + 'intro', function() {
       if (!config.quiet) {
+            console.log('fade out', +new Date);
         audio_utils.fadeOut(introAudio, 2, introAudio.pause);
       }
     });
