@@ -14,46 +14,55 @@ define([
   };
 
   var testVideo;
+  var introAudio;
 
   var initIntroAudio = function() {
     // Trigger load and play of intro sound
-    soundManager.createSound({
+    introAudio = soundManager.createSound({
       id: 'intro',
       url: AUDIO_FILES.intro,
       autoLoad: true,
       onload: function() {
         events.trigger('media/intro/load');
-        audio_utils.loopSound(this.id);
-        audio_utils.fadeIn('intro', 2);
       }
     });
+    introAudio.setVolume(0);
+    audio_utils.loopSound(introAudio);
+    introAudio.pause();
   };
 
   var initTestVideo = function() {
     testVideo = videojs('test_video_1', {
       loop: true,
-      width: '100%'
+      width: '100%',
+      height: 'auto'
     });
+    testVideo.volume(0);
   };
 
   var soundManagerOnReady = function() {
-    if (!config.quiet) {
-      initIntroAudio();
-    }
+    initIntroAudio();
   };
 
   var setBindings = function() {
     events.on(config.enterViewportEvent + 'intro', function() {
-      audio_utils.fadeIn('intro', 2);
+      introAudio.resume();
+      introAudio.setVolume(0);
+      if (!config.quiet) {
+        audio_utils.fadeIn(introAudio, 4);
+      }
     });
     events.on(config.exitViewportEvent + 'intro', function() {
-      audio_utils.fadeOut('intro', 2);
+      if (!config.quiet) {
+        audio_utils.fadeOut(introAudio, 2, introAudio.pause);
+      }
     });
+
     events.on(config.enterViewportEvent + 'test-video', function() {
-      testVideo.play();
+      video_utils.fadeIn(testVideo);
     });
     events.on(config.exitViewportEvent + 'test-video', function() {
-      testVideo.pause();
+      video_utils.fadeOut(testVideo);
     });
   };
 

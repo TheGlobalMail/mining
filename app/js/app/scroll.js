@@ -28,7 +28,7 @@ define([
     _.map(elementsToWatch, function(obj) {
       var element = $(obj.selector);
       var offset = element.offset();
-      offset.bottom = offset.top + element.height();
+      offset.bottom = offset.top + element.outerHeight();
 
       return _.extend(obj, {
         element: element,

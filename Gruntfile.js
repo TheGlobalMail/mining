@@ -263,6 +263,7 @@ module.exports = function(grunt) {
           src: [
             'index.html',
             'audio/*.mp3',
+            'video/*.m4v',
             'components/soundmanager/swf/*',
             '*.{ico,txt}',
             '.htaccess'
