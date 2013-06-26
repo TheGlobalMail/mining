@@ -7,7 +7,7 @@ var fs = require('fs');
 var path = require('path');
 var cheerio = require('cheerio');
 
-var gFileId = '1lq8BbiIBPx_-3zCtuvjWUc9f5yWplmtHW4OPkIP4ziw';
+var gFileId = '1edGNM4VnvrgYx7_ZSyiHMZHMeuB2kPUz7kFYNphbVbM';
 
 gFile(gFileId, function(err, body){
   if (err) throw(err);
@@ -20,25 +20,39 @@ gFile(gFileId, function(err, body){
   $('p').each(function(i, p){
     var $p = $(p);
     var pHtml = '';
-    var section;
+    var markup;
     if (ended) return;
-    if ($p.text().match(/\[\[end\]\]/i)){
-      ended = true;
-    }else if ($p.text().match(/\{/)){
-      // skip the comment
-    }else if ($p.text().match(/\[\[/)){
-      section = $p.text().match(/=(.*)\]]/)[1];
-      if (inSection){
+    if ($p.text().match(/^\/\*/)){
+      // comment skip
+    }else if ($p.text().match(/^\{/)){
+      markup = JSON.parse($p.text());
+      if (markup.markup === 'end'){
+        ended = true;
+      }else if (markup.tag === 'section'){
+        if (inSection){
+          storyHtml += '</section>';
+        }
+        inSection = true;
+        storyHtml += '<section id="' + markup.id.toLowerCase().replace(/ +/g, '-') + '">';
+        storyHtml += '<h2>' + markup.id.toUpperCase() + '</h2>';
+      }else if (markup.tag === 'video'){
+        if (inSection){
+          storyHtml += '</section>';
+        }
+        inSection = false;
+        storyHtml += '<section>';
+        storyHtml += '<video id="' + markup.id + '">';
+        storyHtml += '<source src="' + markup.src + '" type="video/mp4"/>';
+        storyHtml += '</video>';
         storyHtml += '</section>';
+      }else{
+        throw 'unknown tag: ' + markup;
       }
-      inSection = true;
-      storyHtml += '<section id="' + section.toLowerCase().replace(/ +/g, '-') + '">';
-      storyHtml += '<h2>' + section.toUpperCase() + '</h2>';
     }else{
       $p.children('span').each(function(i, span){
         pHtml += $(span).html();
       });
-      if (pHtml.length){
+      if (pHtml.match(/\w/)){
         storyHtml += '<p>' + pHtml + '</p>';
       }
     }
@@ -46,7 +60,8 @@ gFile(gFileId, function(err, body){
   if (inSection){
     storyHtml += '</section>';
   }
-  $index('article').remove('section').append(storyHtml);
+  $index('article section').remove();
+  $index('article').append(storyHtml);
   fs.writeFileSync(indexFile, $index.html());
   console.error('OK');
 });
