@@ -7,33 +7,33 @@ define([
   var volumeMax = 100;
   var volumeMin = 0;
 
-  var fadeTimeouts = [];
+  var states = {
+    fadeIn: 'fade-in',
+    fadeOut: 'fade-out'
+  };
 
-  var defaultFadeInOptions = {
+  var defaultOptions = {
     amount: 2, // step amount, % percentage increase per step
     complete: null // callback
   };
-
-  var defaultFadeOutOptions = {
-    amount: 2, // step amount, % percentage decrease per step
-    complete: null // callback
-  };
-
-  var clearFadeTimeouts = function() {
-    _.each(fadeTimeouts, function(id) {
-      console.log(clearTimeout(id));
-    });
-    fadeTimeouts = [];
-  };
+  var defaultFadeInOptions = _.extend(defaultOptions, {});
+  var defaultFadeOutOptions = _.extend(defaultOptions, {});
 
   var fadeIn = function(sound, options) {
-    clearFadeTimeouts();
+    if (!sound) {
+      return;
+    }
 
-//    console.log('fade in', +new Date);
+    sound.state = states.fadeIn;
+
     options = _.extend(defaultFadeInOptions, options);
     options.amount = Math.abs(options.amount);
 
-    sound.setVolume(0).play();
+    sound.setVolume(0);
+
+    if (sound.paused || sound.playState == 0) {
+      sound.play();
+    }
 
     if (config.quiet) {
       return;
@@ -41,6 +41,10 @@ define([
 
     // The step function
     var _fadeIn = function(sound, options) {
+      if (sound.state !== states.fadeIn) {
+        return;
+      }
+
       var vol = sound.volume;
 
       if (vol >= volumeMax) {
@@ -52,19 +56,21 @@ define([
 
       sound.setVolume(Math.min(volumeMax, vol + options.amount));
 
-      var timeoutID = setTimeout(function() {
+      setTimeout(function() {
         _fadeIn(sound, options);
       }, fadeStepDelay);
-      fadeTimeouts.push(timeoutID);
     };
 
     _fadeIn(sound, options);
   };
 
   var fadeOut = function(sound, options) {
-    clearFadeTimeouts();
+    if (!sound) {
+      return;
+    }
 
-//    console.log('fade out', +new Date);
+    sound.state = states.fadeOut;
+
     options = _.extend(defaultFadeOutOptions, options);
     options.amount = Math.abs(options.amount);
 
@@ -74,6 +80,10 @@ define([
 
     // The step function
     var _fadeOut = function(sound, options) {
+      if (sound.state !== states.fadeOut) {
+        return;
+      }
+
       var vol = sound.volume;
 
       if (vol <= volumeMin) {
@@ -86,10 +96,9 @@ define([
 
       sound.setVolume(Math.max(volumeMin, vol - options.amount));
 
-      var timeoutID = setTimeout(function() {
+      setTimeout(function() {
         _fadeOut(sound, options);
       }, fadeStepDelay);
-      fadeTimeouts.push(timeoutID);
     };
 
     _fadeOut(sound, options);

@@ -5,8 +5,10 @@ define([
   'events',
   'config',
   './audio_utils',
-  './video_utils'
-], function(_, soundManager, videojs, events, config, audio_utils, video_utils) {
+  './video_utils',
+  './../utils/getScrollY',
+  './scroll'
+], function(_, soundManager, videojs, events, config, audio_utils, video_utils, getScrollY, scroll) {
 
   var AUDIO_ROOT = '/audio/';
   var AUDIO_FILES = {
@@ -23,7 +25,10 @@ define([
       url: AUDIO_FILES.intro,
       autoLoad: true,
       onload: function() {
-        audio_utils.fadeIn(this, 4);
+        var intro = $('.article-header');
+        if (scroll.elementInViewport(intro)) {
+          audio_utils.fadeIn(this, 4);
+        }
       }
     });
   };
@@ -42,16 +47,10 @@ define([
 
   var setBindings = function() {
     events.on(config.enterViewportEvent + 'intro', function() {
-      if (introAudio && introAudio.paused) {
-            console.log('fade in', +new Date);
-        audio_utils.fadeIn(introAudio);
-      }
+      audio_utils.fadeIn(introAudio);
     });
     events.on(config.exitViewportEvent + 'intro', function() {
-      if (!config.quiet) {
-            console.log('fade out', +new Date);
-        audio_utils.fadeOut(introAudio, 2, introAudio.pause);
-      }
+      audio_utils.fadeOut(introAudio);
     });
 
     events.on(config.enterViewportEvent + 'test-video', function() {

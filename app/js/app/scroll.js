@@ -2,8 +2,9 @@ define([
   'jquery',
   'lodash',
   'events',
-  'config'
-], function ($, _, events, config) {
+  'config',
+  './../utils/getScrollY'
+], function ($, _, events, config, getScrollY) {
 
   var elementsToWatch = [{
     selector: '.article-header',
@@ -16,10 +17,6 @@ define([
   // Cached globals values
   var scrollY;
   var windowHeight;
-
-  var getScrollY = function() {
-    return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-  };
 
   var initElements = function() {
     // Calculate the position of each element and cache
@@ -38,6 +35,22 @@ define([
     });
   };
 
+  var offsetInViewport = function(offset, resetScrollY) {
+    if (resetScrollY) {
+      scrollY = getScrollY();
+    }
+    return (
+      (offset.top >= scrollY) && (offset.top <= scrollY + windowHeight) ||
+      (offset.bottom >= scrollY) && (offset.bottom <= scrollY + windowHeight)
+    );
+  };
+
+  var elementInViewport = function(element) {
+    var offset = element.offset();
+    offset.bottom = offset.top + element.outerHeight();
+    return offsetInViewport(offset, true);
+  };
+
   var checkElements = function() {
     // Check if each element is within the viewport and trigger
     // events when an element enters or exits.
@@ -47,10 +60,7 @@ define([
       var offset = obj.offset;
       var event = null;
 
-      var inViewport = (
-        (offset.top >= scrollY) && (offset.top <= scrollY + windowHeight) ||
-        (offset.bottom >= scrollY) && (offset.bottom <= scrollY + windowHeight)
-      );
+      var inViewport = offsetInViewport(offset);
 
       if (!obj.inViewport && inViewport) {
         obj.inViewport = true;
@@ -92,6 +102,8 @@ define([
   };
 
   return {
-    init: init
+    init: init,
+    elementInViewport: elementInViewport,
+    elementsToWatch: elementsToWatch
   }
 });
