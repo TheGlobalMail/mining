@@ -35,7 +35,7 @@ gFile(gFileId, function(err, body){
         }
         inSection = true;
         storyHtml += '<section id="' + markup.id.toLowerCase().replace(/ +/g, '-') + '">';
-        storyHtml += '<h2>' + markup.id.toUpperCase() + '</h2>';
+        storyHtml += '<h1>' + markup.id.toUpperCase() + '</h1>';
       }else if (markup.tag === 'video'){
         if (inSection){
           storyHtml += '</section>';
