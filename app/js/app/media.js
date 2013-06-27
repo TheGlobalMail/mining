@@ -21,10 +21,10 @@ define([
   var initIntroAudio = function() {
     // Trigger load and play of intro sound
     introAudio = soundManager.createSound({
-      id: 'intro',
       url: AUDIO_FILES.intro,
+      autoplay: true,
       autoLoad: true,
-      onload: function() {
+      onplay: function() {
         var intro = $('.article-header');
         if (scroll.elementInViewport(intro)) {
           audio_utils.fadeIn(this, 4);
@@ -35,9 +35,7 @@ define([
 
   var initTestVideo = function() {
     testVideo = videojs('test_video_1', {
-      loop: true,
-      width: '100%',
-      height: 'auto'
+      loop: true
     }).volume(0);
   };
 

@@ -3,10 +3,6 @@ define([
   'config'
 ], function(_, config) {
 
-  var fadeStepDelay = 20;
-  var volumeMax = 100;
-  var volumeMin = 0;
-
   var states = {
     fadeIn: 'fade-in',
     fadeOut: 'fade-out'
@@ -14,94 +10,88 @@ define([
 
   var defaultOptions = {
     amount: 2, // step amount, % percentage increase per step
-    complete: null // callback
+    complete: null, // callback
+    fadeStepDelay: 20,
+    volumeMax: 100,
+    volumeMin: 0
   };
   var defaultFadeInOptions = _.extend(defaultOptions, {});
   var defaultFadeOutOptions = _.extend(defaultOptions, {});
 
   var fadeIn = function(sound, options) {
-    if (!sound) {
-      return;
-    }
-
-    sound.state = states.fadeIn;
-
     options = _.extend(defaultFadeInOptions, options);
     options.amount = Math.abs(options.amount);
 
-    sound.setVolume(0);
+    if (sound && !config.quiet) {
 
-    if (sound.paused || sound.playState == 0) {
-      sound.play();
-    }
+      sound.state = states.fadeIn;
 
-    if (config.quiet) {
-      return;
-    }
+      sound.setVolume(0);
 
-    // The step function
-    var _fadeIn = function(sound, options) {
-      if (sound.state !== states.fadeIn) {
-        return;
+      if (sound.paused || sound.playState == 0) {
+        sound.play();
       }
 
-      var vol = sound.volume;
-
-      if (vol >= volumeMax) {
-        if (options.complete) {
-          options.complete();
+      // The step function
+      var _fadeIn = function(sound, options) {
+        if (sound.state !== states.fadeIn) {
+          return;
         }
-        return;
-      }
 
-      sound.setVolume(Math.min(volumeMax, vol + options.amount));
+        var vol = sound.volume;
 
-      setTimeout(function() {
-        _fadeIn(sound, options);
-      }, fadeStepDelay);
-    };
+        if (vol >= options.volumeMax) {
+          if (options.complete) {
+            options.complete();
+          }
+          return;
+        }
 
-    _fadeIn(sound, options);
+        sound.setVolume(Math.min(options.volumeMax, vol + options.amount));
+
+        setTimeout(function() {
+          _fadeIn(sound, options);
+        }, options.fadeStepDelay);
+      };
+
+      _fadeIn(sound, options);
+    }
   };
 
   var fadeOut = function(sound, options) {
-    if (!sound) {
-      return;
-    }
-
-    sound.state = states.fadeOut;
 
     options = _.extend(defaultFadeOutOptions, options);
     options.amount = Math.abs(options.amount);
 
-    if (config.quiet) {
-      return;
-    }
+    if (sound && !config.quiet) {
+      sound.state = states.fadeOut;
 
-    // The step function
-    var _fadeOut = function(sound, options) {
-      if (sound.state !== states.fadeOut) {
-        return;
-      }
+      // The step function
+      var _fadeOut = function(sound, options) {
 
-      var vol = sound.volume;
-
-      if (vol <= volumeMin) {
-        sound.pause();
-        if (options.complete) {
-          options.complete();
+        if (sound.state !== states.fadeOut) {
+          return;
         }
-        return;
-      }
 
-      sound.setVolume(Math.max(volumeMin, vol - options.amount));
+        var vol = sound.volume;
 
-      setTimeout(function() {
-        _fadeOut(sound, options);
-      }, fadeStepDelay);
-    };
+        if (vol <= options.volumeMin) {
+          sound.pause();
+          if (options.complete) {
+            options.complete();
+          }
+          return;
+        }
 
-    _fadeOut(sound, options);
+        sound.setVolume(Math.max(options.volumeMin, vol - options.amount));
+
+        setTimeout(function() {
+          _fadeOut(sound, options);
+        }, options.fadeStepDelay);
+      };
+
+      _fadeOut(sound, options);
+    }
   };
 
   var loopSound = function(sound) {
