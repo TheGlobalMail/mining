@@ -6,6 +6,7 @@ var request = require('request');
 var fs = require('fs');
 var path = require('path');
 var cheerio = require('cheerio');
+var _ = require('lodash');
 
 var gFileId = '1edGNM4VnvrgYx7_ZSyiHMZHMeuB2kPUz7kFYNphbVbM';
 
@@ -25,7 +26,7 @@ gFile(gFileId, function(err, body){
     if ($p.text().match(/^\/\*/)){
       // comment skip
     }else if ($p.text().match(/^\{/)){
-      markup = JSON.parse($p.text());
+      markup = JSON.parse($p.text().replace(/\}.*$/, '}'));
       if (markup.markup === 'end'){
         ended = true;
       }else if (markup.tag === 'section'){
@@ -46,7 +47,9 @@ gFile(gFileId, function(err, body){
         storyHtml += '</video>';
         storyHtml += '</section>';
       }else{
-        throw 'unknown tag: ' + markup;
+        storyHtml += '<div ' + _.map(markup, function(v,k){
+          return k + '="' + v + '"';
+        }) + '></div>';
       }
     }else{
       $p.children('span').each(function(i, span){
