@@ -43,6 +43,24 @@ define([
     initIntroAudio();
   };
 
+  var bindAudioControl = function() {
+    var audioControl = $('.audio-control');
+    audioControl.on('click', function() {
+      var audioOn = 'audio-on';
+      var audioOff = 'audio-off';
+      config.quiet = audioControl.hasClass(audioOn);
+      if (config.quiet) {
+        audioControl
+          .removeClass(audioOn)
+          .addClass(audioOff);
+      } else {
+        audioControl
+          .addClass(audioOn)
+          .removeClass(audioOff);
+      }
+    });
+  };
+
   var setBindings = function() {
     events.on(config.enterViewportEvent + 'intro', function() {
       audio_utils.fadeIn(introAudio);
@@ -57,6 +75,8 @@ define([
     events.on(config.exitViewportEvent + 'test-video', function() {
       video_utils.fadeOut(testVideo);
     });
+
+    bindAudioControl();
   };
 
   var init = function() {

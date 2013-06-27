@@ -1,10 +1,6 @@
 .navbar {
   margin-bottom: 0;
 }
-.article-header {
-  background: url('/images/JK3A9329.jpg') center no-repeat;
-  padding: 3em;
-}
 
 article p {
   font-size: 16px;
@@ -19,8 +15,21 @@ article p {
   }
 }
 
-article h1 {
-  margin: 1.5em 2em;
+article {
+  h1 {
+    margin: 1.5em 2em;
+  }
+  h2 {
+    margin: 1.5em 2em;
+  }
+}
+
+.article-header {
+  background: url('/images/JK3A9329.jpg') center no-repeat;
+  padding: 3em;
+  .author {
+    margin-left: 6.2em;
+  }
 }
 
 .video-container {
@@ -31,4 +40,17 @@ article h1 {
 video {
   position: absolute;
   height: 100%;
+}
+
+.audio-control {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.5em;
+  &.audio-on {
+
+  }
+  &.audio-off {
+    text-decoration: line-through;
+  }
 }
