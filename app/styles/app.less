@@ -43,13 +43,13 @@ article {
     .row {
       width: 80%;
       margin: 5% auto;
-      border-top: 2px solid rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(0,0,0,0.1);
+      // border-top: 2px solid rgba(0,0,0,0.1);
+      // border-bottom: 2px solid rgba(0,0,0,0.1);
     }
     h1 {
-      margin: 2% 0;
+      margin: 4% 0;
       color: rgba(35,40,44,0.5);
-      .font-size(110);
+      .font-size(150);
       line-height: .75;
       -webkit-mask-image: url('/images/header-bg.png');
       -o-mask-image: url('/images/header-bg.png');
@@ -59,17 +59,19 @@ article {
       float: none;
     }
     h2 {
-      color: rgba(0,0,0,0.6);
+      position: absolute;
+      color: rgba(0,0,0,0.8);
       text-transform: uppercase;
       top: 40%;
       left: 0;
       width: 100%;
       margin: 0;
       padding: 10px 0;
-      .font-size(16);
+      .font-size(22);
       font-weight: 800;
       line-height: 1;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      text-shadow: 0 1px 0 rgba(255,255,255,.15);
+      // border-top: 1px solid rgba(0,0,0,0.1);
       
     }
     .author {
@@ -146,24 +148,28 @@ article {
 }
 
 .chapters {
-  position: fixed;
+  position: relative;
   width: 100%;
-  bottom: -170px;
-  left: 0;
   padding: 10px 0;
   background-color: rgba(0,0,0,.8);
   border-top: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 0 6px rgba(0,0,0,0.1);
   text-align: center;
   color: white;
-  &.active {
-    bottom: 0;
+  &.fixed {
+    left: 0;
+    position: fixed;
+    top: -170px;
+    &.active {
+      top: 0;
+    }
   }
+  
   button.open {
     color: white;
     position: absolute;
     right: 5%;
-    margin-top: -44px;
+    bottom:-33px;
     background: rgba(0,0,0,.8);
     border: 1px solid rgba(0,0,0,0.1);
     border-bottom: none;
