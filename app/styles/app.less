@@ -139,17 +139,41 @@ article {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  height: 40px;
-  padding: 10px;
-  width: 120px;
+  padding: 10px 0;
+  width: 140px;
   text-align: center;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.7);
   .border-radius(4px);
   .font-size(11);
   font-weight: bold;
   text-transform: uppercase;
   color: white;
   &.audio-off { // added when the control is toggled into off
+  }
+  .has-switch {
+    &.switch-small {
+      min-width: 70px;
+      margin-left: 4px;
+    }
+    label.switch-small {
+      box-shadow: 0 0 8px rgba(0,0,0,0.5);
+      .border-radius(2px);
+    }
+    span.switch-small {
+      .font-size(11);
+      box-shadow: inset 0 2px 2px rgba(0,0,0,0.3);
+    }
+    span.switch-left {
+      background: @green;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
+      .border-left-radius(2px);
+    }
+    span.switch-right {
+      background: @red;
+      color: white;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
+      .border-right-radius(2px);
+    }
   }
 }
 
