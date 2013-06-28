@@ -45,19 +45,10 @@ define([
 
   var bindAudioControl = function() {
     var audioControl = $('.audio-control');
-    audioControl.on('click', function() {
-      var audioOn = 'audio-on';
+    audioControl.find('.switch').on('switch-change', function (e, data) {
       var audioOff = 'audio-off';
-      config.quiet = audioControl.hasClass(audioOn);
-      if (config.quiet) {
-        audioControl
-          .removeClass(audioOn)
-          .addClass(audioOff);
-      } else {
-        audioControl
-          .addClass(audioOn)
-          .removeClass(audioOff);
-      }
+      audioControl.toggleClass(audioOff);
+      config.quiet = data.value;
     });
   };
 
