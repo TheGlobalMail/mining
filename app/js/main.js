@@ -26,7 +26,9 @@ require([
   'jquery',
   // keep events high so that everything can use the one dispatcher
   'events',
-  './app/main'
+  './app/main',
+  // dependencies
+  '../components/bootstrap-switch/static/js/bootstrapSwitch'
 ],
 function($, events, app) {
   $(app.init);
