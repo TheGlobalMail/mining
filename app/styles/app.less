@@ -1,6 +1,16 @@
+
+// Overwrite TGM Bootstrap nav styles
 .navbar {
-  margin-bottom: 0;
-  box-shadow: 0 1px 0 rgba(255,255,255,.1);
+  margin: 0;
+  &.special-feature {
+    width: 100%;
+    padding: 8px 0;
+    z-index: 999;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    .brand {
+      background-size: auto;
+    }
+  }
 }
 body {
   background: url('/images/noise.png') 0 0 fixed #fff;
@@ -462,7 +472,7 @@ article {
     }
   }
   .gallery {
-    height: 400px;
+    height: 300px;
     .border-radius(6px);
   }
   .video {
