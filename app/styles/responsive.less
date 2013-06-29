@@ -1,0 +1,66 @@
+//iPad Landscape and smaller screens
+@media only screen and (max-width: 1300px) {
+	article {
+		p {
+			margin: 1em 15% 1em 10%;
+      .font-size(18);
+      &:first-of-type {
+        .font-size(20);
+      }
+		}
+    .article-header {
+      h1 {
+        .font-size(110);
+        margin-top: 4%;
+      }
+      h2 {
+        .font-size(20);
+      }
+    }
+    section {
+      h1 {
+        .font-size(120);
+      }
+      &#introduction {
+        h1 {
+          @textHeight:100px;
+          height: @textHeight;
+          margin-top: -@textHeight;
+        }
+      }
+      .map {
+        height: 400px;
+      }
+      .related {
+        &.pull-right {
+          margin-right: 5%;
+        }
+        &.large {
+          width: 90%;
+          height: 500px;
+          h4 {
+            .font-size(40);
+          }
+        }
+      }
+      .quote {
+        p, p:first-of-type {
+          .font-size(20);
+        }
+        &.final {
+          p {
+            padding: 5% 10% 10% 10%;
+            margin: 0 auto;
+            .font-size(30);
+          }
+        }
+      }
+      blockquote {
+        .font-size(30);
+        .author {
+          .font-size(18);
+        }
+      }
+    }
+	}
+}
