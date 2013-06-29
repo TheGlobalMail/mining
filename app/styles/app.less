@@ -341,26 +341,30 @@ article {
       }
     }
     &#introduction {
-      margin-top: 10%;
+      margin-top:0;
       h1 {
-        .font-size(200);
+        // .font-size(200);
         background: none;
         height: auto;
         .box-shadow(none);
         padding: 0;
         margin: 0;
         text-transform: uppercase;
-        color: rgba(219,211,198,.4);
+        color: rgba(255,255,255,1);
         letter-spacing: -.05em;
-        text-shadow:0 1px 0 white, 0 -1px 0 rgba(219,211,198,.8);
+        text-shadow:0 0 20px rgba(0,0,0,.2);
         margin-bottom: 5%;
-        position: absolute;
-        z-index: -1;
+        // position: absolute;
+        z-index: 10;
         display: block;
         // display: none;
         width: 100%;
+        @textHeight:135px;
+        height: @textHeight;
+        overflow: hidden;
         text-align: center;
-        margin-top: -4%;
+        margin-top: -@textHeight;
+        line-height: 1;
         &:after {
           .box-shadow(none);
           background: none;
@@ -494,17 +498,21 @@ article {
       }
     }
   }
-  .map.pull-right {
-    width: 35%;
-    margin-right: -5%;
-    height: 360px;
-    padding: 1%;
-    background: white;
-    .border-radius(0);
-    .box-shadow(0 10px 10px -10px rgba(0,0,0,.4));
-    border: 1px solid rgba(0,0,0,.1);
-    .rotate(2deg);
-    -ms-transform: rotate(0); //Cause IE sucks
+  .map {
+    width: 100%;
+    height: 600px;
+    &.pull-right {
+      width: 35%;
+      margin-right: -5%;
+      height: 360px;
+      padding: 1%;
+      background: white;
+      .border-radius(0);
+      .box-shadow(0 10px 10px -10px rgba(0,0,0,.4));
+      border: 1px solid rgba(0,0,0,.1);
+      .rotate(2deg);
+      -ms-transform: rotate(0); //Cause IE sucks
+    }
     iframe {
       width: 100%;
       height: 100%;
