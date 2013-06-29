@@ -16,6 +16,10 @@ body {
   background: url('/images/noise.png') 0 0 fixed #fff;
 }
 
+#main {
+  overflow: hidden;
+}
+
 .blur-on {
   -webkit-filter: blur(3px);
   -moz-filter: blur(3px);
@@ -160,26 +164,29 @@ article {
       font-weight: bold;
       .font-size(24);
       line-height: 1.4;
-      // Drop Caps
-      // &:first-letter { 
-      //   font-size: 520%;
-      //   float: left;
-      //   padding: 0 0 10px;
-      //   line-height: .75;
-      //   text-indent: -.5%;
-      // }
     }
     &:last-child {
-      margin-bottom: 3em;
+      margin-bottom: 2em;
     }
   }
   .article-header {
-    background: url('/images/JK3A9329.jpg') center no-repeat;
+    background: @grayDark url('/images/JK3A9329.jpg') center no-repeat;
     background-size: cover;
     padding: 3em 0;
     text-align: center;
     color: rgba(0,0,0,0.8);
     .box-shadow(inset 0 0 20em rgba(0,0,0,0.8));
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/images/noise-overlay.png') center center repeat;
+
+    }
     .row {
       width: 100%;
       margin: 5% auto;
@@ -195,12 +202,13 @@ article {
       mask-image: url('/images/header-bg.png');
       text-shadow:none;
       text-transform: uppercase;
+      letter-spacing: -.05em;
     }
     h2 {
       position: absolute;
       color: rgba(0,0,0,0.8);
       text-transform: uppercase;
-      top: 40%;
+      top: 42%;
       left: 0;
       width: 100%;
       margin: 0;
@@ -225,7 +233,7 @@ article {
         height: 70px;
         background: black;
         .border-radius(50%);
-        background: url('http://cdn.theglobalmail.org/cache/7f/52/7f523bda0e746e7513fe653c3e893efa.jpg') center center no-repeat;
+        background: @grayDarker url('http://cdn.theglobalmail.org/cache/7f/52/7f523bda0e746e7513fe653c3e893efa.jpg') center center no-repeat;
         background-size: 120% auto;
         .box-shadow(inset 0 2px 5px black);
         @borderWidth:4px;
@@ -296,7 +304,6 @@ article {
     &#introduction {
       margin-top:0;
       h1 {
-        // .font-size(200);
         background: none;
         height: auto;
         .box-shadow(none);
@@ -307,10 +314,8 @@ article {
         letter-spacing: -.05em;
         text-shadow:0 0 20px rgba(0,0,0,.2);
         margin-bottom: 5%;
-        // position: absolute;
         z-index: 10;
         display: block;
-        // display: none;
         width: 100%;
         @textHeight:135px;
         height: @textHeight;
@@ -422,8 +427,8 @@ article {
     }
     &.large {
       margin: 0 auto;
-      width: 90%;
-      height: 800px;
+      width: 80%;
+      height: 600px;
       .border-radius(6px);
       img {
         width:100%;
@@ -438,6 +443,7 @@ article {
         color: white;
         text-align: center;
         width: 100%;
+        z-index: 10;
       }
       &:after {
         position: absolute;
@@ -448,7 +454,31 @@ article {
         width: 100%;
         height: 100%;
         .box-shadow(inset 0 4px 30px 0 rgba(0,0,0,0.8));
+        z-index: 9;
       }
+    }
+  }
+  .portrait {
+    height: auto;
+    padding: 10px 10px 15px;
+    .box-shadow(0 4px 12px -5px rgba(0,0,0,0.8));
+    &.pull-left {
+      .rotate(-3deg);
+      -ms-transform: rotate(0); //Cause IE sucks
+    }
+    &.pull-right {
+      .rotate(3deg);
+      -ms-transform: rotate(0); //Cause IE sucks
+    }
+    img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 5px;
+    }
+    span {
+      .font-size(14);
+      font-style: italic;
+      color: @grayLight;
     }
   }
   .map {
@@ -487,13 +517,15 @@ article {
     display: block;
     font-style: italic;
     padding: 10px 0;
-    background: rgba(219,211,198,.2);
-    .box-shadow(inset 0 2px 5px rgba(219,211,198,.8));
+    background: rgba(219,211,198,.2) url('/images/paper.jpg') center fixed;
+    background-size: cover;
+    .box-shadow(inset 0 2px 5px rgba(0,0,0,.2));
     color: #453929;
     p {
       border-left: 2px solid rgba(69,57,41,.2);
       padding-left: 20px;
       .font-size(24);
+      text-shadow: 0 1px 0 white;
       &:first-of-type {
         .font-size(24);
         font-weight: inherit;
@@ -549,6 +581,10 @@ article {
     text-indent: -25px;
     color: #6c6658;
     text-shadow:0 1px 0 white;
+    width: 20%;
+    &.pull-left {
+      text-align: right;
+    }
     .author {
       font-style: normal;
       .font-size(22);
@@ -694,6 +730,7 @@ footer {
   font-weight: bold;
   text-transform: uppercase;
   color: white;
+  z-index: 20;
   &.audio-off { // added when the control is toggled into off
   }
   .has-switch {
