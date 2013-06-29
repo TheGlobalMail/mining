@@ -162,9 +162,9 @@ article {
       margin: 5% auto;
     }
     h1 {
-      margin: 4% 0;
+      margin: 0;
       color: rgba(35,40,44,0.5);
-      .font-size(150);
+      .font-size(180);
       line-height: .75;
       -webkit-mask-image: url('/images/header-bg.png');
       -o-mask-image: url('/images/header-bg.png');
@@ -177,12 +177,12 @@ article {
       position: absolute;
       color: rgba(0,0,0,0.8);
       text-transform: uppercase;
-      top: 43%;
+      top: 40%;
       left: 0;
       width: 100%;
       margin: 0;
       padding: 10px 0;
-      .font-size(22);
+      .font-size(30);
       font-weight: 800;
       line-height: 1;
       text-shadow: 0 1px 0 rgba(255,255,255,.15);
@@ -193,7 +193,9 @@ article {
       left: 0;
       bottom: 5%;
       .font-size(16);
+      color: white;
       .author-pic {
+        position: relative;
         margin: 0 auto 1em;
         display: block;
         width: 70px;
@@ -202,7 +204,20 @@ article {
         .border-radius(50%);
         background: url('http://cdn.theglobalmail.org/cache/7f/52/7f523bda0e746e7513fe653c3e893efa.jpg') center center no-repeat;
         background-size: 120% auto;
-        box-shadow: inset 0 2px 3px black;
+        .box-shadow(inset 0 2px 5px black);
+        @borderWidth:4px;
+        border: @borderWidth solid rgba(255,255,255,0.6);
+        &:before {
+          position: absolute;
+          content: '';
+          display: block;
+          left: -@borderWidth;
+          top: -@borderWidth;
+          width: 100% + (@borderWidth * 3);
+          height: 100%  + (@borderWidth * 3);
+          .box-shadow(0 2px 10px black);
+          .border-radius(50%);
+        }
       }
     }
   }
