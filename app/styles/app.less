@@ -210,10 +210,13 @@ article {
   .article-header {
     background: @grayDark url('/images/JK3A9329.jpg') center fixed;
     background-size: cover;
-    padding: 3em 0;
+    padding: 0;
+    vertical-align: middle;
     text-align: center;
     color: rgba(0,0,0,0.8);
     .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
+    display: table; 
+    width: 100%;
     &:after {
       content: '';
       display: block;
@@ -225,11 +228,14 @@ article {
       background: url('/images/noise-overlay.png') center center repeat;
     }
     .row {
-      width: 100%;
-      margin: 5% auto;
+      display: table-cell; 
+      vertical-align: middle; 
+      width: auto;
+      margin: 0 auto;
     }
     h1 {
-      margin: 0;
+      width: 100%;
+      margin: -130px 0 0;
       color: rgba(35,40,44,0.5);
       .font-size(180);
       line-height: .75;
@@ -245,11 +251,12 @@ article {
       position: absolute;
       color: rgba(0,0,0,0.8);
       text-transform: uppercase;
-      top: 42%;
+      top: 50%;
       left: 0;
       width: 100%;
-      margin: 0;
-      padding: 10px 0;
+      height: 100%;
+      padding: 0;
+      margin:-50px 0 0;
       .font-size(30);
       font-weight: 800;
       line-height: 1;
