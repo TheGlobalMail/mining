@@ -25,6 +25,12 @@ body {
   -moz-filter: blur(3px);
   -ms-filter: blur(3px);
   filter: blur(3px);
+  // Force hardware accelation
+  -webkit-transform: translateZ(0);
+   -moz-transform: translateZ(0);
+   -ms-transform: translateZ(0);
+   -o-transform: translateZ(0);
+   transform: translateZ(0);
 }
 .blur-off {
   -webkit-filter: blur(0px);
@@ -170,7 +176,7 @@ article {
     -moz-hyphens: auto;
     hyphens: auto;
     word-wrap:break-word;
-    margin: 1em 30% 1em 20%;
+    margin: 20px 30% 20px 20%;
     &:first-of-type {
       font-weight: bold;
       .font-size(24);
@@ -184,7 +190,7 @@ article {
       }
     }
     &:last-child {
-      margin-bottom: 2em;
+      margin-bottom: 40px;
     }
   }
   .article-header {
@@ -252,7 +258,7 @@ article {
       color: white;
       .author-pic {
         position: relative;
-        margin: 0 auto 1em;
+        margin: 0 auto 10px;
         display: block;
         width: 70px;
         height: 70px;
@@ -429,8 +435,8 @@ article {
     h4 {
       .font-size(16);
       text-transform: uppercase;
-      margin-bottom: .8em;
-      padding-bottom: .8em;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
       border-bottom: 1px dotted black;
       font-weight: 800;
     }
@@ -451,7 +457,7 @@ article {
         height: auto;
       }
       h4 {
-        margin: .5em 0 0;
+        margin: 15px 0 0;
         padding: 0;
         position: absolute;
         border: none;
@@ -547,7 +553,7 @@ article {
       &:first-of-type {
         .font-size(24);
         font-weight: inherit;
-        margin-top:2em;
+        margin-top:40px;
         &:first-letter {
           font-size: inherit;
           text-indent: 0;
@@ -654,7 +660,7 @@ article {
   video {
     position: absolute;
     height: 100%;
-    margin-bottom: 3em;
+    margin-bottom: 50px;
   }
 }
 
