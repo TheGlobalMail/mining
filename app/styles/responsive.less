@@ -32,9 +32,7 @@
       }
       &#introduction {
         h1 {
-          @textHeight:100px;
-          height: @textHeight;
-          margin-top: -@textHeight;
+          margin: 0 20% 5% 10%;
         }
       }
       .map {
@@ -213,6 +211,9 @@
       }
       &#introduction {
         h1 {
+          text-align: center;
+          margin: 0 auto 5%;
+          .font-size(60);
           @textHeight:50px;
           height: @textHeight;
           margin-top: -@textHeight;
@@ -254,7 +255,10 @@
         text-indent: -15px;
         .font-size(24);
         &.pull-left {
-          text-align: left;
+          text-align: justify;
+          -webkit-hyphens: auto;
+          -moz-hyphens: auto;
+          hyphens: auto;
         }
         .author {
           .font-size(18);
@@ -363,6 +367,7 @@
       }
       &#introduction {
         h1 {
+          .font-size(38);
           @textHeight:30px;
           height: @textHeight;
           margin-top: -@textHeight;

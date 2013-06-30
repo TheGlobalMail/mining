@@ -184,14 +184,22 @@ article {
     .font-size(20);
     line-height: 1.5;
     text-align: justify;
-    -webkit-hyphens: manual;
-    -moz-hyphens: manual;
-    hyphens: manual;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    word-wrap:break-word;
     margin: 1em 30% 1em 20%;
     &:first-of-type {
       font-weight: bold;
       .font-size(24);
       line-height: 1.4;
+      &:first-letter {
+        font-size: 720%;
+        float: left;
+        line-height: .7;
+        margin: 0 0 15px -20px;
+        text-indent: -5px;
+      }
     }
     &:last-child {
       margin-bottom: 2em;
@@ -335,35 +343,24 @@ article {
         height: auto;
         .box-shadow(none);
         padding: 0;
-        margin: 0;
+        margin: 0 30% 5% 20%;
+        text-align: left;
         text-transform: uppercase;
         color: rgba(255,255,255,1);
         letter-spacing: -.05em;
         text-shadow:0 0 20px rgba(0,0,0,.2);
-        margin-bottom: 5%;
         z-index: 10;
         display: block;
         width: 100%;
-        @textHeight:135px;
+        .font-size(100);
+        @textHeight:85px;
         height: @textHeight;
         overflow: hidden;
-        text-align: center;
         margin-top: -@textHeight;
         line-height: 1;
         &:after {
           .box-shadow(none);
           background: none;
-        }
-      }
-      p {
-        &:first-of-type {
-          &:first-letter {
-            font-size: inherit;
-            text-indent: 0;
-            font-style: inherit;
-            line-height: inherit;
-            float: none;
-          }
         }
       }
     }
@@ -565,6 +562,7 @@ article {
           font-style: inherit;
           line-height: inherit;
           float: none;
+          margin: 0;
         }
       }
     }
@@ -611,6 +609,10 @@ article {
     color: #6c6658;
     text-shadow:0 1px 0 white;
     width: 20%;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    word-wrap:break-word;
     &.pull-left {
       text-align: right;
     }
