@@ -40,7 +40,7 @@ body {
   width: 100%;
   padding: 10px 0;
   background-color: rgba(22,22,21,.9);
-  .box-shadow(inset 0 -3px 3px rgba(0,0,0,.2));
+  .box-shadow(inset 0 3px 3px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.4));
   text-align: center;
   color: white;
   z-index: 99;
@@ -52,20 +52,41 @@ body {
       top: 0;
     }
   }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/noise-overlay.png') center center repeat;
+  }
   button.open {
     color: white;
     .border-bottom-radius(4px);
     position: absolute;
     left: 20px;
     bottom:-32px;
-    background: rgba(22,22,21,.92);
+    background: rgba(22,22,21,.9);
     border: none;
     .font-size(11);
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+    .box-shadow(0 2px 4px rgba(0,0,0,.4));
     padding: 6px 10px 6px 30px;
     width: 140px;
+    z-index: 100;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/images/noise-overlay.png') center center repeat;
+    }
     ul {
       margin: 0;
       position: absolute;
@@ -84,19 +105,25 @@ body {
     }
   }
   ul {
-    margin: 0 auto;
+    margin: 0;
     display: block;
     width: 100%;
     li {
       vertical-align: top;
       display: inline-block;
-      width: 12%;
+      width: 11%;
       min-height: 150px;
       padding: 1%;
       .opacity(60);
       .border-radius(4px);
       border: 1px solid rgba(0,0,0,0);
       .transition(all 150ms ease-in);
+      &:first-of-type {
+        //Force hyphenation of long word
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
+      }
       &:hover, &:focus, &:active {
         .opacity(100);
         cursor: pointer;
@@ -119,6 +146,7 @@ body {
       .pic {
         width: 100%;
         height: auto;
+        max-height: 100px;
         background-color: black;
         .border-radius(2px);
         overflow: hidden;
@@ -185,7 +213,6 @@ article {
       width: 100%;
       height: 100%;
       background: url('/images/noise-overlay.png') center center repeat;
-
     }
     .row {
       width: 100%;
@@ -460,7 +487,7 @@ article {
   }
   .portrait {
     height: auto;
-    padding: 10px 10px 15px;
+    padding: 10px 10px 20px;
     .box-shadow(0 4px 12px -5px rgba(0,0,0,0.8));
     &.pull-left {
       .rotate(-3deg);
@@ -473,7 +500,7 @@ article {
     img {
       width: 100%;
       height: auto;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
     span {
       display: block;
@@ -620,18 +647,6 @@ footer {
   .loading & {
     display: none;
   }
-  &:before {
-    content:'';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height:232px;
-    background: url('/images/noise-fader.png') repeat-x center bottom transparent;
-    background-size: auto 232px;
-    top: -232px;
-    left: 0;
-    z-index: 0;
-  }
   h4 {
     color: white;
     text-transform: uppercase;
@@ -732,6 +747,16 @@ footer {
   text-transform: uppercase;
   color: white;
   z-index: 20;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/noise-overlay.png') center center repeat;
+  }
   h5 {
     width: 40px;
    .font-size(10);
