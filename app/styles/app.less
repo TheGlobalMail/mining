@@ -304,6 +304,7 @@ article {
       color: rgba(0,0,0,0.4);
       line-height: .8;
       text-transform: uppercase;
+      overflow: hidden;
       span {
         display: block;
         width: auto;
@@ -335,7 +336,8 @@ article {
         width: 100%;
         height: 100%;
         background: url('/images/noise-overlay.png') center center repeat;
-        // .box-shadow(inset 0 0 20em rgba(0,0,0,0.9));
+        .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
+        overflow: hidden;
       }
     }
     &#introduction {
@@ -575,19 +577,47 @@ article {
       font-style: normal;
     }
     &.final {
+      position: relative;
       background: @grayDark url('/images/final.jpg') center center fixed;
       background-size: cover;
-      .box-shadow(inset 0 0 20em rgba(0,0,0,0.8));
-      padding: 0;
+      .box-shadow(inset 0 0 100px rgba(0,0,0,0.8));
+      padding: 5% 0 10%;
       margin-top: 2.5%;
       p {
-        .font-size(36);
+        position: relative;
+        padding:2% 2% 3%;
+        .font-size(32);
+        text-shadow:none;
+        width: 60%;
         color: white;
         border-color: rgba(255,255,255,.2);
         background: rgba(0,0,0,0.4);
         margin: 0;
-        border: none;
-        padding: 5% 20% 10% 20%;
+        border: 8px solid rgba(255,255,255,.8);
+        margin: 0 auto;
+        .author {
+          border-top: 1px dotted  rgba(255,255,255,.8);
+          margin-top: 3%;
+          padding-top: 2%;
+          text-align: right;
+          display: block;
+          font-size:60%;
+          font-style: normal;
+        }
+      }
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -20px;
+        left: 20%;
+        margin: 5% 0 0 0;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 20px 20px 20px;
+        border-color: transparent transparent rgba(255,255,255,.8) transparent;
+        -webkit-transform:rotate(360deg);
       }
       &:after {
         content: '';
