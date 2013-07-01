@@ -286,12 +286,16 @@
   .chapters {
     background-color: rgb(22,22,21);
     padding: 0;
+    &.fixed {
+      top: -404px;
+    }
     ul {
       li {
         display: block;
         width: auto;
         padding: 4px 15px;
         margin: 0 auto;
+        height: auto;
         min-height: 47px;
         .border-radius(0);
         border-bottom: 1px solid rgba(255,255,255,.1);
