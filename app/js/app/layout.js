@@ -1,7 +1,8 @@
 define([
   'lodash',
-  'jquery'
-], function(_, $) {
+  'jquery',
+  'events'
+], function(_, $, events) {
 
   var navBar;
   var introContainer;
@@ -9,8 +10,10 @@ define([
   var videoContainers;
 
   var scaleIntro = function() {
-    // Window height minus the navbar minus the intro container's padding
-    var introHeight = window.innerHeight - navBar.outerHeight() - (introContainer.outerHeight() - introContainer.height());
+    // Window height minus the navbar
+    var introHeight = window.innerHeight - navBar.outerHeight();
+    // Minus the intro container's padding
+    introHeight -= (introContainer.outerHeight() - introContainer.height());
     introContainer.css({
       height: introHeight
     });
@@ -28,8 +31,11 @@ define([
     introImage = introContainer.find('img');
     videoContainers = $('.video-container');
 
-    scaleIntro();
-    scaleVideoContainers();
+    events.on('init:end', function() {
+      scaleIntro();
+      scaleVideoContainers();
+      events.trigger('layout:end');
+    });
   };
 
   return {

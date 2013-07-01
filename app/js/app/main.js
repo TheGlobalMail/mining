@@ -9,12 +9,17 @@ define([
   'use strict';
 
   var init = function() {
+    // Initialise modules
     layout.init();
     media.init();
-    _.defer(scroll.init);
+    scroll.init();
+
+    _.defer(function() {
+      events.trigger('init:end');
+    });
   };
 
   return {
     init: init
-  }
+  };
 });

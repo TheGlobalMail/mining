@@ -5,9 +5,10 @@ define(function() {
     // flags
     quiet: false,
     debug: false,
+    debugEvents: false,
     // variables
-    enterViewportEvent: 'scroll/enter/',
-    exitViewportEvent: 'scroll/exit/'
+    enterViewportEvent: 'scroll:enter:',
+    exitViewportEvent: 'scroll:exit:'
   };
 
   if (location.search.indexOf('quiet') != -1) {
@@ -20,6 +21,11 @@ define(function() {
     config.debug = true;
   }
 
-  return config
+  if (location.search.indexOf('events') != -1 || config.debug) {
+    // Log event bindings and triggers with stack traces
+    config.debugEvents = true;
+  }
+
+  return config;
 
 });

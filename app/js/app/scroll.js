@@ -9,10 +9,11 @@ define([
   var elementsToWatch = [{
     selector: '.article-header',
     eventIdentifier: 'intro'
-  }, {
-    selector: '#test_video_1',
-    eventIdentifier: 'test-video'
-  }];
+  }//, {
+//    selector: '#test_video_1',
+//    eventIdentifier: 'test-video'
+//  }
+  ];
 
   // Cached globals values
   var scrollY;
@@ -96,9 +97,14 @@ define([
   var init = function() {
     scrollY = getScrollY();
     windowHeight = window.innerHeight;
-    initElements();
-    setBindings();
-    _.defer(checkElements);
+
+    events.on('layout:end', function() {
+      setBindings();
+      initElements();
+      setBindings();
+      checkElements();
+      events.trigger('scroll:end');
+    });
   };
 
   return {

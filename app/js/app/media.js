@@ -17,23 +17,26 @@ define([
 
   var testVideo;
   var introAudio;
+  var playIntroAudio;
 
   var initIntroAudio = function() {
     // Trigger load and play of intro sound
     introAudio = soundManager.createSound({
       url: AUDIO_FILES.intro,
-      autoplay: true,
       autoLoad: true,
-      onplay: function() {
-        var intro = $('.article-header');
-        if (scroll.elementInViewport(intro)) {
-          audio_utils.fadeIn(this, 4);
+      onload: function() {
+        if (playIntroAudio) {
+          audio_utils.fadeIn(introAudio);
         }
       }
     });
   };
 
   var initTestVideo = function() {
+    var testVideoElement = $('#test_video_1');
+    if (!testVideoElement.length) {
+      return;
+    }
     testVideo = videojs('test_video_1', {
       loop: true
     }).volume(0);
@@ -46,17 +49,18 @@ define([
   var bindAudioControl = function() {
     var audioControl = $('.audio-control');
     audioControl.find('.switch').on('switch-change', function (e, data) {
-      var audioOff = 'audio-off';
-      audioControl.toggleClass(audioOff);
       config.quiet = data.value;
+      events.trigger('audio:' + (data.value ? 'on' : 'off'));
     });
   };
 
   var setBindings = function() {
     events.on(config.enterViewportEvent + 'intro', function() {
+      playIntroAudio = true;
       audio_utils.fadeIn(introAudio);
     });
     events.on(config.exitViewportEvent + 'intro', function() {
+      playIntroAudio = false;
       audio_utils.fadeOut(introAudio);
     });
 
