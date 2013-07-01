@@ -33,13 +33,10 @@ define([
   };
 
   var initTestVideo = function() {
-    var testVideoElement = $('#test_video_1');
-    if (!testVideoElement.length) {
-      return;
-    }
-    testVideo = videojs('test_video_1', {
-      loop: true
-    }).volume(0);
+//    var testVideoElement = $('#test_video_1');
+//    testVideo = videojs('test_video_1', {
+//      loop: true
+//    }).volume(0);
   };
 
   var soundManagerOnReady = function() {
@@ -55,21 +52,21 @@ define([
   };
 
   var setBindings = function() {
-    events.on(config.enterViewportEvent + 'intro', function() {
+    events.on('scroll:enter:intro', function() {
       playIntroAudio = true;
       audio_utils.fadeIn(introAudio);
     });
-    events.on(config.exitViewportEvent + 'intro', function() {
+    events.on('scroll:exit:intro', function() {
       playIntroAudio = false;
       audio_utils.fadeOut(introAudio);
     });
 
-    events.on(config.enterViewportEvent + 'test-video', function() {
-      video_utils.fadeIn(testVideo);
-    });
-    events.on(config.exitViewportEvent + 'test-video', function() {
-      video_utils.fadeOut(testVideo);
-    });
+//    events.on(config.enterViewportEvent + 'test-video', function() {
+//      video_utils.fadeIn(testVideo);
+//    });
+//    events.on(config.exitViewportEvent + 'test-video', function() {
+//      video_utils.fadeOut(testVideo);
+//    });
 
     bindAudioControl();
   };

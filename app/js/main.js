@@ -31,9 +31,13 @@ require([
   'jquery',
   'events',
   './app/main',
+  'config',
   // dependencies
   'bootstrapSwitch'
 ],
-function($, events, app) {
+function($, events, app, config) {
+  if (config.debugEvents) {
+    window.fc = events;
+  }
   $(app.init);
 });

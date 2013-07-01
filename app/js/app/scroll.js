@@ -9,11 +9,13 @@ define([
   var elementsToWatch = [{
     selector: '.article-header',
     eventIdentifier: 'intro'
-  }//, {
-//    selector: '#test_video_1',
-//    eventIdentifier: 'test-video'
-//  }
-  ];
+  }, {
+    selector: '.chapters-container',
+    eventIdentifier: 'chapters-container',
+    extraOffset: {
+      bottom: +5
+    }
+  }];
 
   // Cached globals values
   var scrollY;
@@ -27,6 +29,10 @@ define([
       var element = $(obj.selector);
       var offset = element.offset();
       offset.bottom = offset.top + element.outerHeight();
+
+      if (obj.extraOffset && obj.extraOffset.bottom) {
+        offset.bottom += obj.extraOffset.bottom;
+      }
 
       return _.extend(obj, {
         element: element,
@@ -65,15 +71,12 @@ define([
 
       if (!obj.inViewport && inViewport) {
         obj.inViewport = true;
-        event = config.enterViewportEvent + obj.eventIdentifier;
+        event = 'scroll:enter:' + obj.eventIdentifier;
       } else if (obj.inViewport && !inViewport) {
         obj.inViewport = false;
-        event = config.exitViewportEvent + obj.eventIdentifier;
+        event = 'scroll:exit:' + obj.eventIdentifier;
       }
       if (event) {
-        if (config.debug) {
-          console.log('scroll event: ', event);
-        }
         events.trigger(event);
       }
     }

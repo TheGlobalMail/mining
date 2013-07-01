@@ -5,10 +5,7 @@ define(function() {
     // flags
     quiet: false,
     debug: false,
-    debugEvents: false,
-    // variables
-    enterViewportEvent: 'scroll:enter:',
-    exitViewportEvent: 'scroll:exit:'
+    debugEvents: false
   };
 
   if (location.search.indexOf('quiet') != -1) {

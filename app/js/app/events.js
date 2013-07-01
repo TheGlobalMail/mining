@@ -17,9 +17,9 @@ define([
     ];
 
     // Register scroll events
-    _.each(['intro', 'test-video'], function(fragment) {
-      eventRegister.push(config.enterViewportEvent + fragment);
-      eventRegister.push(config.exitViewportEvent + fragment);
+    _.each(['intro', 'chapter-container'], function(fragment) {
+      eventRegister.push('scroll:enter:' + fragment);
+      eventRegister.push('scroll:exit:' + fragment);
     });
 
     var trigger = fc.trigger;
