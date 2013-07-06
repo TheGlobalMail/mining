@@ -295,10 +295,12 @@
     padding: 0;
     width: 260px;
     position: fixed;
-    top: 10px;
+    top: initial;
+    bottom: 10px;
     left: initial;
-    right: -264px;
-    .border-bottom-left-radius(4px); 
+    right: -314px;
+    .border-left-radius(4px); 
+    .transition(right 250ms ease-out);
     &.fixed {
       top: 10px;
       left: initial;
@@ -347,8 +349,8 @@
       background-color: rgb(22,22,21);
       right:260px;
       left: initial;
-      top: 0;
-      bottom: auto;
+      top: initial;
+      bottom: 10px;
       text-indent: -9000px;
       width: 44px;
       padding:10px;
@@ -368,6 +370,7 @@
   article {
     .article-header {
       background-attachment: scroll;
+      .box-shadow(0 20px 20px -20px black);
       h1 {
         .font-size(54);
         br {
