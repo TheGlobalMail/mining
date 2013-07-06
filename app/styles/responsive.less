@@ -287,11 +287,30 @@
       }
     }
   }
+  .chapters-container {
+    height: auto !important;
+  }
   .chapters {
     background-color: rgb(22,22,21);
     padding: 0;
+    width: 260px;
+    position: fixed;
+    top: 10px;
+    left: initial;
+    right: -264px;
+    .border-bottom-left-radius(4px); 
+    .transition(right 250ms ease-out);
     &.fixed {
-      top: -404px;
+      top: 10px;
+      left: initial;
+      right: -264px;
+      .transition(right 250ms ease-out);
+    }
+    &.active {
+      top: 10px !important;
+      right: 0;
+      left: initial;
+      .transition(right 250ms ease-out);
     }
     ul {
       li {
@@ -312,9 +331,20 @@
     }
     button.open {
       background-color: rgb(22,22,21);
-      left:initial;
-      right: 10px;
+      right:260px;
+      left: initial;
+      top: 0;
+      bottom: auto;
+      text-indent: -9000px;
+      width: 44px;
+      padding:10px;
+      text-align: center;
+      .border-radius(0);
+      .border-left-radius(4px); 
       ul {
+        left: 50%;
+        width: auto;
+        margin: 6px 0 0 -7px;
         li {
           margin: 0 0 1px;
         }
@@ -322,7 +352,6 @@
     }
   }
   article {
-    
     .article-header {
       background-attachment: scroll;
       h1 {

@@ -11,5 +11,6 @@
     "soundmanager": "latest",
     "video.js": "~4.0.3",
     "bootstrap-switch": "latest"
+    "font-awesome": "latest"
   }
 }

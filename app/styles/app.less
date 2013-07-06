@@ -5,7 +5,7 @@
   &.special-feature {
     width: 100%;
     padding: 8px 0;
-    z-index: 999;
+    z-index: 99;
     border-bottom: 1px solid rgba(255,255,255,.05);
     .brand {
       background-size: auto;
@@ -521,9 +521,10 @@ article {
     }
     &.large {
       margin: 0 auto;
-      width: 80%;
+      width: 90%;
       height: 600px;
       .border-radius(6px);
+      max-width: none;
       img {
         width:100%;
         height: auto;
@@ -587,6 +588,7 @@ article {
   }
   .map {
     width: 100%;
+    max-width: none;
     height: 600px;
     &.pull-right {
       width: 35%;
@@ -646,7 +648,7 @@ article {
     }
     button.arrow {
       position: absolute; 
-      background: rgba(0,0,0,.6);
+      background: rgba(0,0,0,.4);
       border: none;
       width: 30px;
       height: 30px;
@@ -654,11 +656,20 @@ article {
       bottom: 10px;
       .border-radius(50%);
       color: transparent;
+      .opacity(50);
+      i {
+        text-align: center;
+        color: white;
+        line-height: 1.9;
+      }
       &.prev {
         left: 10px;
       }
       &.next {
         right: 10px;
+      }
+      &:hover, &:active {
+        .opacity(100);
       }
     }
   }
