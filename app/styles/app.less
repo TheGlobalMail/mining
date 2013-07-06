@@ -226,7 +226,6 @@ body {
 
 article {
   overflow: hidden;
-  
   .article-header {
     -webkit-font-smoothing: antialiased;
     background: @grayDark url('/images/JK3A9329.jpg') center fixed;
@@ -399,13 +398,13 @@ article {
     &:nth-child(odd) {
       p {
         margin: 20px 30% 20px 20%;
-        }
       }
-      &:nth-child(even) {
+    }
+    &:nth-child(even) {
       p {
         margin: 20px 20% 20px 30%;
-        }
       }
+    }
     &#chapter1 {
       margin-top:0;
       h1 {
@@ -498,6 +497,7 @@ article {
     position: relative;
     width: 25%;
     min-width: 280px;
+    max-width: 400px;
     &.pull-right {
       margin: 0 5% 2% 2%;
     }
@@ -607,6 +607,11 @@ article {
   }
   .gallery {
     min-height: 300px;
+    img {
+      width: 100%;
+
+      height: auto;
+    }
     ul {
       margin:0;
       li {
