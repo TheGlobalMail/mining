@@ -299,7 +299,6 @@
     left: initial;
     right: -264px;
     .border-bottom-left-radius(4px); 
-    .transition(right 250ms ease-out);
     &.fixed {
       top: 10px;
       left: initial;
@@ -316,16 +315,31 @@
       li {
         display: block;
         width: auto;
-        padding: 4px 15px;
+        padding: 6px 15px;
         margin: 0 auto;
         height: auto;
-        min-height: 47px;
+        min-height: 40px;
         .border-radius(0);
         border-bottom: 1px solid rgba(255,255,255,.1);
+        &:last-child {
+          min-height: auto;
+          .title {
+            text-align: center;
+            padding: 8px 0 10px;
+          }
+        }
         .pic {
-          width: 70px;
-          float: left;
-          margin-right: 10px;
+          width: 60px;
+          float: right;
+          margin-left: 10px;
+        }
+        .title {
+          h4 {
+            .font-size(10);
+          }
+          h3 {
+            .font-size(14);
+          }
         }
       }
     }
