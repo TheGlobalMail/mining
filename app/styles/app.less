@@ -28,6 +28,10 @@ body {
   }
 }
 
+.container {
+  width: auto;
+}
+
 // Reused Mixins
 .animation (...) {
   -webkit-animation: @arguments;
@@ -555,6 +559,7 @@ article {
     }
   }
   .portrait {
+    background: #faf5ee;
     height: auto;
     padding: 10px 10px 20px;
     .box-shadow(0 4px 12px -5px rgba(0,0,0,0.8));
@@ -820,7 +825,7 @@ article {
 footer {
   background-color: #222;
   #gradient.vertical-three-colors(#000,#111,2%,#222);
-  padding: 40px 0 60px;
+  padding: 40px 5% 60px;
   text-shadow: 0 -1px 0 black;
   position: relative;
   z-index: 1000;
