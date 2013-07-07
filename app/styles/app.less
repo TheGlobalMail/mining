@@ -328,13 +328,14 @@ article {
     }
   }
   section {
+    @Margin:20%;
     margin-top: 5%;
     position: relative;
     &:nth-child(even) {
       h1 .row {
         text-align: right;
         left: auto;
-        right: 15%;
+        right: @Margin;
         margin-right: -20px;
         padding-right: 20px;
         border-left: none;
@@ -357,7 +358,7 @@ article {
         color: white;
         line-height: .8;
         text-transform: uppercase;
-        left: 15%;
+        left: @Margin;
         margin-left: -20px;
         text-shadow:0 -1px 0 rgba(0,0,0,.4);
         border-left: 1px solid white;
@@ -415,12 +416,12 @@ article {
     }
     &:nth-child(odd) {
       p {
-        margin: 20px 30% 20px 20%;
+        margin: 20px 30% 20px @Margin;
       }
     }
     &:nth-child(even) {
       p {
-        margin: 20px 20% 20px 30%;
+        margin: 20px @Margin 20px 30%;
       }
     }
     &#chapter1 {
