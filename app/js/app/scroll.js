@@ -14,9 +14,29 @@ define([
     eventIdentifier: 'chapters-container',
     filter: {
       exit: function(obj) {
+        // Prevent the exit event from firing if you
+        // scroll above the chapter container
         return obj.offset.top < scrollY;
       }
     }
+  }, {
+    selector: '#chapter1',
+    eventIdentifier: 'chapter1'
+  }, {
+    selector: '#chapter2',
+    eventIdentifier: 'chapter2'
+  }, {
+    selector: '#chapter3',
+    eventIdentifier: 'chapter3'
+  }, {
+    selector: '#chapter4',
+    eventIdentifier: 'chapter4'
+  }, {
+    selector: '#chapter5',
+    eventIdentifier: 'chapter5'
+  }, {
+    selector: '#chapter6',
+    eventIdentifier: 'chapter6'
   }];
 
   // Cached globals values
@@ -71,15 +91,15 @@ define([
 
       var inViewport = offsetInViewport(offset);
 
-      if (!obj.inViewport && inViewport) {
-        if (obj.filter && obj.filter.enter && !obj.filter.enter(obj)) {
-          continue;
-        }
+//      if (obj.selector == '#chapter5') console.log(obj.selector, obj.inViewport, inViewport, scrollY, obj.offset);
+
+      if (inViewport && !obj.inViewport) {
         obj.inViewport = true;
         event = 'scroll:enter:' + obj.eventIdentifier;
-      } else if (obj.inViewport && !inViewport) {
+      } else if (!inViewport && obj.inViewport) {
         obj.inViewport = false;
         if (obj.filter && obj.filter.exit && !obj.filter.exit(obj)) {
+//          console.log('YO IN THA WRONG HOOD', 'SHOULDNT GET HERE, YO');
           continue;
         }
         event = 'scroll:exit:' + obj.eventIdentifier;

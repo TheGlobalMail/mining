@@ -5,8 +5,9 @@ define([
   './layout',
   './media',
   './visualisations',
-  './scroll'
-], function($, _, events, layout, media, visualisations, scroll) {
+  './scroll',
+  './chapters'
+], function($, _, events, layout, media, visualisations, scroll, chapters) {
   'use strict';
 
   var body;
@@ -26,6 +27,7 @@ define([
     layout.init();
     media.init();
     visualisations.init();
+    chapters.init();
     scroll.init();
 
     _.defer(function() {
