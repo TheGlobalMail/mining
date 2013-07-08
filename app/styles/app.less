@@ -664,9 +664,15 @@ article {
   }
   .gallery {
     min-height: 300px;
+    .font-size(0);
     img {
       width: 100%;
       height: auto;
+      &.sml {
+        width: 45%;
+        display: inline-block;
+        margin: 0 10px 10px 0;
+      }
     }
     ul {
       margin:0;
