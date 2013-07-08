@@ -35,6 +35,28 @@ define([
     });
   };
 
+  var chapterButtonOnclick = function() {
+    if (chapters.hasClass('fixed')) {
+      if (chapters.hasClass('active')) {
+        chapters
+          .addClass('inactive')
+          .removeClass('active');
+      } else {
+        chapters
+          .removeClass('inactive')
+          .addClass('active');
+      }
+    }
+  };
+
+  var toggleChapterState = function() {
+    chaptersContainer.toggleClass('pinned-child');
+    chapters
+      .toggleClass('fixed')
+      .removeClass('active')
+      .removeClass('inactive');
+  };
+
   var setBindings = function() {
     // Set the size for objects
     events.on('init:end', function() {
@@ -44,13 +66,7 @@ define([
       events.trigger('layout:end');
     });
 
-    var toggleChapterState = function() {
-      chaptersContainer.toggleClass('pinned-child');
-      chapters
-        .toggleClass('fixed')
-        .removeClass('active')
-        .removeClass('inactive');
-    };
+
     events.on('scroll:enter:chapters-container', function() {
       if (chapters.hasClass('fixed')) {
         toggleChapterState();
@@ -58,19 +74,7 @@ define([
     });
     events.on('scroll:exit:chapters-container', toggleChapterState);
 
-    chaptersButton.on('click', function() {
-      if (chapters.hasClass('fixed')) {
-        if (chapters.hasClass('active')) {
-          chapters
-            .addClass('inactive')
-            .removeClass('active');
-        } else {
-          chapters
-            .removeClass('inactive')
-            .addClass('active');
-        }
-      }
-    })
+    chaptersButton.on('click', chapterButtonOnclick)
   };
 
   var init = function() {
