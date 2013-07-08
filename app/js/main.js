@@ -8,7 +8,8 @@ require.config({
     fatcontroller: './libs/fatcontroller',
     soundManager: '../components/soundmanager/script/soundmanager2',
     videojs: '../components/video.js/video',
-    bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrapSwitch'
+    bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrapSwitch',
+    scPlayer: './libs/sc-player'
   },
   shim: {
     backbone: {
@@ -23,6 +24,11 @@ require.config({
     },
     bootstrapSwitch: {
       deps: ['jquery']
+    },
+    scPlayer: {
+      deps: [
+        './libs/soundcloud.player.api'
+      ]
     }
   }
 });

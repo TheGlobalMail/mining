@@ -1,4 +1,5 @@
 define([
+  'jquery',
   'lodash',
   'soundManager',
   'videojs',
@@ -7,8 +8,10 @@ define([
   './audio_utils',
   './video_utils',
   './../utils/getScrollY',
-  './scroll'
-], function(_, soundManager, videojs, events, config, audio_utils, video_utils, getScrollY, scroll) {
+  './scroll',
+  // dependencies
+  'scPlayer'
+], function($, _, soundManager, videojs, events, config, audio_utils, video_utils, getScrollY, scroll) {
 
   var AUDIO_ROOT = '/audio/';
   var AUDIO_FILES = {
@@ -82,6 +85,8 @@ define([
     initTestVideo();
 
     setBindings();
+
+    $('.soundcloud-player').scPlayer();
   };
 
   return {
