@@ -11,6 +11,7 @@
     "soundmanager": "latest",
     "video.js": "~4.0.3",
     "bootstrap-switch": "latest",
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "highcharts.com": "~v3.0.2"
   }
 }

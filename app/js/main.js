@@ -9,7 +9,8 @@ require.config({
     soundManager: '../components/soundmanager/script/soundmanager2',
     videojs: '../components/video.js/video',
     bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrapSwitch',
-    scPlayer: './libs/sc-player'
+    scPlayer: './libs/sc-player',
+    highcharts: '../components/highcharts.com/js/highcharts.src'
   },
   shim: {
     backbone: {
@@ -29,6 +30,10 @@ require.config({
       deps: [
         './libs/soundcloud.player.api'
       ]
+    },
+    highcharts: {
+      deps: ['jquery'],
+      exports: 'Highcharts'
     }
   }
 });
