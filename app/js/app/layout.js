@@ -47,7 +47,8 @@ define([
     var toggleChapterState = function() {
       chapters
         .toggleClass('fixed')
-        .removeClass('active');
+        .removeClass('active')
+        .removeClass('inactive');
     };
     events.on('scroll:enter:chapters-container', function() {
       if (chapters.hasClass('fixed')) {
@@ -58,7 +59,15 @@ define([
 
     chaptersButton.on('click', function() {
       if (chapters.hasClass('fixed')) {
-        chapters.toggleClass('active');
+        if (chapters.hasClass('active')) {
+          chapters
+            .addClass('inactive')
+            .removeClass('active');
+        } else {
+          chapters
+            .removeClass('inactive')
+            .addClass('active');
+        }
       }
     })
   };

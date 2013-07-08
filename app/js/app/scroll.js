@@ -11,7 +11,12 @@ define([
     eventIdentifier: 'intro'
   }, {
     selector: '.chapters-container',
-    eventIdentifier: 'chapters-container'
+    eventIdentifier: 'chapters-container',
+    filter: {
+      exit: function(obj) {
+        return obj.offset.top < scrollY;
+      }
+    }
   }];
 
   // Cached globals values
@@ -67,12 +72,19 @@ define([
       var inViewport = offsetInViewport(offset);
 
       if (!obj.inViewport && inViewport) {
+        if (obj.filter && obj.filter.enter && !obj.filter.enter(obj)) {
+          continue;
+        }
         obj.inViewport = true;
         event = 'scroll:enter:' + obj.eventIdentifier;
       } else if (obj.inViewport && !inViewport) {
         obj.inViewport = false;
+        if (obj.filter && obj.filter.exit && !obj.filter.exit(obj)) {
+          continue;
+        }
         event = 'scroll:exit:' + obj.eventIdentifier;
       }
+
       if (event) {
         events.trigger(event);
       }

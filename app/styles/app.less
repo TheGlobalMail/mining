@@ -117,13 +117,16 @@ body {
     left: 0;
     position: fixed;
     top: -204px;
-    .transition(top 250ms ease-out);
-    .transform(translate3d(0,0,0));
+    &.inactive,
     &.active {
-      top: 0;
       .transition(top 250ms ease-out);
       .transform(translate3d(0,0,0));
-
+    }
+    &.inactive {
+      top: -204px;
+    }
+    &.active {
+      top: 0;
     }
   }
   button.open {
