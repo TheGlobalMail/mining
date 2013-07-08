@@ -11,10 +11,7 @@ define([
     eventIdentifier: 'intro'
   }, {
     selector: '.chapters-container',
-    eventIdentifier: 'chapters-container',
-    extraOffset: {
-      bottom: +5
-    }
+    eventIdentifier: 'chapters-container'
   }];
 
   // Cached globals values

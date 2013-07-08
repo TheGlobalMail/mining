@@ -83,7 +83,7 @@ module.exports = function(grunt) {
           '<%= project.app %>/index.html',
           '{.tmp,<%= project.app %>}/styles/{,/*}*.css',
           '{.tmp,<%= project.app %>}/js/{,/*,**/,*/,**/**/}*.js',
-          '<%= project.app %>/images/{,*/}*.{png,jpg,jpeg,webp}'
+          '<%= project.app %>/images/{,*/}*.{png,jpg,jpeg,webp,svg}'
         ],
         tasks: ['livereload']
       }
@@ -266,7 +266,8 @@ module.exports = function(grunt) {
             'video/*.m4v',
             'components/soundmanager/swf/*',
             '*.{ico,txt}',
-            '.htaccess'
+            '.htaccess',
+            'images/*.svg'
           ]
         }]
       }
