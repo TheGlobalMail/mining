@@ -8,7 +8,8 @@ require.config({
     fatcontroller: './libs/fatcontroller',
     soundManager: '../components/soundmanager/script/soundmanager2',
     videojs: '../components/video.js/video',
-    bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrapSwitch'
+    bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrapSwitch',
+    highcharts: '../components/highcharts.com/js/highcharts.src'
   },
   shim: {
     backbone: {
@@ -23,6 +24,10 @@ require.config({
     },
     bootstrapSwitch: {
       deps: ['jquery']
+    },
+    highcharts: {
+      deps: ['jquery'],
+      exports: 'Highcharts'
     }
   }
 });
