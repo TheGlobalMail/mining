@@ -248,6 +248,11 @@ body {
 
 article {
   overflow: hidden;
+  .ambient-video {
+    // HACK TO OVERIDE THE SIZE BEING APPLIED SOMEWHERE
+    width: auto!important;
+    height: auto!important;
+  }
   .article-header {
     -webkit-font-smoothing: antialiased;
     // XXX commented out but this should maybe be in as fallback for mobile?
@@ -362,8 +367,10 @@ article {
       background: @grayDark url('/images/JK3A9329.jpg') center center fixed no-repeat;
       background-size: cover;
       .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
-      padding: 30% 0;
+      margin:0;
       overflow: hidden;
+      padding: 0;
+      height: 100%;
       .row {
         position: absolute;
         bottom: 0;
@@ -433,12 +440,12 @@ article {
       }
     }
     &:nth-child(odd) {
-      p, .datavis {
+      p {
         margin: 20px 35% 20px @Margin;
       }
     }
     &:nth-child(even) {
-      p, .datavis {
+      p {
         margin: 20px @Margin 20px 35%;
       }
     }
@@ -478,6 +485,7 @@ article {
     &#chapter3 {
       h1 {
         background-image: url('/images/chapter3.jpg');
+        background: none;
         color: rgba(0,0,0,.8);
          span {
           &:before, &:after {
@@ -489,6 +497,7 @@ article {
     &#chapter4 {
       h1 {
         background-image: url('/images/chapter4.jpg');
+        background: none;
         color: rgba(0,0,0,.8);
          span {
           &:before, &:after {
@@ -512,6 +521,7 @@ article {
       h1 {
         background-image: url('/images/chapter6.jpg');
         color: rgba(0,0,0,.8);
+        background: none;
          span {
           &:before, &:after {
           border-color: rgba(0,0,0,.8);
@@ -522,18 +532,17 @@ article {
   }
 
   //RELATED MEDIA STYLES
-
   .gallery, blockquote, .map, .audio, .related, .video {
     overflow: hidden;
     position: relative;
-    width: 25%;
+    width: 30%;
     min-width: 260px;
     max-width: 400px;
     &.pull-right {
       margin: 0 5% 2% 2%;
     }
     &.pull-left {
-      margin: 0 2% 2% 10%;
+      margin: 0 2% 2% 5%;
     }
     h4 {
       .font-size(16);
@@ -542,14 +551,21 @@ article {
       padding-bottom: 10px;
       border-bottom: 1px dotted black;
       font-weight: 800;
+      margin-top: 0;
+    }
+    img {
+      margin-bottom: 10px;
+      .border-radius(4px);
     }
   }
+  .credit {
+    display: block;
+    .font-size(14);
+    line-height: 1.1;
+    font-style: italic;
+    color: @grayLight;
+  }
   .related {
-    width: 20%;
-    height: 300px;
-    &.pull-right {
-      margin-right: 15%;
-    }
     &.large {
       margin: 0 auto;
       width: 90%;
@@ -589,6 +605,7 @@ article {
     height: auto;
     padding: 10px 10px 20px;
     .box-shadow(0 4px 12px -5px rgba(0,0,0,0.8));
+    width: 25%;
     // &.pull-left {
     //   .rotate(-3deg);
     //   -ms-transform: rotate(0); //Cause IE sucks
@@ -609,13 +626,13 @@ article {
       font-style: italic;
       color: @grayLight;
     }
-    &.pull-left {
-      margin-left: 13%;
-    }
   }
   .audio {
     iframe {
       margin-bottom: 10px;
+    }
+    .sc-player {
+      margin: 0;
     }
   }
   .map {
@@ -643,7 +660,6 @@ article {
     min-height: 300px;
     img {
       width: 100%;
-
       height: auto;
     }
     ul {
@@ -720,17 +736,16 @@ article {
     color: #453929;
     overflow: hidden;
     .box-shadow(inset 0 0 100px rgba(0,0,0,0.8));
-    padding: 60px 0 80px;
-    margin: 2.5% 0;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+    height: 100%;
     .row {
       position: relative;
-      padding:40px 40px 60px;
+      padding:0;
       width: 60%;
       color: white;
-      border-color: rgba(255,255,255,.2);
-      background: rgba(0,0,0,0.4);
-      border: 8px solid rgba(255,255,255,.8);
-      margin: 0 auto;
+      margin: 8% auto;
       p {
         margin: 0 !important;
         .font-size(26);
@@ -785,11 +800,20 @@ article {
     &.albrecht {
       background: @grayDark url('/images/quote-albrecht.jpg') center center fixed  no-repeat;
       background-size: cover;
-      background-attachment: scroll;
-      padding: 10% 0 20%;
+      background-attachment: scroll; // HACK CAUSE FIXED ISN'T WORKING
+      padding: 0;
       .row {
-        width: 30%;
-        margin-left: 10%;
+        width: 40%;
+        margin: 10% 0 0 10%;
+        padding: 0;
+        background: transparent;
+        border:none;
+      }
+    }
+    &.panel {
+      .row {
+        width: 40%;
+        margin: 10% 0 0 10%;
         padding: 0;
         background: transparent;
         border:none;
@@ -800,7 +824,7 @@ article {
       background-size: cover;
     }
     &.judgement {
-      background: @grayDark url('/images/chapter4-judgement.jpg') center center fixed  no-repeat;
+      background: @grayDark url('/images/chapter4-quote-bg.jpg') center center fixed  no-repeat;
       background-size: cover;
     }
     &.final {
@@ -835,9 +859,9 @@ article {
   }
 
   .video-container {
-    display: none;
     overflow: hidden;
     position: relative;
+    clear: both;
   }
 
   video {
