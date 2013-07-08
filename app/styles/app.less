@@ -13,7 +13,7 @@
   }
 }
 body {
-  color: #000;
+  color: #222;
   &.loading {
     height: 100%;
     position: fixed;
@@ -386,7 +386,6 @@ article {
           font-weight: 200;
           margin-bottom: 6px;
         }
-
       }
       &:after {
         content: '';
@@ -407,10 +406,10 @@ article {
       .font-size(20);
       line-height: 1.5;
       text-align: justify;
+      -webkit-hyphens: auto;
       -webkit-hyphenate-character: "‐2010";
       -webkit-hyphenate-limit-after: 1;
       -webkit-hyphenate-limit-before: 3;
-      -webkit-hyphens: auto;
       -moz-hyphens: auto;
       hyphens: auto;
       word-wrap:break-word;
@@ -769,6 +768,7 @@ article {
     &:after {
       content: '';
       display: block;
+      /*display: none;*/
       position: absolute;
       top: 0;
       left: 0;
