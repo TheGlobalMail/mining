@@ -45,6 +45,7 @@ define([
     });
 
     var toggleChapterState = function() {
+      chaptersContainer.toggleClass('pinned-child');
       chapters
         .toggleClass('fixed')
         .removeClass('active')

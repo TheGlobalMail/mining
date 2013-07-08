@@ -102,7 +102,11 @@ body {
 }
 
 //CHAPTER CONTROLS
-
+// This is a hack to get around any millisecond delays in the
+// the browsers positioning of the element after `fixed` is removed.
+.chapters-container.pinned-child {
+  background: rgba(22,22,21,.9) url('/images/noise-overlay.png') center center repeat;
+}
 .chapters {
   position: relative;
   width: 100%;
@@ -120,7 +124,6 @@ body {
     &.inactive,
     &.active {
       .transition(top 250ms ease-out);
-      .transform(translate3d(0,0,0));
     }
     &.inactive {
       top: -204px;
