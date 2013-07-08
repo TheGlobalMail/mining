@@ -425,7 +425,6 @@ article {
       word-wrap:break-word;
       &:first-of-type {
         font-weight: bold;
-        // .font-size(22);
         line-height: 1.4;
         &:first-letter {
           font-size: 720%;
@@ -544,9 +543,11 @@ article {
     max-width: 400px;
     &.pull-right {
       margin: 0 5% 2% 2%;
+      clear: right;
     }
     &.pull-left {
       margin: 0 2% 2% 5%;
+      clear: left;
     }
     h4 {
       .font-size(16);
