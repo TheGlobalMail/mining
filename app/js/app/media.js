@@ -22,6 +22,9 @@ define([
   var introAudio;
   var playIntroAudio;
 
+  var videos = {};
+  var activeVideo;
+
   var initIntroAudio = function() {
     // Trigger load and play of intro sound
     introAudio = soundManager.createSound({
@@ -35,11 +38,15 @@ define([
     });
   };
 
-  var initTestVideo = function() {
-//    var testVideoElement = $('#test_video_1');
-//    testVideo = videojs('test_video_1', {
-//      loop: true
-//    }).volume(0);
+  var initVideos = function(){
+    $('.ambient-video').each(function(){
+      var $video = $(this);
+      var id = $video.attr('id');
+      var video = videojs(id, {
+        loop: true
+      }).volume(0);
+      videos[id] = video;
+    });
   };
 
   var soundManagerOnReady = function() {
@@ -64,13 +71,6 @@ define([
       audio_utils.fadeOut(introAudio);
     });
 
-//    events.on(config.enterViewportEvent + 'test-video', function() {
-//      video_utils.fadeIn(testVideo);
-//    });
-//    events.on(config.exitViewportEvent + 'test-video', function() {
-//      video_utils.fadeOut(testVideo);
-//    });
-
     bindAudioControl();
   };
 
@@ -82,7 +82,7 @@ define([
       debugMode: config.debug
     });
 
-    initTestVideo();
+    initVideos();
 
     setBindings();
 

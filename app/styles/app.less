@@ -248,7 +248,8 @@ article {
   overflow: hidden;
   .article-header {
     -webkit-font-smoothing: antialiased;
-    background: @grayDark url('/images/JK3A9329.jpg') center fixed;
+    // XXX commented out but this should maybe be in as fallback for mobile?
+    //background: @grayDark url('/images/JK3A9329.jpg') center fixed;
     background-size: cover;
     padding: 0;
     vertical-align: middle;
@@ -831,6 +832,8 @@ article {
 
   video {
     position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
     margin-bottom: 50px;
   }
