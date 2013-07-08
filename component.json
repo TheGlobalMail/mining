@@ -10,6 +10,7 @@
     "lodash": "~1.3.1",
     "soundmanager": "latest",
     "video.js": "~4.0.3",
-    "bootstrap-switch": "latest"
+    "bootstrap-switch": "latest",
+    "font-awesome": "latest"
   }
 }
