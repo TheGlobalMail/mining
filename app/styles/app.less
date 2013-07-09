@@ -121,16 +121,16 @@ body {
   color: white;
   border-bottom: 1px solid black;
   z-index: 99;
-  &.fixed {
-    left: 0;
-    position: fixed;
+  &.fixed,
+  &.fixed.inactive {
     top: -154px;
+  }
+  &.fixed {
+    position: fixed;
+    left: 0;
     &.inactive,
     &.active {
       .transition(top 250ms ease-out);
-    }
-    &.inactive {
-      top: -117px;
     }
     &.active {
       top: 44px;
