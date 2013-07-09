@@ -8,6 +8,7 @@ define([
   var navBar;
   var introContainer;
   var introImage;
+  var introh1;
   var videoContainers;
   var chaptersContainer;
   var chapters;
@@ -15,17 +16,24 @@ define([
 
   var scaleIntro = function() {
     // Window height minus the navbar
-    var introHeight = window.innerHeight;
-    // Minus the intro container's padding
-    introHeight -= (introContainer.outerHeight() - introContainer.height());
+    var introHeight = window.innerHeight - navBar.outerHeight();
+
     introContainer.css({
       height: introHeight
     });
+
+    var introh1Height = introh1.outerHeight();
+    if (introh1Height < introHeight) {
+      introh1.css({
+        top: (introHeight - introh1.outerHeight()) / 3
+      });
+    }
   };
 
   var scaleVideoContainers = function() {
     videoContainers.css({
-      height: window.innerHeight
+      height: window.innerHeight,
+      width: window.innerWidth
     });
   };
 
@@ -81,6 +89,7 @@ define([
     navBar = $('.navbar');
     introContainer = $('.article-header');
     introImage = introContainer.find('img');
+    introh1 = introContainer.find('h1');
     videoContainers = $('.video-container');
     chaptersContainer = $('.chapters-container');
     chapters = chaptersContainer.find('.chapters');

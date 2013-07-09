@@ -42,10 +42,9 @@ define([
     $('.ambient-video').each(function(){
       var $video = $(this);
       var id = $video.attr('id');
-      var video = videojs(id, {
+      videos[id] = videojs(id, {
         loop: true
       }).volume(0);
-      videos[id] = video;
     });
   };
 
