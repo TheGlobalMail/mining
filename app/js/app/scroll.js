@@ -43,6 +43,17 @@ define([
   var scrollY;
   var windowHeight;
 
+  var populateConfig = function() {
+    $('.ambient-video').each(function() {
+      var element = $(this);
+      var id = element.attr('id');
+      elementsToWatch.push({
+        selector: '#' + id,
+        eventIdentifier: id
+      });
+    });
+  };
+
   var initElements = function() {
     // Calculate the position of each element and cache
     // as many values as possible
@@ -51,11 +62,6 @@ define([
       var element = $(obj.selector);
       var offset = element.offset();
       offset.bottom = offset.top + element.outerHeight();
-
-      if (obj.extraOffset && obj.extraOffset.bottom) {
-        offset.bottom += obj.extraOffset.bottom;
-      }
-
       return _.extend(obj, {
         element: element,
         offset: offset,
@@ -74,12 +80,6 @@ define([
     );
   };
 
-  var elementInViewport = function(element) {
-    var offset = element.offset();
-    offset.bottom = offset.top + element.outerHeight();
-    return offsetInViewport(offset, true);
-  };
-
   var checkElements = function() {
     // Check if each element is within the viewport and trigger
     // events when an element enters or exits.
@@ -91,18 +91,17 @@ define([
 
       var inViewport = offsetInViewport(offset);
 
-//      if (obj.selector == '#chapter5') console.log(obj.selector, obj.inViewport, inViewport, scrollY, obj.offset);
+      var eventIdentifier = obj.eventIdentifier;
 
       if (inViewport && !obj.inViewport) {
         obj.inViewport = true;
-        event = 'scroll:enter:' + obj.eventIdentifier;
+        event = 'scroll:enter:' + eventIdentifier;
       } else if (!inViewport && obj.inViewport) {
         obj.inViewport = false;
         if (obj.filter && obj.filter.exit && !obj.filter.exit(obj)) {
-//          console.log('YO IN THA WRONG HOOD', 'SHOULDNT GET HERE, YO');
           continue;
         }
-        event = 'scroll:exit:' + obj.eventIdentifier;
+        event = 'scroll:exit:' + eventIdentifier;
       }
 
       if (event) {
@@ -131,6 +130,7 @@ define([
     windowHeight = window.innerHeight;
 
     events.on('layout:end', function() {
+      populateConfig();
       setBindings();
       initElements();
       setBindings();

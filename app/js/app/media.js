@@ -72,6 +72,17 @@ define([
       audio_utils.fadeOut(introAudio);
     });
 
+    $('.ambient-video').each(function() {
+      var element = $(this);
+      var id = element.attr('id');
+      events.on('scroll:enter:' + id, function() {
+        videos[id].play();
+      });
+      events.on('scroll:exit:' + id, function() {
+        videos[id].pause();
+      });
+    });
+
     bindAudioControl();
   };
 
