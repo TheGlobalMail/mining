@@ -259,7 +259,7 @@ article {
     vertical-align: middle;
     text-align: center;
     color: rgba(0,0,0,0.8);
-    .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
+    // .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
     display: table;
     width: 100%;
     position: relative;
@@ -378,7 +378,7 @@ article {
       position: relative;
       background-size: cover;
       background-attachment: fixed;
-      .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
+      // .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
       margin:0;
       overflow: hidden;
       padding: 0;
@@ -577,9 +577,15 @@ article {
   .credit {
     display: block;
     .font-size(14);
-    line-height: 1.1;
+    line-height: 1.4;
     font-style: italic;
-    color: @grayLight;
+    color: @grayDark;
+    em {
+      display: block;
+      font-size: 80%;
+      color: @grayLight;
+      text-transform: uppercase;
+    }
   }
   .related {
     &.large {
@@ -634,21 +640,39 @@ article {
       width: 100%;
       height: auto;
       margin-bottom: 10px;
-    }
-    span {
-      display: block;
-      .font-size(14);
-      line-height: 1.1;
-      font-style: italic;
-      color: @grayLight;
+      .border-radius(0);
     }
   }
   .audio {
+    padding-bottom: 80px;
     iframe {
       margin-bottom: 10px;
     }
     .sc-player {
-      margin: 0;
+      margin: -104px 0 0;
+      padding: 0 3%;
+      width: 94%;
+      background-color: rgba(0,0,0,.6);
+      .border-bottom-radius(6px);
+      &:hover .sc-scrubber, 
+      &.playing .sc-scrubber {
+        left: 64px;
+        bottom: 11px;
+      }
+      .sc-scrubber {
+        width: 80%;
+      }
+      ol.sc-trackslist {
+      width: 80%;
+      left: 60px;
+        li.active, li:hover {
+          background: transparent;
+          color: white;
+          a {
+            color: white;
+          }
+        }
+      }
     }
   }
   .map {
@@ -753,7 +777,7 @@ article {
   }
   .quote {
     position: relative;
-    display: block;
+    display: table-row;
     font-style: italic;
     color: #453929;
     overflow: hidden;
@@ -764,16 +788,15 @@ article {
     height: 100%;
     clear: both;
     .row {
+      display: table-cell;
+      vertical-align: middle;
       position: relative;
       padding:0;
-      width: 60%;
       color: white;
       margin: 8% auto;
       p {
-        margin: 0 !important;
         .font-size(26);
         text-shadow:none;
-        font-family: @sansFontFamily;
         font-weight: 100;
         line-height: 1.6;
         &:first-of-type {
@@ -800,6 +823,15 @@ article {
           font-weight: 600;
         }
       }
+      .credit {
+        color: white;
+        .opacity(50);
+        position: absolute;
+        right: 3%;
+        bottom: 3%;
+        .font-size(11);
+        text-transform: uppercase;
+      }
     }
     &:after {
       content: '';
@@ -822,6 +854,7 @@ article {
     }
     &.albrecht {
       background: @grayDark url('/images/quote-albrecht.jpg') center center fixed  no-repeat;
+      background-attachment: scroll; //FIXED Y U NO WORK?
       background-size: cover;
       padding: 0;
       .row {
@@ -834,16 +867,16 @@ article {
     }
     &.panel {
       .row {
-        width: 40%;
-        margin: 10% 0 0 10%;
-        padding: 0;
-        background: transparent;
-        border:none;
+        
       }
     }
     &.court {
       background: @grayDark url('/images/chapter4-judgement.jpg') center center fixed  no-repeat;
       background-size: cover;
+      clear: both;
+      margin: 5% 0;
+      display: block;
+      padding: 5% 0;
     }
     &.judgement {
       background: @grayDark url('/images/chapter4-quote-bg.jpg') center center fixed  no-repeat;
@@ -854,10 +887,7 @@ article {
       background-size: cover;
       margin-bottom: 0;
       .row {
-        padding:40px 40px 60px;
-        border-color: rgba(255,255,255,.2);
         background: rgba(0,0,0,0.4);
-        border: 8px solid rgba(255,255,255,.8);
       }
     }
   }
@@ -890,6 +920,14 @@ article {
     overflow: hidden;
     position: relative;
     clear: both;
+    margin: 60px 0;
+  }
+
+  .video-quote {
+    overflow: hidden;
+    position: relative;
+    clear: both;
+    margin: 60px 0;
   }
 
   video {
@@ -1066,6 +1104,5 @@ footer {
 
 .ambient-video {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  z-index: -1;
 }
