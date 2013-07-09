@@ -8,6 +8,8 @@ define([
     fadeOut: 'fade-out'
   };
 
+  var playingSounds = {};
+
   var defaultOptions = {
     amount: 2, // step amount, % percentage increase per step
     complete: null, // callback
@@ -21,6 +23,8 @@ define([
   var fadeIn = function(sound, options) {
     options = _.extend(defaultFadeInOptions, options);
     options.amount = Math.abs(options.amount);
+
+    playingSounds[sound.id] = sound;
 
     if (sound && !config.quiet) {
 
@@ -41,6 +45,7 @@ define([
         var vol = sound.volume;
 
         if (vol >= options.volumeMax) {
+          sound.state = null;
           if (options.complete) {
             options.complete();
           }
@@ -49,7 +54,7 @@ define([
 
         sound.setVolume(Math.min(options.volumeMax, vol + options.amount));
 
-        setTimeout(function() {
+        sound.timer = setTimeout(function() {
           _fadeIn(sound, options);
         }, options.fadeStepDelay);
       };
@@ -77,6 +82,8 @@ define([
 
         if (vol <= options.volumeMin) {
           sound.pause();
+          sound.state = null;
+          delete playingSounds[sound.id];
           if (options.complete) {
             options.complete();
           }
@@ -85,13 +92,25 @@ define([
 
         sound.setVolume(Math.max(options.volumeMin, vol - options.amount));
 
-        setTimeout(function() {
+        sound.timer = setTimeout(function() {
           _fadeOut(sound, options);
         }, options.fadeStepDelay);
       };
 
       _fadeOut(sound, options);
     }
+  };
+
+  var mute = function(){
+    _.each(playingSounds, function(sound){
+      sound.setVolume(defaultOptions.volumeMin);
+    });
+  };
+
+  var unmute = function(){
+    _.each(playingSounds, function(sound){
+      sound.setVolume(defaultOptions.volumeMax);
+    });
   };
 
   var loopSound = function(sound) {
@@ -107,6 +126,8 @@ define([
   return {
     fadeIn: fadeIn,
     fadeOut: fadeOut,
+    mute: mute,
+    unmute: unmute,
     loopSound: loopSound
   };
 });

@@ -249,6 +249,8 @@ body {
 // PAGE STYLES
 
 article {
+  @Margin:20%;
+  @parFontSize: 20;
   overflow: hidden;
   .article-header {
     -webkit-font-smoothing: antialiased;
@@ -259,7 +261,7 @@ article {
     vertical-align: middle;
     text-align: center;
     color: rgba(0,0,0,0.8);
-    .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
+    // .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
     display: table;
     width: 100%;
     position: relative;
@@ -360,7 +362,6 @@ article {
     }
   }
   section {
-    @Margin:20%;
     margin-top: 5%;
     position: relative;
     &:nth-child(even) {
@@ -378,7 +379,7 @@ article {
       position: relative;
       background-size: cover;
       background-attachment: fixed;
-      .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
+      .box-shadow(inset 0 10px 20px -10px rgba(0,0,0,0.8));
       margin:0;
       overflow: hidden;
       padding: 0;
@@ -425,9 +426,9 @@ article {
     }
     p {
       font-family: @serifFontFamily;
-      .font-size(20);
+      .font-size(@parFontSize);
       line-height: 1.5;
-      text-align: justify;
+      text-align: left;
       -webkit-hyphens: auto;
       -webkit-hyphenate-limit-after: 1;
       -webkit-hyphenate-limit-before: 3;
@@ -450,14 +451,24 @@ article {
       }
     }
     &:nth-child(odd) {
-      p {
+      p, h4, .video-container .quote .row, 
+      .video-quote .quote .row {
         margin: 20px 35% 20px @Margin;
       }
     }
     &:nth-child(even) {
-      p {
+      p, h4, .video-container .quote .row, 
+      .video-quote .quote .row
+       {
         margin: 20px @Margin 20px 35%;
       }
+    }
+    h4 {
+      padding-top: 20px;
+      .font-size(24);
+    }
+    p.datavis {
+      margin-bottom: 40px;
     }
     &#chapter1 {
       margin-top:0;
@@ -551,13 +562,13 @@ article {
     position: relative;
     width: 30%;
     min-width: 260px;
-    max-width: 400px;
+    max-width: 380px;
     &.pull-right {
-      margin: 0 5% 2% 2%;
+      margin: 0 5% 20px 2%;
       clear: right;
     }
     &.pull-left {
-      margin: 0 2% 2% 5%;
+      margin: 0 2% 20px 5%;
       clear: left;
     }
     h4 {
@@ -577,11 +588,20 @@ article {
   .credit {
     display: block;
     .font-size(14);
-    line-height: 1.1;
+    line-height: 1.4;
     font-style: italic;
-    color: @grayLight;
+    color: @grayDark;
+    em {
+      display: block;
+      font-size: 80%;
+      color: @grayLight;
+      text-transform: uppercase;
+    }
   }
   .related {
+    img  {
+      width: 100%;
+    }
     &.large {
       margin: 0 auto;
       width: 90%;
@@ -634,13 +654,7 @@ article {
       width: 100%;
       height: auto;
       margin-bottom: 10px;
-    }
-    span {
-      display: block;
-      .font-size(14);
-      line-height: 1.1;
-      font-style: italic;
-      color: @grayLight;
+      .border-radius(0);
     }
   }
   .audio {
@@ -648,7 +662,30 @@ article {
       margin-bottom: 10px;
     }
     .sc-player {
-      margin: 0;
+      margin: -70px 0 8px;
+      padding: 0 3%;
+      width: 94%;
+      background-color: rgba(0,0,0,.6);
+      .border-bottom-radius(6px);
+      &:hover .sc-scrubber, 
+      &.playing .sc-scrubber {
+        left: 64px;
+        bottom: 11px;
+      }
+      .sc-scrubber {
+        width: 80%;
+      }
+      ol.sc-trackslist {
+      width: 80%;
+      left: 60px;
+        li.active, li:hover {
+          background: transparent;
+          color: white;
+          a {
+            color: white;
+          }
+        }
+      }
     }
   }
   .map {
@@ -753,31 +790,42 @@ article {
   }
   .quote {
     position: relative;
-    display: block;
-    font-style: italic;
+    display: table-row;
     color: #453929;
     overflow: hidden;
-    .box-shadow(inset 0 0 100px rgba(0,0,0,0.8));
+    .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
     padding: 0;
     margin: 0;
     z-index: 10;
     height: 100%;
     clear: both;
+    &.italic {
+        font-style: italic;
+        .non-italic {
+          font-style: normal;
+        }
+        .row p {
+          .font-size(@parFontSize + 6);
+          &:first-of-type {
+            .font-size(@parFontSize + 6);
+          }
+        }
+      }
     .row {
+      display: table-cell;
+      vertical-align: middle;
       position: relative;
       padding:0;
-      width: 60%;
       color: white;
       margin: 8% auto;
+      z-index: 10;
       p {
-        margin: 0 !important;
-        .font-size(26);
+        .font-size(@parFontSize);
         text-shadow:none;
-        font-family: @sansFontFamily;
         font-weight: 100;
         line-height: 1.6;
         &:first-of-type {
-          .font-size(26);
+          .font-size(@parFontSize);
           font-weight: 100;
           margin-top:40px;
           &:first-letter {
@@ -799,6 +847,15 @@ article {
           font-style: normal;
           font-weight: 600;
         }
+      }
+      .credit {
+        color: white;
+        .opacity(50);
+        position: absolute;
+        right: 3%;
+        bottom: 3%;
+        .font-size(11);
+        text-transform: uppercase;
       }
     }
     &:after {
@@ -822,17 +879,9 @@ article {
     }
     &.albrecht {
       background: @grayDark url('/images/quote-albrecht.jpg') center center fixed  no-repeat;
+      background-attachment: scroll; //FIXED Y U NO WORK?
       background-size: cover;
       padding: 0;
-      .row {
-        width: 40%;
-        margin: 10% 0 0 10%;
-        padding: 0;
-        background: transparent;
-        border:none;
-      }
-    }
-    &.panel {
       .row {
         width: 40%;
         margin: 10% 0 0 10%;
@@ -844,6 +893,10 @@ article {
     &.court {
       background: @grayDark url('/images/chapter4-judgement.jpg') center center fixed  no-repeat;
       background-size: cover;
+      clear: both;
+      margin: 5% 0;
+      display: block;
+      padding: 5% 0;
     }
     &.judgement {
       background: @grayDark url('/images/chapter4-quote-bg.jpg') center center fixed  no-repeat;
@@ -854,10 +907,7 @@ article {
       background-size: cover;
       margin-bottom: 0;
       .row {
-        padding:40px 40px 60px;
-        border-color: rgba(255,255,255,.2);
         background: rgba(0,0,0,0.4);
-        border: 8px solid rgba(255,255,255,.8);
       }
     }
   }
@@ -887,9 +937,42 @@ article {
   }
 
   .video-container {
+    .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
     overflow: hidden;
     position: relative;
     clear: both;
+    margin: 20px 0;
+  }
+
+  .video-quote {
+    .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
+    overflow: hidden;
+    position: relative;
+    clear: both;
+    margin: 20px 0;
+    padding: 40px 0 60px;
+    .quote {
+      .row {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  
+  .video-container, .video-quote {
+    .quote {
+      .row {
+        background-color: rgba(255,255,255,.6);
+        padding: 20px;
+        .border-radius(6px);
+        display: block;
+        p {
+          margin: 10px;
+          color: black;
+        }
+      }
+    }
   }
 
   video {
@@ -1066,6 +1149,7 @@ footer {
 
 .ambient-video {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
