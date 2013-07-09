@@ -262,7 +262,7 @@ article {
     width: 100%;
     &:after {
       content: '';
-      display: block;
+      display: none; // HIDE THIS FOR NOW
       position: absolute;
       top: 0;
       left: 0;
@@ -811,7 +811,6 @@ article {
     &.albrecht {
       background: @grayDark url('/images/quote-albrecht.jpg') center center fixed  no-repeat;
       background-size: cover;
-      background-attachment: scroll; // HACK CAUSE FIXED ISN'T WORKING
       padding: 0;
       .row {
         width: 40%;
