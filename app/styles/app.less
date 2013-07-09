@@ -378,7 +378,7 @@ article {
       position: relative;
       background-size: cover;
       background-attachment: fixed;
-      // .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
+      .box-shadow(inset 0 10px 20px -10px rgba(0,0,0,0.8));
       margin:0;
       overflow: hidden;
       padding: 0;
@@ -450,14 +450,21 @@ article {
       }
     }
     &:nth-child(odd) {
-      p {
+      p, h4 {
         margin: 20px 35% 20px @Margin;
       }
     }
     &:nth-child(even) {
-      p {
+      p, h4 {
         margin: 20px @Margin 20px 35%;
       }
+    }
+    h4 {
+      padding-top: 20px;
+      .font-size(24);
+    }
+    p.datavis {
+      margin-bottom: 40px;
     }
     &#chapter1 {
       margin-top:0;
@@ -649,7 +656,7 @@ article {
       margin-bottom: 10px;
     }
     .sc-player {
-      margin: -104px 0 0;
+      margin: -70px 0 8px;
       padding: 0 3%;
       width: 94%;
       background-color: rgba(0,0,0,.6);
@@ -794,6 +801,7 @@ article {
       padding:0;
       color: white;
       margin: 8% auto;
+      z-index: 10;
       p {
         .font-size(26);
         text-shadow:none;
@@ -865,11 +873,6 @@ article {
         border:none;
       }
     }
-    &.panel {
-      .row {
-        
-      }
-    }
     &.court {
       background: @grayDark url('/images/chapter4-judgement.jpg') center center fixed  no-repeat;
       background-size: cover;
@@ -928,6 +931,13 @@ article {
     position: relative;
     clear: both;
     margin: 60px 0;
+    padding: 40px 0 60px;
+    .quote {
+      .row {
+        display: block;
+        margin: 0 auto;
+      }
+    }
   }
 
   video {
@@ -1104,5 +1114,7 @@ footer {
 
 .ambient-video {
   position: absolute;
-  z-index: -1;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
