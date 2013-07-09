@@ -249,6 +249,8 @@ body {
 // PAGE STYLES
 
 article {
+  @Margin:20%;
+  @parFontSize: 20;
   overflow: hidden;
   .article-header {
     -webkit-font-smoothing: antialiased;
@@ -360,7 +362,6 @@ article {
     }
   }
   section {
-    @Margin:20%;
     margin-top: 5%;
     position: relative;
     &:nth-child(even) {
@@ -425,9 +426,9 @@ article {
     }
     p {
       font-family: @serifFontFamily;
-      .font-size(20);
+      .font-size(@parFontSize);
       line-height: 1.5;
-      text-align: justify;
+      text-align: left;
       -webkit-hyphens: auto;
       -webkit-hyphenate-limit-after: 1;
       -webkit-hyphenate-limit-before: 3;
@@ -450,12 +451,15 @@ article {
       }
     }
     &:nth-child(odd) {
-      p, h4 {
+      p, h4, .video-container .quote .row, 
+      .video-quote .quote .row {
         margin: 20px 35% 20px @Margin;
       }
     }
     &:nth-child(even) {
-      p, h4 {
+      p, h4, .video-container .quote .row, 
+      .video-quote .quote .row
+       {
         margin: 20px @Margin 20px 35%;
       }
     }
@@ -558,7 +562,7 @@ article {
     position: relative;
     width: 30%;
     min-width: 260px;
-    max-width: 400px;
+    max-width: 380px;
     &.pull-right {
       margin: 0 5% 2% 2%;
       clear: right;
@@ -595,6 +599,9 @@ article {
     }
   }
   .related {
+    img  {
+      width: 100%;
+    }
     &.large {
       margin: 0 auto;
       width: 90%;
@@ -651,7 +658,6 @@ article {
     }
   }
   .audio {
-    padding-bottom: 80px;
     iframe {
       margin-bottom: 10px;
     }
@@ -785,15 +791,26 @@ article {
   .quote {
     position: relative;
     display: table-row;
-    font-style: italic;
     color: #453929;
     overflow: hidden;
-    .box-shadow(inset 0 0 100px rgba(0,0,0,0.8));
+    .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
     padding: 0;
     margin: 0;
     z-index: 10;
     height: 100%;
     clear: both;
+    &.italic {
+        font-style: italic;
+        .non-italic {
+          font-style: normal;
+        }
+        .row p {
+          .font-size(@parFontSize + 6);
+          &:first-of-type {
+            .font-size(@parFontSize + 6);
+          }
+        }
+      }
     .row {
       display: table-cell;
       vertical-align: middle;
@@ -803,12 +820,12 @@ article {
       margin: 8% auto;
       z-index: 10;
       p {
-        .font-size(26);
+        .font-size(@parFontSize);
         text-shadow:none;
         font-weight: 100;
         line-height: 1.6;
         &:first-of-type {
-          .font-size(26);
+          .font-size(@parFontSize);
           font-weight: 100;
           margin-top:40px;
           &:first-letter {
@@ -920,22 +937,40 @@ article {
   }
 
   .video-container {
+    .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
     overflow: hidden;
     position: relative;
     clear: both;
-    margin: 60px 0;
+    margin: 20px 0;
   }
 
   .video-quote {
+    .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
     overflow: hidden;
     position: relative;
     clear: both;
-    margin: 60px 0;
+    margin: 20px 0;
     padding: 40px 0 60px;
     .quote {
       .row {
         display: block;
         margin: 0 auto;
+      }
+    }
+  }
+
+  
+  .video-container, .video-quote {
+    .quote {
+      .row {
+        background-color: rgba(255,255,255,.6);
+        padding: 20px;
+        .border-radius(6px);
+        display: block;
+        p {
+          margin: 10px;
+          color: black;
+        }
       }
     }
   }
