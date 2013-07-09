@@ -10,7 +10,9 @@ require.config({
     videojs: '../components/video.js/video',
     bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrapSwitch',
     scPlayer: './libs/sc-player',
-    highcharts: '../components/highcharts.com/js/highcharts.src'
+    highcharts: '../components/highcharts.com/js/highcharts.src',
+    scrollTo: '../components/jquery.scrollTo/jquery.scrollTo',
+    easing: '../components/jquery-easing/jquery.easing'
   },
   shim: {
     backbone: {
@@ -30,6 +32,9 @@ require.config({
       deps: [
         './libs/soundcloud.player.api'
       ]
+    },
+    scrollTo: {
+      deps: ['jquery']
     },
     highcharts: {
       deps: ['jquery'],

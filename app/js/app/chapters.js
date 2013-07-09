@@ -1,7 +1,9 @@
 define([
   'jquery',
   'lodash',
-  'events'
+  'events',
+  'easing',
+  'scrollTo'
 ], function($, _, events) {
   var chapter1;
   var chapter2;
@@ -13,7 +15,19 @@ define([
 
   var buttonText = 'Chapter {0} of 6';
 
-  var setBindings = function() {
+  // Scroll to the correct chapter
+  var setChapterNavBindings = function() {
+    $('.chapters a').on('click', function(e){
+      e.preventDefault();
+      var options = {
+        duration: 2000,
+        easing: 'easeInOutCubic'
+      };
+      $.scrollTo($(this).attr('href'), options);
+    });
+  };
+
+  var setChapterNumberBindings = function() {
     events.on('scroll:enter:chapter1', function() {
       chapterButtonText.text(buttonText.replace('{0}', 1))
     });
@@ -44,7 +58,8 @@ define([
     chapter5 = $('#chapter5');
     chapter6 = $('#chapter6');
 
-    setBindings();
+    setChapterNavBindings();
+    setChapterNumberBindings();
   };
 
   return {
