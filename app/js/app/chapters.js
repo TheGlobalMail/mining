@@ -1,22 +1,17 @@
 define([
   'jquery',
   'lodash',
+  'config',
   'events',
   'easing',
   'scrollTo'
-], function($, _, events) {
-  var chapter1;
-  var chapter2;
-  var chapter3;
-  var chapter4;
-  var chapter5;
-  var chapter6;
-  var chapterButtonText;
+], function($, _, config, events) {
 
+  var chapterButtonText;
   var buttonText = 'Chapter {0} of 6';
 
-  // Scroll to the correct chapter
-  var setChapterNavBindings = function() {
+  // Add click handler to chapter nav to scroll to chapter start
+  var setClickHandlers = function() {
     $('.chapters a').on('click', function(e){
       e.preventDefault();
       var options = {
@@ -27,39 +22,31 @@ define([
     });
   };
 
-  var setChapterNumberBindings = function() {
-    events.on('scroll:enter:chapter1', function() {
-      chapterButtonText.text(buttonText.replace('{0}', 1))
-    });
-    events.on('scroll:enter:chapter2', function() {
-      chapterButtonText.text(buttonText.replace('{0}', 2))
-    });
-    events.on('scroll:enter:chapter3', function() {
-      chapterButtonText.text(buttonText.replace('{0}', 3))
-    });
-    events.on('scroll:enter:chapter4', function() {
-      chapterButtonText.text(buttonText.replace('{0}', 4))
-    });
-    events.on('scroll:enter:chapter5', function() {
-      chapterButtonText.text(buttonText.replace('{0}', 5))
-    });
-    events.on('scroll:enter:chapter6', function() {
-      chapterButtonText.text(buttonText.replace('{0}', 6))
+  // Add scroll handlers to update the chapter numbers and active nav chapter
+  var setScrollHandlers = function() {
+    var currentChapter;
+    var $chapters = {};
+
+    function scrollEnter(chapter){
+      return function(){
+        if (currentChapter) currentChapter.removeClass('active');
+        currentChapter = $chapters[chapter];
+        currentChapter.addClass('active');
+        chapterButtonText.text(buttonText.replace('{0}', chapter.replace(/chapter/, '')));
+      };
+    }
+
+    _.each($('#chapter-navigation li[data-link]'), function(nav){
+      var chapter = $(nav).data('link');
+      $chapters[chapter] = $(nav);
+      events.on('scroll:enter:' + chapter, scrollEnter(chapter));
     });
   };
 
   var init = function() {
-    chapterButtonText = $('.chapters .button-text');
-
-    chapter1 = $('#chapter1');
-    chapter2 = $('#chapter2');
-    chapter3 = $('#chapter3');
-    chapter4 = $('#chapter4');
-    chapter5 = $('#chapter5');
-    chapter6 = $('#chapter6');
-
-    setChapterNavBindings();
-    setChapterNumberBindings();
+    chapterButtonText = $('.chapters button .current-chapter');
+    setClickHandlers();
+    setScrollHandlers();
   };
 
   return {
