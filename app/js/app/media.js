@@ -43,7 +43,9 @@ define([
       var $video = $(this);
       var id = $video.attr('id');
       videos[id] = videojs(id, {
-        loop: true
+        loop: true,
+        width: 'auto',
+        height: 'auto'
       }).volume(0);
     });
   };
