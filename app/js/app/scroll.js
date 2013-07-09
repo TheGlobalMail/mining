@@ -140,8 +140,6 @@ define([
   };
 
   return {
-    init: init,
-    elementInViewport: elementInViewport,
-    elementsToWatch: elementsToWatch
+    init: init
   }
 });
