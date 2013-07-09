@@ -14,28 +14,46 @@ define([
 ], function($, _, soundManager, videojs, events, config, audio_utils, video_utils, getScrollY, scroll) {
 
   var AUDIO_ROOT = '/audio/';
-  var AUDIO_FILES = {
-    intro: AUDIO_ROOT + 'bulga-morning-birdcall-servo.mp3'
-  };
 
   var testVideo;
-  var introAudio;
-  var playIntroAudio;
 
   var videos = {};
   var activeVideo;
 
-  var initIntroAudio = function() {
-    // Trigger load and play of intro sound
-    introAudio = soundManager.createSound({
-      url: AUDIO_FILES.intro,
-      autoLoad: true,
-      onload: function() {
-        if (playIntroAudio) {
-          audio_utils.fadeIn(introAudio);
+  var clips = {};
+
+  var initAudio = function() {
+
+    $('.ambient-audio').each(function(){
+      var $clip = $(this);
+      var id = $clip.attr('id');
+
+      // create the soundManager clip
+      var clip = soundManager.createSound({
+        id: id,
+        //url: AUDIO_ROOT + id + '.mp3',
+        // TODO remove hardcode
+        url: AUDIO_ROOT + 'bulga-morning-birdcall-servo.mp3',
+        autoLoad: true,
+        onload: function(){
+          if (id.match(/intro/)){
+            // HACK HACK. Trigger sound for the first video
+            events.trigger('scroll:enter:' + id);
+          }
         }
-      }
+      });
+
+      // listen to scroll events for this id
+      events.on('scroll:enter:' + id, function() {
+        audio_utils.fadeIn(clip);
+      });
+      events.on('scroll:exit:' + id , function() {
+        audio_utils.fadeOut(clip);
+      });
+
     });
+
+
   };
 
   var initVideos = function(){
@@ -50,27 +68,21 @@ define([
     });
   };
 
-  var soundManagerOnReady = function() {
-    initIntroAudio();
-  };
-
-  var bindAudioControl = function() {
+  var initAndSetAudioBindings = function() {
     var audioControl = $('.audio-control');
     audioControl.find('.switch').on('switch-change', function (e, data) {
-      config.quiet = data.value;
-      events.trigger('audio:' + (data.value ? 'on' : 'off'));
+      var quiet = !data.value;
+      if (!config.quiet && quiet){
+        audio_utils.mute();
+      }else if (config.quiet && !quiet){
+        audio_utils.unmute();
+      }
+      config.quiet = quiet;
+      events.trigger('audio:' + (config.quiet ? 'on' : 'off'));
     });
   };
 
-  var setBindings = function() {
-    events.on('scroll:enter:intro', function() {
-      playIntroAudio = true;
-      audio_utils.fadeIn(introAudio);
-    });
-    events.on('scroll:exit:intro', function() {
-      playIntroAudio = false;
-      audio_utils.fadeOut(introAudio);
-    });
+  var setVideoBindings = function() {
 
     $('.ambient-video').each(function() {
       var element = $(this);
@@ -83,20 +95,21 @@ define([
       });
     });
 
-    bindAudioControl();
   };
 
   var init = function() {
 
-    soundManager.setup({
-      url: '/components/soundmanager/swf/soundmanager2.swf',
-      onready: soundManagerOnReady,
-      debugMode: config.debug
-    });
-
     initVideos();
 
-    setBindings();
+    setVideoBindings();
+
+    initAndSetAudioBindings();
+
+    soundManager.setup({
+      url: '/components/soundmanager/swf/soundmanager2.swf',
+      onready: initAudio,
+      debugMode: config.debug
+    });
 
     $('.soundcloud-player').scPlayer();
   };
