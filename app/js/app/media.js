@@ -36,8 +36,7 @@ define([
         loops: 50,
         onload: function(){
           if (id.match(/intro/)){
-            // HACK HACK. Trigger sound for the first video
-            events.trigger('scroll:enter:' + id);
+            events.trigger('media:ready:audio');
           }
         }
       });
@@ -77,7 +76,7 @@ define([
         audio_utils.unmute();
       }
       config.quiet = quiet;
-      events.trigger('audio:' + (config.quiet ? 'on' : 'off'));
+      events.trigger('media:audio:' + (!config.quiet ? 'on' : 'off'));
     });
   };
 

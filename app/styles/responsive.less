@@ -123,10 +123,11 @@
       &:nth-child(odd) h1 .row {
         left: @Margin;
       }
-      &:nth-child(even) p, &:nth-child(odd) p,
-      h4, .video-container .quote .row,
+      &:nth-child(even), &:nth-child(odd) {
+      p, h4, .video-container .quote .row,
       .video-quote .quote .row {
          margin: 15px @Margin 15px @Margin;
+        }
       }
       p {
         .font-size(@parFontSize);
@@ -141,12 +142,20 @@
           margin-top: -@textHeight;
         }
       }
+      .gallery, blockquote, .map, .audio, .related, .video {
+        &.pull-right {
+          margin: 0 2% 20px 2%;
+        }
+        &.pull-left {
+          margin: 0 2% 20px 2%;
+        }
+      }
       .quote {
         &.italic {
           .row p {
-            .font-size(@parFontSize + 4);
+            .font-size(@parFontSize + 6);
             &:first-of-type {
-              .font-size(@parFontSize + 4);
+              .font-size(@parFontSize + 6);
             }
           }
         }
@@ -227,11 +236,13 @@
       &:nth-child(odd) h1 .row {
         left: @Margin;
       }
-      &:nth-child(even) p, &:nth-child(odd) p,
-      h4, .video-container .quote .row,
+      &:nth-child(even), &:nth-child(odd) {
+      p, h4, .video-container .quote .row,
       .video-quote .quote .row {
           margin: 15px @Margin 15px @Margin;
+        }
       }
+
       &#chapter1 {
         h1 {
           text-align: center;

@@ -120,6 +120,15 @@ define([
     initElements();
   };
 
+  var forceRecheckOfElements = function() {
+    // reset all inViewport attributes
+    for (var i = 0; i < elementsToWatch.length; i++) {
+      elementsToWatch[i].inViewport = false;
+    }
+    // trigger on scroll
+    onScroll();
+  };
+
   var setBindings = function() {
     $(window).on('scroll', _.throttle(onScroll, 50));
     $(window).on('resize', _.debounce(onResize, 50));
@@ -137,6 +146,10 @@ define([
       checkElements();
       events.trigger('scroll:end');
     });
+
+    // Bit of a hack to trigger scroll events immediately after audio is loaded
+    events.on('media:ready:audio', forceRecheckOfElements);
+    events.on('media:audio:on', forceRecheckOfElements);
   };
 
   return {
