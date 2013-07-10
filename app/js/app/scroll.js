@@ -44,7 +44,7 @@ define([
   var windowHeight;
 
   var populateConfig = function() {
-    $('.ambient-video,.ambient-audio').each(function() {
+    $('.ambient-video,[data-ambient-audio]').each(function() {
       var element = $(this);
       var id = element.attr('id');
       elementsToWatch.push({

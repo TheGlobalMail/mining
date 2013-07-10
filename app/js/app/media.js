@@ -24,16 +24,14 @@ define([
 
   var initAudio = function() {
 
-    $('.ambient-audio').each(function(){
+    $('div[data-ambient-audio],video[data-ambient-audio]').each(function(){
       var $clip = $(this);
       var id = $clip.attr('id');
+      var clipFile = $clip.data('ambient-audio');
 
       // create the soundManager clip
       var clip = soundManager.createSound({
-        id: id,
-        //url: AUDIO_ROOT + id + '.mp3',
-        // TODO remove hardcode
-        url: AUDIO_ROOT + 'bulga-morning-birdcall-servo.mp3',
+        url: AUDIO_ROOT + clipFile,
         autoLoad: true,
         onload: function(){
           if (id.match(/intro/)){
@@ -45,9 +43,11 @@ define([
 
       // listen to scroll events for this id
       events.on('scroll:enter:' + id, function() {
+        console.error('fading in ' + clipFile)
         audio_utils.fadeIn(clip);
       });
       events.on('scroll:exit:' + id , function() {
+        console.error('fading out ' + clipFile)
         audio_utils.fadeOut(clip);
       });
 
