@@ -809,17 +809,20 @@ article {
     height: 100%;
     clear: both;
     &.italic {
-        font-style: italic;
-        .non-italic {
-          font-style: normal;
-        }
-        .row p {
+      font-style: italic;
+      .non-italic {
+        font-style: normal;
+      }
+      .row p {
+        .font-size(@parFontSize + 6);
+        &:first-of-type {
           .font-size(@parFontSize + 6);
-          &:first-of-type {
-            .font-size(@parFontSize + 6);
-          }
         }
       }
+    }
+    &.panel {
+      position: absolute;
+    }
     .row {
       display: table-cell;
       vertical-align: middle;
@@ -954,17 +957,21 @@ article {
   }
 
   .video-quote {
-    .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
+    //.box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
+    .box-shadow(none);
     overflow: hidden;
     position: relative;
-    clear: both;
     margin: 20px 0;
-    padding: 40px 0 60px;
     .quote {
+      .box-shadow(none);
       .row {
         display: block;
         margin: 0 auto;
       }
+    }
+    .video-container {
+      .box-shadow(none);
+      margin: 0;
     }
   }
 
@@ -1161,4 +1168,5 @@ footer {
   top: 0;
   left: 0;
   bottom: 0;
+  width: 100%;
 }
