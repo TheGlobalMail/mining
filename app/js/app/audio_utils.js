@@ -104,13 +104,13 @@ define([
   var mute = function(){
     _.each(playingSounds, function(sound){
       sound.setVolume(defaultOptions.volumeMin);
+      sound.stop();
+      sound.state = null;
+      delete playingSounds[sound.id];
     });
   };
 
   var unmute = function(){
-    _.each(playingSounds, function(sound){
-      sound.setVolume(defaultOptions.volumeMax);
-    });
   };
 
   var loopSound = function(sound) {
