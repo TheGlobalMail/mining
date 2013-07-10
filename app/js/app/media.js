@@ -33,6 +33,7 @@ define([
       var clip = soundManager.createSound({
         url: AUDIO_ROOT + clipFile,
         autoLoad: true,
+        loops: 50,
         onload: function(){
           if (id.match(/intro/)){
             // HACK HACK. Trigger sound for the first video
@@ -43,11 +44,9 @@ define([
 
       // listen to scroll events for this id
       events.on('scroll:enter:' + id, function() {
-        console.error('fading in ' + clipFile)
         audio_utils.fadeIn(clip);
       });
       events.on('scroll:exit:' + id , function() {
-        console.error('fading out ' + clipFile)
         audio_utils.fadeOut(clip);
       });
 
