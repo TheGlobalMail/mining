@@ -137,6 +137,16 @@ define([
       checkElements();
       events.trigger('scroll:end');
     });
+
+    // Bit of a hack to trigger scroll events immediately after audio is loaded
+    events.on('media:ready:audio', function(){
+      // reset all inViewport attributes
+      for (var i = 0; i < elementsToWatch.length; i++) {
+        elementsToWatch[i].inViewport = false;
+      }
+      // trigger on scroll
+      onScroll();
+    });
   };
 
   return {
