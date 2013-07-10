@@ -464,6 +464,7 @@ article {
         margin: 20px @Margin 20px 35%;
       }
     }
+
     h4 {
       padding-top: 20px;
       .font-size(24);
@@ -817,6 +818,15 @@ article {
     z-index: 10;
     height: 100%;
     clear: both;
+    &.short-quote .row {
+      padding-top: 5%;
+      padding-bottom: 5%;
+    }
+
+    &.shadow-text .row p {
+      text-shadow: 0 0 50px #000;
+    }
+
     &.italic {
       font-style: italic;
       .non-italic {
@@ -905,6 +915,10 @@ article {
       background-attachment: scroll; //FIXED Y U NO WORK?
       background-size: cover;
       padding: 0;
+      .row {
+        padding-top: 7%;
+        padding-bottom: 12%;
+      }
       p {
         width: 30%;
         padding: 0;
