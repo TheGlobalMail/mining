@@ -599,13 +599,13 @@ article {
     }
   }
   .related {
+    position: relative;
     img  {
       width: 100%;
     }
     &.large {
       margin: 0 auto;
       width: 90%;
-      height: 600px;
       .border-radius(6px);
       max-width: none;
       img {
@@ -622,6 +622,15 @@ article {
         text-align: center;
         width: 100%;
         z-index: 10;
+      }
+      .ambient-video {
+        position: static;
+      }
+      video {
+        position: static;
+        width: 100%;
+        min-height: auto;
+        display: block;
       }
       &:after {
         position: absolute;
