@@ -13,6 +13,20 @@ define([
           fontSize: '0px'
         }
       },
+      chart: {
+        marginBottom: 100
+      },
+      subtitle: {
+        text: 'Source: U.S. Energy Information Administration',
+        align: 'left',
+        verticalAlign: 'bottom',
+        style: {
+          color: '#8f8f8f',
+          'text-transform': 'uppercase',
+          font: '10px open-sans-n4,open-sans-n4,open-sans,Helvetica,Arial,sans-serif'
+        },
+        y: 10 
+      },
       credits: {
         enabled: false
       },
@@ -54,6 +68,7 @@ define([
         }
       },
       legend: {
+        y: -15,
         backgroundColor: '#FFFFFF',
         reversed: true
       },
@@ -78,6 +93,20 @@ define([
         style: {
           fontSize: '0px'
         }
+      },
+      subtitle: {
+        text: 'Source: World Bank',
+        align: 'left',
+        verticalAlign: 'bottom',
+        style: {
+          color: '#8f8f8f',
+          'text-transform': 'uppercase',
+          font: '10px open-sans-n4,open-sans-n4,open-sans,Helvetica,Arial,sans-serif'
+        },
+        y: 10
+      },
+      chart: {
+        marginBottom: 70
       },
       credits: {
         enabled: false

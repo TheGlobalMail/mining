@@ -255,12 +255,12 @@ article {
   .article-header {
     -webkit-font-smoothing: antialiased;
     // XXX commented out but this should maybe be in as fallback for mobile?
-    //background: @grayDark url('/images/JK3A9329.jpg') center fixed;
+    background: rgba(22,22,21,.9) url('/images/noise-overlay.png') center center repeat;
     background-size: cover;
     padding: 0;
     vertical-align: middle;
     text-align: center;
-    color: rgba(0,0,0,0.8);
+    color: rgba(255,255,255,0.8);
     // .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
     display: table;
     width: 100%;
@@ -286,7 +286,7 @@ article {
       position: absolute;
       width: 100%;
       margin: 0;
-      color: rgba(35,40,44,0.5);
+      color: rgba(255,255,255,0.4);
       .font-size(180);
       line-height: .75;
       -webkit-mask-image: url('/images/header-bg.png');
@@ -299,8 +299,8 @@ article {
     }
     h2 {
       position: absolute;
-      color: rgba(0,0,0,0.8);
       text-transform: uppercase;
+      color: white;
       top: 50%;
       left: 0;
       width: 100%;
@@ -310,7 +310,7 @@ article {
       .font-size(30);
       font-weight: 800;
       line-height: 1;
-      text-shadow: 0 1px 0 rgba(255,255,255,.15);
+      text-shadow: 0 -1px 0 rgba(0,0,0,.3);
     }
     .author {
       position: absolute;
@@ -318,7 +318,7 @@ article {
       left: 0;
       bottom: 5%;
       .font-size(16);
-      color: white;
+      color: rgba(255,255,255,0.8);
       z-index: 10;
       text-shadow: 0 -1px 0 rgba(0,0,0,.5);
       .author-pic {
@@ -428,7 +428,7 @@ article {
       font-family: @serifFontFamily;
       .font-size(@parFontSize);
       line-height: 1.5;
-      text-align: left;
+      text-align: justify;
       -webkit-hyphens: auto;
       -webkit-hyphenate-limit-after: 1;
       -webkit-hyphenate-limit-before: 3;
@@ -451,13 +451,13 @@ article {
       }
     }
     &:nth-child(odd) {
-      p, h4, .video-container .quote .row, 
+      p, h4, .video-container .quote .row,
       .video-quote .quote .row {
         margin: 20px 35% 20px @Margin;
       }
     }
     &:nth-child(even) {
-      p, h4, .video-container .quote .row, 
+      p, h4, .video-container .quote .row,
       .video-quote .quote .row
        {
         margin: 20px @Margin 20px 35%;
@@ -561,7 +561,7 @@ article {
     overflow: hidden;
     position: relative;
     width: 30%;
-    min-width: 260px;
+    min-width: 240px;
     max-width: 380px;
     &.pull-right {
       margin: 0 5% 20px 2%;
@@ -607,7 +607,9 @@ article {
       margin: 0 auto;
       width: 90%;
       .border-radius(6px);
+      overflow: hidden;
       max-width: none;
+      clear: both;
       img {
         width:100%;
         height: auto;
@@ -640,7 +642,7 @@ article {
         display: block;
         width: 100%;
         height: 100%;
-        .box-shadow(inset 0 4px 30px 0 rgba(0,0,0,0.8));
+        .box-shadow(inset 0 4px 5px 0 rgba(0,0,0,0.5));
         z-index: 9;
       }
     }
@@ -676,7 +678,7 @@ article {
       width: 94%;
       background-color: rgba(0,0,0,.6);
       .border-bottom-radius(6px);
-      &:hover .sc-scrubber, 
+      &:hover .sc-scrubber,
       &.playing .sc-scrubber {
         left: 64px;
         bottom: 11px;
@@ -687,6 +689,7 @@ article {
       ol.sc-trackslist {
       width: 80%;
       left: 60px;
+      overflow: hidden;
         li.active, li:hover {
           background: transparent;
           color: white;
@@ -830,9 +833,11 @@ article {
       padding:0;
       color: white;
       margin: 8% auto;
+      padding: 3% 0 5%;
       z-index: 10;
       p {
         .font-size(@parFontSize);
+        text-align: left;
         text-shadow:none;
         font-weight: 100;
         line-height: 1.6;
@@ -894,9 +899,8 @@ article {
       background-attachment: scroll; //FIXED Y U NO WORK?
       background-size: cover;
       padding: 0;
-      .row {
-        width: 40%;
-        margin: 10% 0 0 10%;
+      p {
+        width: 30%;
         padding: 0;
         background: transparent;
         border:none;
@@ -908,11 +912,13 @@ article {
       clear: both;
       margin: 5% 0;
       display: block;
-      padding: 5% 0;
     }
     &.judgement {
       background: @grayDark url('/images/coal-size5.jpg') center center fixed  no-repeat;
       background-size: cover;
+      .row {
+        background: rgba(0,0,0,0.4);
+      }
     }
     &.final {
       background: @grayDark url('/images/cockatoos-size5.jpg') center center fixed  no-repeat;
@@ -950,6 +956,7 @@ article {
 
   .video-container {
     .box-shadow(inset 0 5px 10px -5px rgba(0,0,0,0.8));
+    background: rgba(22,22,21,.9) url('/images/noise-overlay.png') center center repeat;
     overflow: hidden;
     position: relative;
     clear: both;
@@ -975,7 +982,7 @@ article {
     }
   }
 
-  
+
   .video-container, .video-quote {
     .quote {
       .row {
