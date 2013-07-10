@@ -32,7 +32,7 @@ define([
 
       sound.setVolume(0);
 
-      if (sound.paused || sound.playState == 0) {
+      if (sound.stopped || sound.playState == 0) {
         sound.play();
       }
 
@@ -81,7 +81,7 @@ define([
         var vol = sound.volume;
 
         if (vol <= options.volumeMin) {
-          sound.pause();
+          sound.stop();
           sound.state = null;
           delete playingSounds[sound.id];
           if (options.complete) {
