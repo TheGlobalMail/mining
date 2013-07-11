@@ -493,8 +493,11 @@ article {
     }
     &#chapter3 {
       h1 {
-        background-image: url('/images/chapter3.jpg');
-        background: none;
+        // set up BG properties for the mobile fallback
+        background-position: right center;
+        background-size: cover;
+        background-attachment: fixed;
+
         color: rgba(0,0,0,.8);
          span {
           &:before, &:after {
@@ -505,8 +508,10 @@ article {
     }
     &#chapter4 {
       h1 {
-        background-image: url('/images/chapter4.jpg');
-        background: none;
+        // set up BG properties for the mobile fallback
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
         color: rgba(0,0,0,.8);
          span {
           &:before, &:after {
@@ -528,9 +533,11 @@ article {
     }
     &#chapter6 {
       h1 {
-        background-image: url('/images/chapter6.jpg');
+        // set up BG properties for the mobile fallback
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
         color: rgba(0,0,0,.8);
-        background: none;
          span {
           &:before, &:after {
           border-color: rgba(0,0,0,.8);

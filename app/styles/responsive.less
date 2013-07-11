@@ -11,16 +11,74 @@
   @media only screen and (max-width: @bigWidth)     { background-image: url("@{imgBase}4.jpg"); }
   @media only screen and (max-width: @medWidth)     { background-image: url("@{imgBase}3.jpg"); }
   @media only screen and (max-width: @smallWidth)   { background-image: url("@{imgBase}2.jpg"); }
-  @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}1.jpg"); }
+  @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}3.jpg"); }
+}
+.killVideo {
+  // hides the video elem when we're not using it on small displays
+  @media only screen and (max-width: @smallerWidth) { video { display: none; } }
+}
+
+.videoFallback(@imgName) {
+  // fallback for when there's no video - using a bigger size cos the stills are a bit lossy
+  @imgBase: "/images/@{imgName}-size";
+  @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}3.jpg"); }
 }
 
 article {
+  // big resposive images (all devices)
   section#chapter2 h1 { .responsiveBG('lightpollution'); }
   section#chapter5 h1 { .responsiveBG('pub'); }
   .quote.albrecht     { .responsiveBG('nighttree'); }
   .quote.court        { .responsiveBG('carsunrise'); }
   .quote.judgement    { .responsiveBG('coal'); }
   .quote.final        { .responsiveBG('cockatoos'); }
+
+  // video fallbacks (mobile)
+  .article-header {
+    .killVideo;
+    .videoFallback('Opener');    
+  }
+
+  section#chapter3 {
+    .killVideo;
+    h1 { .videoFallback('JohnKrey'); }
+  }
+
+  section#chapter4 {
+    .killVideo;
+    h1 { .videoFallback('SunriseHill'); }
+  }
+
+  section#chapter6 {
+    .killVideo;
+    h1 { .videoFallback('Cat'); }
+  }
+
+  .video-quote .video-container {
+    // this should be #morning-timelapse-section .video-container - 
+    // need to add an ID to this .video-quote element
+    .killVideo;
+    .videoFallback('MorningTimelapse');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: static;
+  }
+
+  #coal-train-section .video-container {
+    .killVideo;
+    .videoFallback('Coaltrain');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: static;
+  }
+
+  #gum-leaves-section .video-container {
+    .killVideo;
+    .videoFallback('GumLeaves');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: static;
+  }
 }
 
 //iPad Landscape and smaller screens
