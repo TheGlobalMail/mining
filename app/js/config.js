@@ -8,7 +8,7 @@ define(function() {
     debugEvents: false
   };
 
-  if ( (window.innerWidth > 1300 && (document.documentElement.className !== 'ie8' || document.documentElement.className !== 'ie9') && !window.location.href.match(/ambient=disable/i)){
+  if ( (window.innerWidth > 1300 && (document.documentElement.className !== 'ie8' || document.documentElement.className !== 'ie9') ) && !window.location.href.match(/ambient=disable/i)){
     config.ambianceEnabled = true;
   }
 
