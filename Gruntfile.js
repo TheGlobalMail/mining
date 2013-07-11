@@ -195,7 +195,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= project.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
           dest: '<%= project.dist %>/images'
         }]
       }
@@ -239,12 +239,12 @@ module.exports = function(grunt) {
           src: [
             'index.html',
             'audio/*.mp3',
-            'video/*.m4v',
+            'video/*',
             'components/soundmanager/swf/*',
             'components/font-awesome/font/*',
             '*.{ico,txt}',
             '.htaccess',
-            'images/*.svg'
+            'images/*'
           ]
         }]
       }
