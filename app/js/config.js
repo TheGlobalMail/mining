@@ -8,7 +8,7 @@ define(function() {
     debugEvents: false
   };
 
-  if (window.innerWidth > 670 && !window.location.href.match(/ambient=disable/i)){
+  if (window.innerWidth > 680 && !window.location.href.match(/ambient=disable/i)){
     config.ambianceEnabled = true;
   }
 
