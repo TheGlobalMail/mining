@@ -122,6 +122,7 @@ define([
         labels: {
           rotation: -70,
           y: 25,
+          step: 5,
           formatter: function() {
             return this.value.replace(/\w+-/, '');
           }
