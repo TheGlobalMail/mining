@@ -241,6 +241,7 @@ module.exports = function(grunt) {
             'audio/*.mp3',
             'video/*.m4v',
             'components/soundmanager/swf/*',
+            'components/font-awesome/font/*',
             '*.{ico,txt}',
             '.htaccess',
             'images/*.svg'
