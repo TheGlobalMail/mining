@@ -7,18 +7,24 @@ define([
   'scrollTo'
 ], function($, _, config, events) {
 
+  var chapters;
   var chapterButtonText;
   var buttonText = 'Chapter {0} of 6';
 
   // Add click handler to chapter nav to scroll to chapter start
   var setClickHandlers = function() {
-    $('.chapters a').on('click', function(e){
+    chapters.find('a').on('click', function(e){
       e.preventDefault();
       var options = {
         duration: 2000,
         easing: 'easeInOutCubic'
       };
       $.scrollTo($(this).attr('href'), options);
+      if (chapters.hasClass('fixed')) {
+        chapters
+          .addClass('inactive')
+          .removeClass('active');
+      }
     });
   };
 
@@ -44,7 +50,8 @@ define([
   };
 
   var init = function() {
-    chapterButtonText = $('.chapters button .current-chapter');
+    chapters = $('.chapters');
+    chapterButtonText = chapters.find('button .current-chapter');
     setClickHandlers();
     setScrollHandlers();
   };
