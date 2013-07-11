@@ -72,10 +72,19 @@ define([
       .removeClass('inactive');
   };
 
+  var scaleTimelapseContainer = function() {
+    var largeTimelapse = $('.time-lapse-big');
+    largeTimelapse
+      .css({
+        'height': largeTimelapse.find('video').outerHeight(true)
+      });
+  };
+
   function scaleLayout() {
     scaleIntro();
     scaleVideoContainers();
     scaleChapterContainer();
+    scaleTimelapseContainer();
   }
 
   var setBindings = function() {
@@ -93,6 +102,10 @@ define([
       }
     });
     events.on('scroll:exit:chapters-container', toggleChapterState);
+
+    events.on('scroll:enter:chapter3', function() {
+      scaleTimelapseContainer();
+    });
 
     chaptersButton.on('click', chapterButtonOnclick)
   };
