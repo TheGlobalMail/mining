@@ -72,15 +72,20 @@ define([
       .removeClass('inactive');
   };
 
+  function scaleLayout() {
+    scaleIntro();
+    scaleVideoContainers();
+    scaleChapterContainer();
+  }
+
   var setBindings = function() {
     // Set the size for objects
     events.on('init:end', function() {
-      scaleIntro();
-      scaleVideoContainers();
-      scaleChapterContainer();
+      scaleLayout();
       events.trigger('layout:end');
     });
 
+    $(window).on('resize', _.debounce(scaleLayout, 50));
 
     events.on('scroll:enter:chapters-container', function() {
       if (chapters.hasClass('fixed')) {
