@@ -13,16 +13,13 @@
   @media only screen and (max-width: @smallWidth)   { background-image: url("@{imgBase}2.jpg"); }
   @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}3.jpg"); }
 }
-.killVideo {
-  // hides the video elem when we're not using it on small displays
-  @media only screen and (max-width: @smallerWidth) { video { display: none; } }
-}
 
 .videoFallback(@imgName) {
   // fallback for when there's no video - using a bigger size cos the stills are a bit lossy
   @imgBase: "/images/@{imgName}-size";
-  @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}3.jpg"); }
+  background-image: url("@{imgBase}3.jpg");
 }
+
 
 article {
   // big resposive images (all devices)
@@ -32,62 +29,68 @@ article {
   .quote.court        { .responsiveBG('carsunrise'); }
   .quote.judgement    { .responsiveBG('coal'); }
   .quote.final        { .responsiveBG('cockatoos'); }
+}
 
-  // video fallbacks (mobile)
-  .article-header {
-    .killVideo;
-    .videoFallback('Opener');    
-  }
+// video fallbacks (tablet & IE8)
+// gotta be in a mixin so we can de @media and ie8 without repetition
+.videoFallbacks() {
+  article {
+    .article-header {
+      video { display: none; };
+      .videoFallback('Opener');    
+    }
 
-  section#chapter3 {
-    .killVideo;
-    h1 { .videoFallback('JohnKrey'); }
-    @media only screen and (max-width: @smallerWidth) {
-      .time-lapse-big {
-        display: none;
+    section#chapter3 {
+      video { display: none; };
+      h1 { 
+        .videoFallback('JohnKrey'); 
+        background-position: 70% center;
       }
-      .time-lapse-small {
-        display: block;
-      }
+      .time-lapse-big { display: none; }
+      .time-lapse-small { display: block; }
+    }
+
+    section#chapter4 {
+      video { display: none; };
+      h1 { .videoFallback('SunriseHill'); }
+    }
+
+    section#chapter6 {
+      video { display: none; }; 
+      h1 { .videoFallback('Cat'); }
+    }
+
+    .video-quote .video-container {
+      // this should be #morning-timelapse-section .video-container - 
+      // need to add an ID to this .video-quote element
+      video { display: none; };
+      .videoFallback('MorningTimelapse');
+      background-position: center center;
+      background-size: cover;
+      background-attachment: scroll;
+    }
+
+    #coal-train-section .video-container {
+      video { display: none; }; 
+      .videoFallback('Coaltrain');
+      background-position: 80% center;
+      background-size: cover;
+      background-attachment: scroll;
+      background-repeat: no-repeat;
+    }
+
+    #gum-leaves-section .video-container {
+      video { display: none; };
+      .videoFallback('GumLeaves');
+      background-position: center center;
+      background-size: cover;
+      background-attachment: scroll;
     }
   }
-
-  section#chapter4 {
-    .killVideo;
-    h1 { .videoFallback('SunriseHill'); }
-  }
-
-  section#chapter6 {
-    .killVideo;
-    h1 { .videoFallback('Cat'); }
-  }
-
-  .video-quote .video-container {
-    // this should be #morning-timelapse-section .video-container - 
-    // need to add an ID to this .video-quote element
-    .killVideo;
-    .videoFallback('MorningTimelapse');
-    background-position: center center;
-    background-size: cover;
-    background-attachment: static;
-  }
-
-  #coal-train-section .video-container {
-    .killVideo;
-    .videoFallback('Coaltrain');
-    background-position: center center;
-    background-size: cover;
-    background-attachment: static;
-  }
-
-  #gum-leaves-section .video-container {
-    .killVideo;
-    .videoFallback('GumLeaves');
-    background-position: center center;
-    background-size: cover;
-    background-attachment: static;
-  }
 }
+
+@media only screen and (max-width: @medWidth) { .videoFallbacks(); }
+html.ie8 { .videoFallbacks(); }
 
 //iPad Landscape and smaller screens
 @media only screen and (max-width: @bigWidth) {
