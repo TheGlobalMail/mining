@@ -1131,28 +1131,13 @@ footer {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 10px;
-  width: 120px;
+  width: 30px;
   text-align: left;
-  background-color: rgba(22,22,21,.92);
-  .border-radius(4px);
   font-weight: bold;
   text-transform: uppercase;
-  color: white;
+  background: none;
   z-index: 199;
-  .box-shadow(0 6px 8px -4px rgba(0,0,0,0.8));
-  border-top: 1px solid rgba(255,255,255,.1);
-  border-bottom: 1px solid rgba(0,0,0,.9);
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/images/noise-overlay.png') center center repeat;
-  }
+
   h5 {
     width: 40px;
    .font-size(10);
@@ -1160,34 +1145,52 @@ footer {
    margin: 3px 0 0;
    color: @grayLight;
    text-shadow: 0 -1px 0 black;
-   /*display: none;*/
-  }
-  &.audio-off { // added when the control is toggled into off
+   display: none;
   }
   .has-switch {
     float: right;
+    border: none;
+    .box-shadow(none);
     &.switch-small {
-      min-width: 70px;
-      margin-left: 4px;
+      min-width: 30px;
     }
+    div {
+        width: 100%;
+        &.switch-off {
+          left: 0;
+          span.switch-left {
+            display: none;
+          }
+          span.switch-right {
+            display: inline-block;
+          }
+        }
+    }
+
     label.switch-small {
-      box-shadow: 0 0 8px rgba(0,0,0,0.5);
-      .border-radius(2px);
+      display: none;
     }
-    span.switch-small {
-      .font-size(11);
-      box-shadow: inset 0 2px 2px rgba(0,0,0,0.3);
+    span {
+      width: 100%;
+
     }
-    span.switch-left {
-      background: @blue;
-      text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
-      .border-left-radius(2px);
+    span.switch-small,
+    span.switch-left,
+    span.switch-right {
+      .font-size(24);
+      text-align: left;
+      background: transparent;
+      color: rgb(100,100,100);
+      color: rgba(150,150,150,0.7);
+      border: none;
+      padding: 0;
+      text-shadow: none;
+      &:hover {
+        color: rgb(150,150,150);
+      };
     }
     span.switch-right {
-      background: @grayDark;
-      color: white;
-      text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
-      .border-right-radius(2px);
+      display: none;
     }
   }
 }
