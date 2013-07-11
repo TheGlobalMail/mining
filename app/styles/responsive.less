@@ -32,21 +32,44 @@
       .videoFallback('Opener');
     }
 
+    section#chapter2 {
+      h1 { background-attachment: scroll; }
+    }
+
     section#chapter3 {
       video { display: none; };
-      h1 { .videoFallback('JohnKrey'); }
+      h1 { 
+        .videoFallback('JohnKrey'); 
+        background-attachment: scroll;
+      }
       .time-lapse-big { display: none; }
       .time-lapse-small { display: block; }
     }
 
     section#chapter4 {
       video { display: none; };
-      h1 { .videoFallback('SunriseHill'); }
+      h1 { 
+        .videoFallback('SunriseHill'); 
+        background-attachment: scroll;
+    }
+    }
+
+    section#chapter5 {
+      h1 { background-attachment: scroll; }
     }
 
     section#chapter6 {
       video { display: none; };
-      h1 { .videoFallback('Cat'); }
+      h1 { 
+        .videoFallback('Cat'); 
+        background-attachment: scroll;
+      }
+    }
+
+    .quote.court,
+    .quote.judgement,
+    .quote.final {
+        background-attachment: scroll;
     }
 
     .video-quote .video-container {
