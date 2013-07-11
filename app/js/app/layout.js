@@ -74,9 +74,10 @@ define([
 
   var scaleTimelapseContainer = function() {
     var largeTimelapse = $('.time-lapse-big');
+    var height = largeTimelapse.find('video').height() + largeTimelapse.find('.full-explanation').height();
     largeTimelapse
       .css({
-        'height': largeTimelapse.find('video').outerHeight(true)
+        'height': height
       });
   };
 
