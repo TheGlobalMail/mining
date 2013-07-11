@@ -3,7 +3,9 @@ define([
   'lodash',
   'events',
   'config',
-  './../utils/getScrollY'
+  './../utils/getScrollY',
+  'easing',
+  'scrollTo'
 ], function ($, _, events, config, getScrollY) {
 
   var elementsToWatch = [{
@@ -145,6 +147,15 @@ define([
       setBindings();
       checkElements();
       events.trigger('scroll:end');
+    });
+
+    $('a[data-return-to-main]').on('click', function(e){
+      e.preventDefault();
+      var options = {
+        duration: 2000,
+        easing: 'easeInOutCubic'
+      };
+      $.scrollTo('#main', options);
     });
 
     // Bit of a hack to trigger scroll events immediately after audio is loaded
