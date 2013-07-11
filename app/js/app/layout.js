@@ -75,10 +75,17 @@ define([
   var scaleTimelapseContainer = function() {
     var largeTimelapse = $('.time-lapse-big');
     var height = largeTimelapse.find('video').height() + largeTimelapse.find('.full-explanation').height();
-    largeTimelapse
-      .css({
-        'height': height
-      });
+    if (
+      largeTimelapse.height() > height ||
+      largeTimelapse.height() < height
+    ) {
+      largeTimelapse
+        .css({
+          'height': height
+        });
+      // Cause all the layout stuff to rejig and recalculate
+      events.trigger('layout:change');
+    }
   };
 
   function scaleLayout() {
@@ -104,7 +111,7 @@ define([
     });
     events.on('scroll:exit:chapters-container', toggleChapterState);
 
-    events.on('scroll:enter:chapter3', function() {
+    events.on('scroll:exit:chapter2', function() {
       scaleTimelapseContainer();
     });
 

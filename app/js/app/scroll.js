@@ -134,6 +134,7 @@ define([
   var setBindings = function() {
     $(window).on('scroll', _.throttle(onScroll, 50));
     $(window).on('resize', _.debounce(onResize, 50));
+    events.on('layout:change', _.throttle(onResize, 100));
   };
 
   var init = function() {
