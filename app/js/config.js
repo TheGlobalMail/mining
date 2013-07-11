@@ -8,9 +8,23 @@ define(function() {
     debugEvents: false
   };
 
+  // media off in IE10 for the moment, still buggy
+  // blargh, see http://stackoverflow.com/questions/16135814/check-for-ie-10
+  var isIE10 = false;
+  /*@cc_on
+      if (/^10/.test(@_jscript_version)) {
+          isIE10 = true;
+      }
+  @*/
+
+  if (isIE10) {
+      document.documentElement.className += ' ie10';
+  }
+
   var wideAndNotIE = window.innerWidth > 1300 &&
-    document.documentElement.className !== 'ie8' &&
-    document.documentElement.className !== 'ie9';
+    document.documentElement.className.indexOf('ie8') == -1 &&
+    document.documentElement.className.indexOf('ie9') == -1 &&
+    document.documentElement.className.indexOf('ie10') == -1;
 
   if (wideAndNotIE && !window.location.href.match(/ambient=disable/i)){
     config.ambianceEnabled = true;
