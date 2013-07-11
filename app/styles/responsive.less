@@ -42,6 +42,14 @@ article {
   section#chapter3 {
     .killVideo;
     h1 { .videoFallback('JohnKrey'); }
+    @media only screen and (max-width: @smallerWidth) {
+      .time-lapse-big {
+        display: none;
+      }
+      .time-lapse-small {
+        display: block;
+      }
+    }
   }
 
   section#chapter4 {
