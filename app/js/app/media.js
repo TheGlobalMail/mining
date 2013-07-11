@@ -98,19 +98,21 @@ define([
   var init = function() {
 
     // Stop here if we're not enabling any ambient audio or video
-    if (!config.ambianceEnabled) return;
+    if (!config.ambianceEnabled) {
 
-    initVideos();
+      initVideos();
 
-    setVideoBindings();
+      setVideoBindings();
 
-    initAndSetAudioBindings();
+      initAndSetAudioBindings();
 
-    soundManager.setup({
-      url: '/components/soundmanager/swf/soundmanager2.swf',
-      onready: initAudio,
-      debugMode: config.debug
-    });
+      soundManager.setup({
+        url: '/components/soundmanager/swf/soundmanager2.swf',
+        onready: initAudio,
+        debugMode: config.debug
+      });
+
+    }
 
     $('.soundcloud-player').scPlayer();
   };
