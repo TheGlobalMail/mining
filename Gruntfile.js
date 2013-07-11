@@ -262,7 +262,7 @@ module.exports = function(grunt) {
     cdn: {
       dist: {
         src: ['<%= project.dist %>/index.html'],
-        cdn: 'http://mining.theglobalmail.org'
+        cdn: 'http://bulga.theglobalmail.org'
       },
 
       staging: {
