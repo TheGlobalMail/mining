@@ -22,9 +22,7 @@ define(function() {
   }
 
   var wideAndNotIE = window.innerWidth > 1300 &&
-    document.documentElement.className.indexOf('ie8') == -1 &&
-    document.documentElement.className.indexOf('ie9') == -1 &&
-    document.documentElement.className.indexOf('ie10') == -1;
+    document.documentElement.className.indexOf('ie8') == -1;
 
   if (wideAndNotIE && !window.location.href.match(/ambient=disable/i)){
     config.ambianceEnabled = true;
