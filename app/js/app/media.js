@@ -55,8 +55,14 @@ define([
   };
 
   var initVideos = function(){
+
     $('.ambient-video').each(function(){
       var $video = $(this);
+      $video.find('source').each(function() {
+        var element = $(this);
+        var src = element.attr('data-src');
+        element.attr('src', src);
+      });
       var id = $video.attr('id');
       videos[id] = videojs(id, {
         loop: true,
