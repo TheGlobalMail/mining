@@ -36,7 +36,7 @@ a {
 }
 a:hover {
  color: #666;
- text-decoration: underline; 
+ text-decoration: underline;
 };
 
 .container {
@@ -553,9 +553,37 @@ article {
         }
       }
     }
-    &#comments {
+    #comments {
+      border-color: white;
+      border-top: 1px dotted rgba(255,255,255,.3);
       text-align: center;
+      margin: 5% auto;
       padding: 5% 0;
+      width: 80%;
+      h4 {
+        .font-size(@parFontSize + 8);
+        font-style: normal;
+        font-weight: normal;
+        margin: 0 auto!important;
+        line-height: 1.2;
+        a {
+          margin-top: 6px;
+          font-weight: bold;
+          .font-size(@parFontSize + 6);
+          clear: both;
+          padding: 10px 20px;
+          width: auto;
+          display: inline-block;
+          color: white;
+          background-color: @blue;
+          .border-radius(4px);
+          .box-shadow(0 1px 0 rgba(0,0,0,.8));
+          &:hover {
+            text-decoration:none;
+            background-color: #084975;
+          }
+        }
+      }
     }
   }
 
