@@ -14,29 +14,11 @@ var project = {
   dist: 'dist'
 };
 
-/* Load the livereload <script> snippet
- * This gets inject into our HTML in the connect dev server with middleware
- */
-var lrSnippet = function(options) {
-  options = options || {};
-  return function(req, res, next) {
-    var snip = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-    var r = req;
-
-    // Fudge request URL to force livereload-snippet injection (used for pushState requests)
-    if (options.force) {
-      r = { url: '/index.html' };
-    }
-
-    snip(r, res, next);
-  }
+var LIVERELOAD_PORT = 9000;
+var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
 };
-
-// Wrapper around connect.static so we can properly resolve the directory to mount
-var mountFolder = function(connect, dir) {
-  return connect.static(path.resolve(dir));
-};
-
 
 // This is a custom middleware for connect to serve our index.html for pushState requests
 // This should be added after mounting any folders so we can still serve real static files
@@ -98,19 +80,13 @@ module.exports = function(grunt) {
         hostname: '0.0.0.0'
       },
 
-      // dev server with livereload snippet injected
       livereload: {
         options: {
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
-              lrSnippet(),
-              // try serving real static files first
+              lrSnippet,
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, project.app),
-              // force livereload snippet because we know we're about to hit serveIndex middleware
-              lrSnippet({ force: true }),
-              // if we get to here, always resond with index.html instead of a 404
-              serveIndex
+              mountFolder(connect, project.app)
             ];
           }
         }
@@ -330,7 +306,6 @@ module.exports = function(grunt) {
       'clean:server',
       'jshint:with_overrides',
       'less:server',
-      'livereload-start',
       'connect:livereload',
       'watch'
     ]);
