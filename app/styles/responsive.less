@@ -13,13 +13,16 @@
   @media only screen and (max-width: @smallWidth)   { background-image: url("@{imgBase}2.jpg"); }
   @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}3.jpg"); }
 }
+.killVideo {
+  // hides the video elem when we're not using it on small displays
+  @media only screen and (max-width: @smallerWidth) { video { display: none; } }
+}
 
 .videoFallback(@imgName) {
   // fallback for when there's no video - using a bigger size cos the stills are a bit lossy
   @imgBase: "/images/@{imgName}-size";
-  background-image: url("@{imgBase}3.jpg");
+  @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}3.jpg"); }
 }
-
 
 article {
   // big resposive images (all devices)
@@ -29,68 +32,62 @@ article {
   .quote.court        { .responsiveBG('carsunrise'); }
   .quote.judgement    { .responsiveBG('coal'); }
   .quote.final        { .responsiveBG('cockatoos'); }
-}
 
-// video fallbacks (tablet & IE8)
-// gotta be in a mixin so we can de @media and ie8 without repetition
-.videoFallbacks() {
-  article {
-    .article-header {
-      video { display: none; };
-      .videoFallback('Opener');    
-    }
+  // video fallbacks (mobile)
+  .article-header {
+    .killVideo;
+    .videoFallback('Opener');
+  }
 
-    section#chapter3 {
-      video { display: none; };
-      h1 { 
-        .videoFallback('JohnKrey'); 
-        background-position: 70% center;
+  section#chapter3 {
+    .killVideo;
+    h1 { .videoFallback('JohnKrey'); }
+    @media only screen and (max-width: @smallerWidth) {
+      .time-lapse-big {
+        display: none;
       }
-      .time-lapse-big { display: none; }
-      .time-lapse-small { display: block; }
-    }
-
-    section#chapter4 {
-      video { display: none; };
-      h1 { .videoFallback('SunriseHill'); }
-    }
-
-    section#chapter6 {
-      video { display: none; }; 
-      h1 { .videoFallback('Cat'); }
-    }
-
-    .video-quote .video-container {
-      // this should be #morning-timelapse-section .video-container - 
-      // need to add an ID to this .video-quote element
-      video { display: none; };
-      .videoFallback('MorningTimelapse');
-      background-position: center center;
-      background-size: cover;
-      background-attachment: scroll;
-    }
-
-    #coal-train-section .video-container {
-      video { display: none; }; 
-      .videoFallback('Coaltrain');
-      background-position: 80% center;
-      background-size: cover;
-      background-attachment: scroll;
-      background-repeat: no-repeat;
-    }
-
-    #gum-leaves-section .video-container {
-      video { display: none; };
-      .videoFallback('GumLeaves');
-      background-position: center center;
-      background-size: cover;
-      background-attachment: scroll;
+      .time-lapse-small {
+        display: block;
+      }
     }
   }
-}
 
-@media only screen and (max-width: @medWidth) { .videoFallbacks(); }
-html.ie8 { .videoFallbacks(); }
+  section#chapter4 {
+    .killVideo;
+    h1 { .videoFallback('SunriseHill'); }
+  }
+
+  section#chapter6 {
+    .killVideo;
+    h1 { .videoFallback('Cat'); }
+  }
+
+  .video-quote .video-container {
+    // this should be #morning-timelapse-section .video-container -
+    // need to add an ID to this .video-quote element
+    .killVideo;
+    .videoFallback('MorningTimelapse');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: static;
+  }
+
+  #coal-train-section .video-container {
+    .killVideo;
+    .videoFallback('Coaltrain');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: static;
+  }
+
+  #gum-leaves-section .video-container {
+    .killVideo;
+    .videoFallback('GumLeaves');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: static;
+  }
+}
 
 //iPad Landscape and smaller screens
 @media only screen and (max-width: @bigWidth) {
@@ -121,7 +118,7 @@ html.ie8 { .videoFallbacks(); }
         h4,
         .video-container .quote .row,
         .video-quote .quote .row {
-          margin: 20px 25% 20px @Margin !important;
+          margin: 20px 25% 20px @Margin;
         }
         .video-quote .quote .row {
           margin-top: 0 !important;
@@ -135,7 +132,7 @@ html.ie8 { .videoFallbacks(); }
         h4,
         .video-container .quote .row,
         .video-quote .quote .row {
-          margin: 20px @Margin 20px 25% !important;
+          margin: 20px @Margin 20px 25%;
         }
         .video-quote .quote .row {
           margin-top: 0 !important;
@@ -247,6 +244,9 @@ html.ie8 { .videoFallbacks(); }
           }
         }
       }
+      h4 {
+        .font-size(@parFontSize + 4);
+      }
       &#chapter1 {
         h1 {
           @textHeight:84px;
@@ -285,6 +285,14 @@ html.ie8 { .videoFallbacks(); }
         .font-size(24);
         .author {
           .font-size(14);
+        }
+      }
+      #comments {
+        h4 {
+          .font-size(@parFontSize + 6);
+          a {
+            .font-size(@parFontSize + 4);
+          }
         }
       }
     }
@@ -569,6 +577,9 @@ html.ie8 { .videoFallbacks(); }
           }
         }
       }
+      h4 {
+        .font-size(@parFontSize);
+      }
       &#chapter1 {
         h1 {
           .font-size(38);
@@ -611,7 +622,7 @@ html.ie8 { .videoFallbacks(); }
         .row {
           border:none;
           width: auto;
-          padding: 20px 20px 40px;
+          padding: 10px 10px 20px;
           p, p:first-of-type {
             padding: 0;
             width: auto;
@@ -621,13 +632,19 @@ html.ie8 { .videoFallbacks(); }
             }
           }
         }
+        &.italic {
+          .row p {
+            .font-size(@parFontSize + 2);
+            &:first-of-type {
+              .font-size(@parFontSize + 2);
+            }
+          }
+        }
         &:before {
           display: none;
         }
         &.final .row {
-          border: none;
-          background: none;
-          padding: 6%;
+          padding: 6% 0;
         }
       }
       blockquote {
@@ -638,6 +655,17 @@ html.ie8 { .videoFallbacks(); }
         }
         .author {
           .font-size(12);
+        }
+      }
+      #comments {
+        width: auto;
+        h4 {
+          padding-top: 10px;
+          .font-size(@parFontSize - 2);
+          a {
+            .font-size(@parFontSize - 2);
+            margin-top: 5px;
+          }
         }
       }
     }
