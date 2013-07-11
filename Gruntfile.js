@@ -249,7 +249,7 @@ module.exports = function(grunt) {
         }]
       }
     },
-    
+
     bower: {
         options: {
             exclude: ['modernizr']
