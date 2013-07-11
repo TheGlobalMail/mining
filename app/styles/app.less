@@ -987,12 +987,12 @@ article {
         display: block;
         margin: 0 35% 20px 20% !important;
         .border-radius(0 0 6px 6px) !important;
-//        background-color: transparent !important;
-        .container {
-//          padding: 20px;
-//          width: 100%;
-//          margin-left: -50px;
-//          background-color: rgba(255, 255, 255, 0.6);
+        &.no-border-radius {
+          .border-radius(0) !important;
+        }
+        p {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
         }
       }
     }

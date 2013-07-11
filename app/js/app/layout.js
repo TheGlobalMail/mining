@@ -31,9 +31,16 @@ define([
   };
 
   var scaleVideoContainers = function() {
-    videoContainers.css({
-      height: window.innerHeight,
-      width: window.innerWidth
+    videoContainers.each(function() {
+      var element = $(this);
+      var row = element.parent().find('.row');
+      if (window.innerHeight <= row.outerHeight()) {
+        row.addClass('no-border-radius');
+      }
+      element.css({
+        height: Math.max(window.innerHeight, row.outerHeight()),
+        width: window.innerWidth
+      });
     });
   };
 

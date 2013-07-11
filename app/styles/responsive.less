@@ -83,14 +83,15 @@ article {
 
 //iPad Landscape and smaller screens
 @media only screen and (max-width: @bigWidth) {
-	article {
+  article {
     @parFontSize: 18;
-		p {
+    section p,
+    section .video-quote p {
       .font-size(@parFontSize);
       &:first-of-type {
         .font-size(@parFontSize);
       }
-		}
+    }
     .article-header {
       h1 {
         .font-size(110);
@@ -105,18 +106,32 @@ article {
         h1 .row {
           left: @Margin;
         }
-        p, h4, .video-container .quote .row,
-      .video-quote .quote .row {
-          margin: 20px 25% 20px @Margin;
+        p,
+        h4,
+        .video-container .quote .row,
+        .video-quote .quote .row {
+          margin: 20px 25% 20px @Margin !important;
+        }
+        .video-quote .quote .row {
+          margin-top: 0 !important;
         }
       }
       &:nth-child(even) {
         h1 .row {
           right: @Margin;
         }
-        p, h4, .video-container .quote .row,
-      .video-quote .quote .row {
-          margin: 20px @Margin 20px 25%;
+        p,
+        h4,
+        .video-container .quote .row,
+        .video-quote .quote .row {
+          margin: 20px @Margin 20px 25% !important;
+        }
+        .video-quote .quote .row {
+          margin-top: 0 !important;
+          p {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+          }
         }
       }
       .map {
@@ -155,7 +170,7 @@ article {
         }
       }
     }
-	}
+  }
 }
 // SMALLER SCREENS AND PORTRAIT
 
@@ -207,15 +222,18 @@ article {
         left: @Margin;
       }
       &:nth-child(even), &:nth-child(odd) {
-      p, h4, .video-container .quote .row,
-      .video-quote .quote .row {
-         margin: 15px @Margin 15px @Margin;
+        p,
+        h4,
+        .video-container .quote .row,
+        .video-quote .quote .row {
+           margin: 15px @Margin 15px @Margin;
         }
-      }
-      p {
-        .font-size(@parFontSize);
-        &:first-of-type {
+        p,
+        .video-quote p {
           .font-size(@parFontSize);
+          &:first-of-type {
+            .font-size(@parFontSize);
+          }
         }
       }
       &#chapter1 {
@@ -526,7 +544,8 @@ article {
           }
         }
       }
-      p {
+      p,
+      section .video-quote p {
       line-height: 1.4;
         &:first-of-type {
           &:first-letter {
