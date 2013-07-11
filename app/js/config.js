@@ -10,9 +10,7 @@ define(function() {
 
   var wideAndNotIE = window.innerWidth > 1300 &&
     document.documentElement.className !== 'ie8' &&
-    document.documentElement.className !== 'ie9' &&
-    // disabled 10 also for the moment
-    document.documentElement.className !== 'ie10';
+    document.documentElement.className !== 'ie9';
 
   if (wideAndNotIE && !window.location.href.match(/ambient=disable/i)){
     config.ambianceEnabled = true;
