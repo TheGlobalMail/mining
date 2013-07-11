@@ -264,7 +264,7 @@ article {
   .article-header {
     -webkit-font-smoothing: antialiased;
     // XXX commented out but this should maybe be in as fallback for mobile?
-    background: rgba(22,22,21,.9) url('/images/noise-overlay.png') center center repeat;
+    background-color: rgba(22,22,21,.9);
     background-size: cover;
     padding: 0;
     vertical-align: middle;
@@ -1033,11 +1033,13 @@ article {
       .box-shadow(none);
       .row {
         display: block;
-        margin: 0 35% 20px 20%;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
         .border-radius(0 0 6px 6px);
         &.no-border-radius {
           .border-radius(0) !important;
           margin-top: 0 !important;
+          margin-bottom: 0 !important;
         }
         p {
           margin-left: 0 !important;
