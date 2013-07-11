@@ -36,7 +36,7 @@ article {
   // video fallbacks (mobile)
   .article-header {
     .killVideo;
-    .videoFallback('Opener');    
+    .videoFallback('Opener');
   }
 
   section#chapter3 {
@@ -63,7 +63,7 @@ article {
   }
 
   .video-quote .video-container {
-    // this should be #morning-timelapse-section .video-container - 
+    // this should be #morning-timelapse-section .video-container -
     // need to add an ID to this .video-quote element
     .killVideo;
     .videoFallback('MorningTimelapse');
@@ -118,7 +118,7 @@ article {
         h4,
         .video-container .quote .row,
         .video-quote .quote .row {
-          margin: 20px 25% 20px @Margin !important;
+          margin: 20px 25% 20px @Margin;
         }
         .video-quote .quote .row {
           margin-top: 0 !important;
@@ -132,7 +132,7 @@ article {
         h4,
         .video-container .quote .row,
         .video-quote .quote .row {
-          margin: 20px @Margin 20px 25% !important;
+          margin: 20px @Margin 20px 25%;
         }
         .video-quote .quote .row {
           margin-top: 0 !important;
@@ -244,6 +244,9 @@ article {
           }
         }
       }
+      h4 {
+        .font-size(@parFontSize + 4);
+      }
       &#chapter1 {
         h1 {
           @textHeight:84px;
@@ -282,6 +285,14 @@ article {
         .font-size(24);
         .author {
           .font-size(14);
+        }
+      }
+      #comments {
+        h4 {
+          .font-size(@parFontSize + 6);
+          a {
+            .font-size(@parFontSize + 4);
+          }
         }
       }
     }
@@ -566,6 +577,9 @@ article {
           }
         }
       }
+      h4 {
+        .font-size(@parFontSize);
+      }
       &#chapter1 {
         h1 {
           .font-size(38);
@@ -608,7 +622,7 @@ article {
         .row {
           border:none;
           width: auto;
-          padding: 20px 20px 40px;
+          padding: 10px 10px 20px;
           p, p:first-of-type {
             padding: 0;
             width: auto;
@@ -618,13 +632,19 @@ article {
             }
           }
         }
+        &.italic {
+          .row p {
+            .font-size(@parFontSize + 2);
+            &:first-of-type {
+              .font-size(@parFontSize + 2);
+            }
+          }
+        }
         &:before {
           display: none;
         }
         &.final .row {
-          border: none;
-          background: none;
-          padding: 6%;
+          padding: 6% 0;
         }
       }
       blockquote {
@@ -635,6 +655,17 @@ article {
         }
         .author {
           .font-size(12);
+        }
+      }
+      #comments {
+        width: auto;
+        h4 {
+          padding-top: 10px;
+          .font-size(@parFontSize - 2);
+          a {
+            .font-size(@parFontSize - 2);
+            margin-top: 5px;
+          }
         }
       }
     }

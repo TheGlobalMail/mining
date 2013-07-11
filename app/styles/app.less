@@ -456,6 +456,12 @@ article {
     }
     p.datavis {
       margin-bottom: 40px;
+      .highcharts-container {
+        font-family: @sansFontFamily!important;
+        text {
+          font-family: @sansFontFamily!important;
+        }
+      }
     }
     &#chapter1 {
       margin-top:0;
@@ -567,7 +573,7 @@ article {
         margin: 0 auto!important;
         line-height: 1.2;
         a {
-          margin-top: 6px;
+          margin: 15px 10% 0;
           font-weight: bold;
           .font-size(@parFontSize + 6);
           clear: both;
@@ -578,6 +584,7 @@ article {
           background-color: @blue;
           .border-radius(4px);
           .box-shadow(0 1px 0 rgba(0,0,0,.8));
+          text-shadow:0 -1px 0 rgba(0,0,0,.8);
           &:hover {
             text-decoration:none;
             background-color: #084975;
@@ -1021,7 +1028,7 @@ article {
       .box-shadow(none);
       .row {
         display: block;
-        margin: 0 35% 20px 20% !important;
+        margin: 0 35% 20px 20%;
         .border-radius(0 0 6px 6px) !important;
         &.no-border-radius {
           .border-radius(0) !important;
