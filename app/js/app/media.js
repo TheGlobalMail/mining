@@ -97,6 +97,9 @@ define([
 
   var init = function() {
 
+    // Stop here if we're not enabling any ambient audio or video
+    if (!config.ambianceEnabled) return;
+
     initVideos();
 
     setVideoBindings();

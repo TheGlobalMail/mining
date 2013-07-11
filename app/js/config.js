@@ -8,6 +8,10 @@ define(function() {
     debugEvents: false
   };
 
+  if (window.innerWidth > 670 && !window.location.href.match(/ambient=disable/i)){
+    config.ambianceEnabled = true;
+  }
+
   if (location.search.indexOf('quiet') != -1) {
     // Suppress sound playback
     config.quiet = true;
