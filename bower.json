@@ -1,7 +1,7 @@
 {
   "name": "mining",
   "dependencies": {
-    "jquery": "~2.0.2",
+    "jquery": "1.10.1",
     "backbone": "~1.0.0",
     "tgm-bootstrap": "git@github.com:TheGlobalMail/tgm-bootstrap.git#0.3.2",
     "bootstrap": "2.3.0",
