@@ -8,19 +8,6 @@ define(function() {
     debugEvents: false
   };
 
-  // media off in IE10 for the moment, still buggy
-  // blargh, see http://stackoverflow.com/questions/16135814/check-for-ie-10
-  var isIE10 = false;
-  /*@cc_on
-    if (/^10/.test(@_jscript_version)) {
-      isIE10 = true;
-    }
-  @*/
-
-  if (isIE10) {
-    document.documentElement.className += ' ie10';
-  }
-
   var wideAndNotIE = window.innerWidth > 1204 &&
     document.documentElement.className.indexOf('ie8') == -1;
 
