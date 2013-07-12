@@ -88,11 +88,19 @@ define([
     }
   };
 
+  var scaleDanielleInterview = function() {
+    var element = $('#danielle-interview');
+    var width = element.outerWidth();
+    var height = width * (9/16);
+    element.attr('height', height);
+  };
+
   function scaleLayout() {
     scaleIntro();
     scaleVideoContainers();
     scaleChapterContainer();
     scaleTimelapseContainer();
+    scaleDanielleInterview();
   }
 
   var setBindings = function() {
