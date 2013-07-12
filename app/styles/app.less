@@ -1,5 +1,7 @@
 
 // Overwrite TGM Bootstrap nav styles
+@sansFontFamily: "open-sans", "Open Sans", Helvetica, Arial, sans-serif;
+
 .navbar {
   margin: 0;
   &.special-feature {
@@ -305,7 +307,8 @@ article {
       // mask-image:         url('/images/header-bg-2.png');
       text-shadow:none;
       text-transform: uppercase;
-      letter-spacing: -.05em;
+      letter-spacing: -.02em;
+      text-rendering: optimizeLegibility;
     }
     h2 {
       position: absolute;
