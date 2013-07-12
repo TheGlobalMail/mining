@@ -21,7 +21,7 @@ define(function() {
       document.documentElement.className += ' ie10';
   }
 
-  var wideAndNotIE = window.innerWidth > 1025 &&
+  var wideAndNotIE = window.innerWidth > 1024 &&
     document.documentElement.className.indexOf('ie8') == -1 &&
     document.documentElement.className.indexOf('ie9') == -1 &&
     document.documentElement.className.indexOf('ie10') == -1;
