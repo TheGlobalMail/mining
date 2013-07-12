@@ -15,12 +15,7 @@ define([
 
   var AUDIO_ROOT = '/audio/';
 
-  var testVideo;
-
   var videos = {};
-  var activeVideo;
-
-  var clips = {};
 
   var initAudio = function() {
 
@@ -103,7 +98,7 @@ define([
 
   var init = function() {
 
-    // Stop here if we're not enabling any ambient audio or video
+    // Only if we're enabling ambient audio and video
     if (config.ambianceEnabled) {
 
       initVideos();
