@@ -104,7 +104,39 @@
   }
 }
 
-html.ie8 { .videoFallbacks(); }
+html.ie8 {
+  .videoFallbacks();
+
+  article{
+    .court{
+      background-image: none;
+    }
+    p {
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+    .article-header{
+      background-position-x: center;
+      background-repeat: no-repeat;
+      background-position-y: center;
+      background-color: @grayDark;
+      .row-container{
+        height: 500px;
+        position: relative;
+        h1{
+          margin-top: 5%;
+          position: relative;
+        }
+      }
+    }
+  }
+
+
+
+  .datavis-container, .chapters-container{
+    display:none;
+  }
+}
 @media only screen and (max-width: @bigWidth) { .videoFallbacks(); }
 
 
