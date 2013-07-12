@@ -8,7 +8,7 @@ define(function() {
     debugEvents: false
   };
 
-  var wideAndNotIE = window.innerWidth > 1204 &&
+  var wideAndNotIE = window.innerWidth > 1024 &&
     document.documentElement.className.indexOf('ie8') == -1;
 
   if (wideAndNotIE && !window.location.href.match(/ambient=disable/i)){
