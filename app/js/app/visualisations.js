@@ -40,9 +40,17 @@ define([
       xAxis: {
         categories: _.range(2000, 2012),
         tickmarkPlacement: 'on',
+        tickInterval: 1,
+        tickPosition: 'inside',
         labels: {
-          rotation: -70,
-          y: 25
+          enabled: false
+        },
+        title: {
+          text: '2000-2011',
+          offset: 10,
+          style: {
+            color: '#333'
+          }
         }
       },
       yAxis: {
@@ -70,6 +78,7 @@ define([
       legend: {
         y: -15,
         backgroundColor: '#FFFFFF',
+        borderColor: '#FFFFFF',
         reversed: true
       },
       series: [{
