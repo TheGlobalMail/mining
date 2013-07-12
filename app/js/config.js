@@ -21,7 +21,7 @@ define(function() {
     document.documentElement.className += ' ie10';
   }
 
-  var wideAndNotIE = window.innerWidth > 1300 &&
+  var wideAndNotIE = window.innerWidth > 1204 &&
     document.documentElement.className.indexOf('ie8') == -1;
 
   if (wideAndNotIE && !window.location.href.match(/ambient=disable/i)){
