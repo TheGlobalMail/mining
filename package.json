@@ -25,7 +25,7 @@
     "grunt-rev": "~0.1.0",
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.2",
-    "connect-livereload": "~0.2.0",
+    "connect-livereload": "git://github.com/bxjx/connect-livereload.git#header-fixes",
     "grunt-cdn": "git://github.com/bxjx/grunt-cdn.git#requirejs_support",
     "grunt-cloudfiles": "0.0.3",
     "google-drive": "0.0.4",
