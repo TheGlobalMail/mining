@@ -469,6 +469,13 @@ article {
     }
     &#chapter1 {
       margin-top:0;
+      &:before {
+        display: block; 
+        content: " "; 
+        margin-top: -49px; // height of .navbar.special-feature 
+        height: 49px; 
+        visibility: hidden;         
+      };
       h1 {
         display: none;
         margin-top:0;
