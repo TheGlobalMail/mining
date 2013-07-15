@@ -13,10 +13,6 @@
   @media only screen and (max-width: @smallWidth)   { background-image: url("@{imgBase}2.jpg"); }
   @media only screen and (max-width: @smallerWidth) { background-image: url("@{imgBase}3.jpg"); }
 }
-.killVideo {
-  // hides the video elem when we're not using it on small displays
-  @media only screen and (max-width: @bigWidth) {  }
-}
 
 .videoFallback(@imgName) {
   // fallback for when there's no video - using a bigger size cos the stills are a bit lossy
@@ -614,6 +610,13 @@ article {
           }
         }
       }
+
+      .scroller-icon {
+        .square(22px);
+        .font-size(20);
+        line-height: 22px;
+      }
+
     }
     section {
       margin-top: 0;
@@ -648,6 +651,10 @@ article {
         .font-size(@parFontSize);
       }
       &#chapter1 {
+        &:before {
+          margin-top: 10px; 
+          height: 10px; 
+        };
         h1 {
           .font-size(38);
           @textHeight:30px;

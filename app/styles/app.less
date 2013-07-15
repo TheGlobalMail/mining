@@ -338,6 +338,37 @@ article {
         color: rgba(255,255,255,0.8);
       }
     }
+
+    .scroller {
+      display: block;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      text-align: center;
+      bottom: 13%;
+      .font-size(16);
+      z-index: 10;
+      &:hover .scroller-icon {
+        border-color: rgb(150, 150, 150);
+        background-color: rgb(150, 150, 150);
+        color: @grayDarker;
+      }
+    }
+    .scroller-label {
+      display: none;
+    }
+
+    .scroller-icon {
+      display: inline-block;
+      .square(31px);
+      .font-size(24);
+      line-height: 32px;
+      .border-radius(999px);
+      background: transparent;
+      color: rgba(150, 150, 150, 0.7);
+      border: 2px solid rgba(150, 150, 150, 0.7);
+    }
+
     #intro-video {
       position: absolute;
       top: 0;

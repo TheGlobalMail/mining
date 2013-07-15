@@ -159,6 +159,15 @@ define([
       $.scrollTo('#main', options);
     });
 
+    $('#story-kickoff').on('click', function(e){
+      e.preventDefault();
+      var options = {
+        duration: 700,
+        easing: 'easeInOutCubic'
+      };
+      $.scrollTo('#chapter1', options);
+    });
+
     // Bit of a hack to trigger scroll events immediately after audio is loaded
     events.on('media:ready:audio', forceRecheckOfElements);
     events.on('media:audio:on', forceRecheckOfElements);

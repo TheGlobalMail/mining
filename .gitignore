@@ -3,3 +3,4 @@ node_modules/
 .tmp/
 app/components
 config.json
+npm-debug.log
