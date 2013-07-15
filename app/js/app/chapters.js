@@ -42,7 +42,7 @@ define([
       };
     }
 
-    _.each($('#chapter-navigation li[data-link]'), function(nav){
+    _.each($('#chapter-navigation').find('li[data-link]'), function(nav){
       var chapter = $(nav).data('link');
       $chapters[chapter] = $(nav);
       events.on('scroll:enter:' + chapter, scrollEnter(chapter));

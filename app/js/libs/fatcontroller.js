@@ -78,9 +78,6 @@ define(function fc() {
     return event;
   };
 
-  // Present a simple API by only returning public methods.
-  // Stylistically, underscores should be prepended to any private
-  // methods or members
   return {
     on: on,
     off: off,
