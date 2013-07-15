@@ -30,7 +30,7 @@ define([
         autoLoad: true,
         loops: 50,
         onload: function(){
-          if (id.match(/intro/)){
+          if (id.match(/header-ambient-audio/)){
             events.trigger('media:ready:audio');
           }
         }
