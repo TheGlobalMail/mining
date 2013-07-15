@@ -14,7 +14,7 @@ var project = {
   dist: 'dist'
 };
 
-var LIVERELOAD_PORT = 9000;
+var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
@@ -47,6 +47,10 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     watch: {
+      options: {
+          nospawn: true,
+          livereload: true
+      },
       // Recompile LESS which will then trigger the livereload watcher below
       less: {
         files: ['app/styles/{,*/}*.less', 'app/components/tgm-bootstrap/less/*.less'],
@@ -61,13 +65,15 @@ module.exports = function(grunt) {
        * Any precompiled resources (i.e. compiled CSS, compiled Handlebars templates) live in the .tmp folder
        */
       livereload: {
+        options: {
+          livereload: LIVERELOAD_PORT
+        },
         files: [
           '<%= project.app %>/index.html',
           '{.tmp,<%= project.app %>}/styles/{,/*}*.css',
           '{.tmp,<%= project.app %>}/js/{,/*,**/,*/,**/**/}*.js',
           '<%= project.app %>/images/{,*/}*.{png,jpg,jpeg,webp,svg}'
-        ],
-        tasks: ['livereload']
+        ]
       }
     },
 
@@ -295,8 +301,6 @@ module.exports = function(grunt) {
       }
     }
   });
-
-  grunt.renameTask('regarde', 'watch');
 
   grunt.registerTask('server', function(target) {
     if (target === 'dist') {
