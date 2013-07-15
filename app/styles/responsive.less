@@ -363,10 +363,10 @@ article {
 // BIG PHONES AND SMALL TABLETS
 @media only screen and (max-width: @smallWidth) {
   .blur-on {
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: blur(2px);
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter: blur(0px);
   }
   .navbar.special-feature {
     .brand.brand-center {
@@ -397,7 +397,7 @@ article {
   article {
     .article-header {
       h1 {
-        .font-size(70);
+        .font-size(60);
       }
       h2 {
         .font-size(16);
@@ -589,10 +589,13 @@ article {
         }
       }
       h2 {
-        .font-size(14);
+        .font-size(12);
         padding: 0 5%;
         width: 90%;
         margin-top: -20px;
+      }
+      .scroller-icon {
+        border-width: 0;
       }
       .author {
         .font-size(12);
@@ -794,3 +797,18 @@ article {
     }
   }
 }
+
+// SHORT DESKTOP DIPLAYS  
+@media only screen and (max-height: @smallerWidth) and (min-width: @smallerWidth) {
+  article {
+    .article-header {
+      h1 {
+        .font-size(80);
+      }
+      h2 {
+        top: 65%;
+      }
+    }
+  }
+}
+
