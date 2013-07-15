@@ -97,11 +97,13 @@ define([
   };
 
   var initSoundManager = function() {
+    soundManager = window.soundManager = new SoundManager();
+
     soundManager.setup({
       url: '/components/soundmanager/swf/soundmanager2.swf',
       onready: initAudio,
       debugMode: config.debug,
-      ontimeout: _.debounce(initSoundManager, 250)
+      ontimeout: _.debounce(initSoundManager, 500)
     });
 
     // Ensure start-up in case document.readyState and/or DOMContentLoaded are unavailable

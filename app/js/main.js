@@ -43,6 +43,9 @@ require.config({
   }
 });
 
+// Defer SoundManager2 instantiation until we're ready
+window.SM2_DEFER = true;
+
 require([
   'jquery',
   'events',
