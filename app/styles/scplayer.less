@@ -53,47 +53,47 @@
     .sc-controls a.sc-pause { display: block; }
   }
 
+  /* scrubber */
+
+  .sc-scrubber {
+    position: absolute;
+    left: -5000px;
+    bottom: 10px;
+    height: 40px;
+    width: 95.5%;
+
+    .sc-buffer, .sc-played {
+      height: 30px;
+      position: absolute;
+      top: 0;
+      width: 0;
+      -webkit-transition: width 0.1s linear;
+    }
+  }
+
+  &:hover .sc-scrubber, 
+  &.playing .sc-scrubber {
+    display: block;
+    left: 45px;
+  }
+
+  .sc-time-span {
+    height: 30px;
+    margin: 5px;
+    position: relative;
+  }
+
+
+  .sc-scrubber .sc-time-indicators{
+    position: absolute;
+    right: 0;
+    top: -20px;
+  }
+
 
 } // /.sc-player
 
 
-/* scrubber */
-
-.sc-scrubber {
-  position: absolute;
-  left: -5000px;
-  bottom: 10px;
-  height: 40px;
-  width: 95.5%;
-
-  .sc-buffer, .sc-played {
-    height: 30px;
-    position: absolute;
-    top: 0;
-    width: 0;
-    -webkit-transition: width 0.1s linear;
-  }
-}
-
-&:hover .sc-scrubber, 
-&.playing .sc-scrubber {
-  display: block;
-  left: 45px;
-}
-
-.sc-time-span {
-  height: 30px;
-  margin: 5px;
-  position: relative;
-}
-
-
-
-.sc-scrubber .sc-time-indicators{
-  position: absolute;
-  right: 0;
-  top: -20px;
-}
 
 /* tracks */
 
