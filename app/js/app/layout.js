@@ -76,18 +76,19 @@ define([
 
   var scaleTimelapseContainer = function() {
     var largeTimelapse = $('.time-lapse-big');
-    var height = largeTimelapse.find('video').height() + largeTimelapse.find('.full-explanation').height();
-    if (
-      largeTimelapse.height() > height ||
-      largeTimelapse.height() < height
-    ) {
-      largeTimelapse
-        .css({
-          'height': height
-        });
-      // Cause all the layout stuff to rejig and recalculate
-      events.trigger('layout:change');
-    }
+    largeTimelapse.css('height', 'auto');
+    _.defer(function() {
+      var height = largeTimelapse.find('video').height();
+      if (
+        largeTimelapse.height() > height ||
+          largeTimelapse.height() < height
+        ) {
+        largeTimelapse
+          .css('height', height);
+        // Cause all the layout stuff to rejig and recalculate
+        events.trigger('layout:change');
+      }
+    });
   };
 
   var scaleDanielleInterview = function() {
@@ -121,9 +122,7 @@ define([
     });
     events.on('scroll:exit:chapters-container', toggleChapterState);
 
-    events.on('scroll:exit:chapter2', function() {
-      scaleTimelapseContainer();
-    });
+    events.on('scroll:exit:chapter2', _.once(scaleTimelapseContainer));
 
     chaptersButton.on('click', chapterButtonOnclick)
   };
