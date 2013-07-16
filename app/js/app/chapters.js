@@ -13,7 +13,7 @@ define([
 
   // Add click handler to chapter nav to scroll to chapter start
   var setClickHandlers = function() {
-    chapters.find('a').on('click', function(e){
+    chapters.find('a:not(.external-link)').on('click', function(e){
       e.preventDefault();
       var element = $(this);
       var options = {
