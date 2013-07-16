@@ -1,10 +1,16 @@
 define([
+  'jquery',
   'lodash',
   'config',
   'highcharts'
-], function(_, config, highcharts) {
+], function($, _, config, highcharts) {
 
   var init = function() {
+    
+    // Disable all charts if on ie8
+    if ($('body').hasClass('ie8')){
+      return;
+    }
 
     $('#coal-exports').highcharts({
       title: {
