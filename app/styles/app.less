@@ -188,7 +188,7 @@ a:hover {
     li {
       vertical-align: top;
       display: inline-block;
-      width: 13%;
+      width: 12%;
       height: 160px;
       padding: 10px;
       .opacity(60);
@@ -759,37 +759,12 @@ article {
       margin-bottom: 10px;
     }
     .sc-player {
-      margin: -70px 0 8px;
+      margin: -70px 0 0;
       padding: 0 3%;
       width: 94%;
+      background-color: rgb(0,0,0);
       background-color: rgba(0,0,0,.6);
       .border-bottom-radius(6px);
-      &:hover .sc-scrubber,
-      &.playing .sc-scrubber {
-        left: 64px;
-        bottom: 11px;
-      }
-      .sc-scrubber {
-        width: 80%;
-        display: none;
-      }
-      ol.sc-trackslist {
-      width: 75%;
-      left: 50px;
-      overflow: hidden;
-      li {
-        line-height: 1.1;
-      }
-        li.active, li:hover {
-          background: transparent;
-          color: white;
-          padding-top: 8px;
-          a {
-
-            color: white;
-          }
-        }
-      }
     }
   }
   .map {
