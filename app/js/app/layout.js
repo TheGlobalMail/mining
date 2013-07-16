@@ -56,10 +56,12 @@ define([
         chapters
           .addClass('inactive')
           .removeClass('active');
+        window._gaq && _gaq.push(['_trackEvent', 'Click', 'Chapter Nav Toggle', 'Close']);
       } else {
         chapters
           .removeClass('inactive')
           .addClass('active');
+        window._gaq && _gaq.push(['_trackEvent', 'Click', 'Chapter Nav Toggle', 'Open']);
       }
     }
   };
