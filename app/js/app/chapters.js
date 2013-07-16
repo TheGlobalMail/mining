@@ -15,16 +15,18 @@ define([
   var setClickHandlers = function() {
     chapters.find('a').on('click', function(e){
       e.preventDefault();
+      var element = $(this);
       var options = {
         duration: 2000,
         easing: 'easeInOutCubic'
       };
-      $.scrollTo($(this).attr('href'), options);
+      $.scrollTo(element.attr('href'), options);
       if (chapters.hasClass('fixed')) {
         chapters
           .addClass('inactive')
           .removeClass('active');
       }
+      window._gaq && _gaq.push(['_trackEvent', 'Click', 'ID', element.attr('id')]);
     });
   };
 
