@@ -21,32 +21,14 @@ define([
         return obj.offset.top < scrollY;
       }
     }
-  }, {
-    selector: '#chapter1',
-    eventIdentifier: 'chapter1'
-  }, {
-    selector: '#chapter2',
-    eventIdentifier: 'chapter2'
-  }, {
-    selector: '#chapter3',
-    eventIdentifier: 'chapter3'
-  }, {
-    selector: '#chapter4',
-    eventIdentifier: 'chapter4'
-  }, {
-    selector: '#chapter5',
-    eventIdentifier: 'chapter5'
-  }, {
-    selector: '#chapter6',
-    eventIdentifier: 'chapter6'
   }];
 
   // Cached globals values
   var scrollY;
   var windowHeight;
 
-  var populateConfig = function() {
-    $('.ambient-video, [data-ambient-audio]').each(function() {
+  var _populateConfig = function(selector) {
+    $(selector).each(function() {
       var element = $(this);
       var id = element.attr('id');
       elementsToWatch.push({
@@ -54,6 +36,13 @@ define([
         eventIdentifier: id
       });
     });
+  };
+
+  var populateConfig = function() {
+    _.each(_.range(1, 7), function(num) {
+      _populateConfig('#chapter' + num);
+    });
+    _populateConfig('.ambient-video, [data-ambient-audio], #footer');
   };
 
   var initElements = function() {
@@ -166,6 +155,7 @@ define([
         easing: 'easeInOutCubic'
       };
       $.scrollTo('#chapter1', options);
+      window._gaq && _gaq.push(['_trackEvent', 'Click', 'ID', 'Story kickoff arrow']);
     });
 
     // Bit of a hack to trigger scroll events immediately after audio is loaded
