@@ -188,7 +188,7 @@ a:hover {
     li {
       vertical-align: top;
       display: inline-block;
-      width: 12%;
+      width: 10.5%;
       height: 160px;
       padding: 10px;
       .opacity(60);
@@ -212,6 +212,22 @@ a:hover {
       a {
         &:hover, &:focus, &:active {
           text-decoration: none
+        }
+      }
+
+      a.external-link {
+        // .title h4 i { float: right; }
+        .pic {
+          background: transparent;
+          position: relative;
+          i {
+            color: #dbd3c6;
+            font-size: 70px;
+            margin-left: -35px;
+            position: absolute;
+            left: 50%;
+            top: 10%;
+          }
         }
       }
       .pic {
@@ -239,15 +255,16 @@ a:hover {
         }
         h3 {
           .font-size(18);
+          line-height: 1.2em;
           margin: 2px 0 0;
           width: 100%;
           display: block;
           &:first-of-type {
             //Force hyphenation of long word
-            -webkit-hyphens: auto;
-            -moz-hyphens: auto;
-            hyphens: auto;
-            word-break: break-all;
+            -webkit-hyphens: manual;
+            -moz-hyphens: manual;
+            hyphens: manual;
+            // word-break: break-all;
             word-break: break-word;
 
           }

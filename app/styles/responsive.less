@@ -154,8 +154,30 @@ article {
 
 //iPad Landscape and smaller screens
 @media only screen and (max-width: @bigWidth) {
+  .chapters {
+    ul {
+      li {
+        height: 120px;
+        .title {
+          h3 {
+            .font-size(15);
+          }
+        }
+        a.external-link {
+          .hidden-tablet { display: none; } 
+          .pic i {
+            font-size: 40px;
+            margin-left: -20px;
+            top: 18%;
+          }
+        } 
+      }
+    }
+  }
+
   article {
     @parFontSize: 18;
+
     section p,
     section .video-quote p {
       .font-size(@parFontSize);
@@ -258,16 +280,6 @@ article {
   .chapters {
     &.fixed {
       top:-114px;
-    }
-    ul {
-      li {
-        height: 120px;
-        .title {
-          h3 {
-            .font-size(15);
-          }
-        }
-      }
     }
   }
   article {
@@ -391,6 +403,14 @@ article {
             .font-size(14);
           }
         }
+        a.external-link {
+          // .hidden-tablet { display: inline; } 
+          .pic i {
+            font-size: 30px;
+            margin-left: -15px;
+            top: 5%;
+          }
+        } 
       }
     }
   }
