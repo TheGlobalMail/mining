@@ -8,7 +8,7 @@ define([
   var init = function() {
     
     // Disable all charts if on ie8
-    if ($('body').hasClass('ie8')){
+    if ($('html').hasClass('ie8')){
       return;
     }
 
