@@ -115,10 +115,12 @@ define([
     scaleChapterContainer();
     scaleTimelapseContainer();
     scaleDanielleInterview();
-    if (chapters.hasClass('fixed') && chapters.hasClass('active')) {
-      toggleChapterActiveState();
-    } else {
-      toggleChapterInactiveState();
+    if (chapters.hasClass('fixed')) {
+      if (chapters.hasClass('active')) {
+        toggleChapterActiveState();
+      } else {
+        toggleChapterInactiveState();
+      }
     }
   }
 
@@ -134,6 +136,7 @@ define([
     events.on('scroll:enter:chapters-container', function() {
       if (chapters.hasClass('fixed')) {
         toggleChapterState();
+        chapters.css('top', 0);
       }
     });
     events.on('scroll:exit:chapters-container', toggleChapterState);
