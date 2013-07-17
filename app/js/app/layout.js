@@ -45,22 +45,33 @@ define([
   };
 
   var scaleChapterContainer = function() {
-    chaptersContainer.css({
-      'height': chapters.outerHeight(true)
-    });
+    // Expand the placeholder to prevent the pinning of the
+    // chapters from changing the positioning of other elements
+    chaptersContainer.css('height', chapters.outerHeight(true));
+  };
+
+  var toggleChapterInactiveState = function() {
+    var chapterHeight = $('#chapter-navigation').find('li').height();
+    chapters
+      .addClass('inactive')
+      .removeClass('active')
+      .css('top', -chapterHeight + 6);
+  };
+
+  var toggleChapterActiveState = function() {
+    chapters
+      .removeClass('inactive')
+      .addClass('active')
+      .css('top', 0 + navBar.outerHeight());
   };
 
   var chapterButtonOnclick = function() {
     if (chapters.hasClass('fixed')) {
       if (chapters.hasClass('active')) {
-        chapters
-          .addClass('inactive')
-          .removeClass('active');
+        toggleChapterInactiveState();
         window._gaq && _gaq.push(['_trackEvent', 'Click', 'Chapter Nav Toggle', 'Close']);
       } else {
-        chapters
-          .removeClass('inactive')
-          .addClass('active');
+        toggleChapterActiveState();
         window._gaq && _gaq.push(['_trackEvent', 'Click', 'Chapter Nav Toggle', 'Open']);
       }
     }
@@ -81,8 +92,8 @@ define([
       var height = largeTimelapse.find('video').height();
       if (
         largeTimelapse.height() > height ||
-          largeTimelapse.height() < height
-        ) {
+        largeTimelapse.height() < height
+      ) {
         largeTimelapse
           .css('height', height);
         // Cause all the layout stuff to rejig and recalculate
@@ -104,6 +115,11 @@ define([
     scaleChapterContainer();
     scaleTimelapseContainer();
     scaleDanielleInterview();
+    if (chapters.hasClass('fixed') && chapters.hasClass('active')) {
+      toggleChapterActiveState();
+    } else {
+      toggleChapterInactiveState();
+    }
   }
 
   var setBindings = function() {

@@ -132,20 +132,11 @@ a:hover {
   color: white;
   border-bottom: 1px solid black;
   z-index: 99;
-  &.fixed,
-  &.fixed.inactive {
-    top: -154px;
-  }
   &.fixed {
     position: fixed;
+    top: -154px;
     left: 0;
-    &.inactive,
-    &.active {
-      .transition(top 250ms ease-out);
-    }
-    &.active {
-      top: 44px;
-    }
+    .transition(top 250ms ease-out);
   }
   button.open {
     color: white;

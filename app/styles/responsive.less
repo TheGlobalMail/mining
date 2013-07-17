@@ -155,9 +155,12 @@ article {
 //iPad Landscape and smaller screens
 @media only screen and (max-width: @bigWidth) {
   .chapters {
+    &.fixed {
+      top: -154px + 40px;
+    };
     ul {
       li {
-        height: 120px;
+        height: 160px - 40px;
         .title {
           h3 {
             .font-size(15);
@@ -390,11 +393,11 @@ article {
   }
   .chapters {
     &.fixed {
-      top:-94px;
+      top: top: -154px + 60px;
     }
     ul {
       li {
-        height: 100px;
+        height: 160px - 60px;
         .title {
           h4 {
             margin-top: 4px;
