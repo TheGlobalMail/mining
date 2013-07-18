@@ -7,7 +7,6 @@ require.config({
     events: './app/events',
     fatcontroller: './libs/fatcontroller',
     soundManager: '../components/soundmanager/script/soundmanager2',
-    videojs: './libs/video.dev',
     bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrap-switch',
     scPlayer: './libs/sc-player',
     highcharts: '../components/highcharts.com/js/highcharts.src',
@@ -21,9 +20,6 @@ require.config({
     },
     soundManager: {
       exports: 'soundManager'
-    },
-    videojs: {
-      exports: 'videojs'
     },
     bootstrapSwitch: {
       deps: ['jquery']

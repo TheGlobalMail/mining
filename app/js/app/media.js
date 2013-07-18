@@ -2,16 +2,35 @@ define([
   'jquery',
   'lodash',
   'soundManager',
-  'videojs',
   'events',
   'config',
   './audio_utils',
   './video_utils',
-  './../utils/getScrollY',
-  './scroll',
   // dependencies
   'scPlayer'
-], function($, _, soundManager, videojs, events, config, audio_utils, video_utils, getScrollY, scroll) {
+], function($, _, soundManager, events, config, audio_utils, video_utils) {
+
+  // TODO: SEQUENTIAL LOADING
+
+  // step 1: page & css loaded
+  // display loading screen
+
+  // step 2: first video & audio loaded
+  // show header with bg & audio
+  // show loading icon instead of down arrow
+
+  // Step 3: first chapter loaded
+  // display the chapter
+  // show loading icons over other chapter's thumbnails
+  // replace header's loading icon with down arrow
+  // display a loading icon at the end of the chapter
+
+  // step 4 onwards: successive chapter loads
+  // display the chapter
+  // remove the loading icon at the end of the previous chapter
+
+  // Last step: display the footer
+
 
   var AUDIO_ROOT = '/audio/';
 
@@ -43,10 +62,7 @@ define([
       events.on('scroll:exit:' + id , function() {
         audio_utils.fadeOut(clip);
       });
-
     });
-
-
   };
 
   var initVideos = function(){
@@ -62,11 +78,11 @@ define([
       if (!id) {
         throw Error('Missing ID', this, id);
       }
-      videos[id] = videojs(id, {
-        loop: true,
-        width: 'auto',
-        height: 'auto'
-      }).volume(0);
+      this.loop = true;
+      this.volume = 0;
+      this.load();
+
+      videos[id] = this;
     });
   };
 

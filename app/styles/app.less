@@ -377,18 +377,6 @@ article {
       border: 2px solid rgba(255,255,255, 0.5);
     }
 
-    #intro-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      video {
-        min-width: 100%;
-        min-height: 100%;
-      }
-    }
   }
   section {
     margin-top: 5%;
@@ -1289,12 +1277,13 @@ footer {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 100%;
-  &.right-align-video video {
+  min-width: 100%;
+  min-height: 100%;
+  &.right-align-video {
     left: auto;
     right: 0;
   }
-  &.bottom-align-video video {
+  &.bottom-align-video {
     top: auto;
     bottom: 0;
   }
@@ -1319,6 +1308,13 @@ article .time-lapse-big.related.large {
 // Fix for overlap of the social media buttons
 .share-button.twitter {
   margin-right: 10px;
+}
+
+.ambient-video-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .ambient-audio-container {
