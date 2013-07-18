@@ -165,5 +165,5 @@ define([
 
   return {
     init: init
-  }
+  };
 });

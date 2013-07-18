@@ -59,6 +59,9 @@ define([
         element.attr('src', src);
       });
       var id = $video.attr('id');
+      if (!id) {
+        throw Error('Missing ID', this, id);
+      }
       videos[id] = videojs(id, {
         loop: true,
         width: 'auto',
