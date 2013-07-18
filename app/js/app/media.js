@@ -19,19 +19,16 @@ define([
   // show header with bg & audio
   // show loading icon instead of down arrow
 
-  // Step 3: first chapter loaded
+  // Step 3 onwards: successive chapter loads
   // display the chapter
   // show loading icons over other chapter's thumbnails
   // replace header's loading icon with down arrow
   // display a loading icon at the end of the chapter
 
-  // step 4 onwards: successive chapter loads
-  // display the chapter
-  // remove the loading icon at the end of the previous chapter
+  // Final step: display the footer
 
-  // Last step: display the footer
-
-
+  var maxFlashTimeouts = 5;
+  var flashTimeouts = 0;
   var AUDIO_ROOT = '/audio/';
 
   var videos = {};
@@ -44,11 +41,13 @@ define([
       var clipFile = $clip.data('ambient-audio');
 
       // create the soundManager clip
+      console.log('++++', id)
       var clip = soundManager.createSound({
         url: AUDIO_ROOT + clipFile,
         autoLoad: true,
         loops: 50,
         onload: function(){
+          console.log('####',id);
           if (id.match(/header-ambient-audio/)){
             events.trigger('media:ready:audio');
           }
@@ -67,7 +66,13 @@ define([
 
   var initVideos = function(){
 
-    $('.ambient-video').each(function(){
+    var ambientVideos = $('.ambient-video');
+
+    var onAmbientVideoLoad = _.after(ambientVideos.length, function() {
+      events.trigger('media:ready:video');
+    });
+
+    ambientVideos.each(function(){
       var $video = $(this);
       $video.find('source').each(function() {
         var element = $(this);
@@ -83,6 +88,8 @@ define([
       this.load();
 
       videos[id] = this;
+
+      onAmbientVideoLoad();
     });
   };
 
@@ -116,13 +123,22 @@ define([
   };
 
   var initSoundManager = function() {
+
+    // Ensure that issues connecting to the swf file
+    // don't prevent other stages from completing
+    flashTimeouts += 1;
+    if (flashTimeouts >= maxFlashTimeouts) {
+      events.trigger('media:ready:audio');
+      return;
+    }
+
     soundManager = window.soundManager = new SoundManager();
 
     soundManager.setup({
-      url: '/components/soundmanager/swf/soundmanager2.swf',
+      url: '//bulga.theglobalmail.org' + '/components/soundmanager/swf/soundmanager2_debug.swf',
       onready: initAudio,
       debugMode: config.debug,
-      ontimeout: _.debounce(initSoundManager, 500)
+      ontimeout: initSoundManager
     });
 
     // Ensure start-up in case document.readyState and/or DOMContentLoaded are unavailable

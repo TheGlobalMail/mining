@@ -13,9 +13,18 @@ define([
 
   var body;
 
+  var removeGlobalLoadingAfter = [
+    'scroll:end',
+    'media:ready:audio',
+    'media:ready:video'
+  ];
+  var removeGlobalLoading = _.after(removeGlobalLoadingAfter.length, function() {
+    body.removeClass('loading');
+  });
+
   var setBindings = function() {
-    events.on('scroll:end', function() {
-      body.removeClass('loading');
+    _.each(removeGlobalLoadingAfter, function(eventName) {
+      events.on(eventName, removeGlobalLoading);
     });
   };
 
