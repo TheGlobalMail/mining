@@ -437,7 +437,7 @@ article {
       }
     }
     section {
-      @Margin: 6%;
+      @Margin: 4%;
       h1 .row {
         .font-size(60);
         padding-bottom: 15%;
@@ -493,6 +493,9 @@ article {
       .quote {
         .row {
           width: 80%;
+        }
+        &.albrecht p {
+          width: 50%;
         }
       }
       .credit {
@@ -662,6 +665,7 @@ article {
           border: none;
           .font-size(38);
           padding-bottom: 25%;
+          padding-left: 0;
           width: 90%;
           span {
           .font-size(12);
@@ -670,8 +674,10 @@ article {
         }
       }
       p,
-      section .video-quote p {
-      line-height: 1.4;
+      .video-quote p {
+        line-height: 1.4;
+        padding-left: 0;
+        padding-right: 0;
         &:first-of-type {
           &:first-letter {
             font-size: inherit;
@@ -683,9 +689,7 @@ article {
           }
         }
       }
-      h4 {
-        .font-size(@parFontSize);
-      }
+      h4 { .font-size(@parFontSize); }
       &#chapter1 {
         &:before {
           margin-top: 10px; 
@@ -727,20 +731,26 @@ article {
         }
       }
       &:nth-child(even), &:nth-child(odd) {
-      .video-container .quote .row,
-      .video-quote .quote .row {
-          margin: 15px 0 15px 0;
-          background-color: rgba(255,255,255,.75);
-          .border-radius(0px);
+        h1 .row {
+          border-right-width: 0;
+          padding-right: 0;
         }
-      }
+        .video-container .quote .row,
+        .video-quote .quote .row {
+            margin: 15px 0 15px 0;
+            padding-left: 4%;
+            padding-right: 4%;
+            background-color: rgba(255,255,255,.75);
+            .border-radius(0px);
+          }
+        }
       .quote {
         background-attachment: scroll;
         padding:0;
         .row {
           border:none;
           width: auto;
-          padding: 10px 10px 20px;
+          padding: 10px 0 20px 0;
           p, p:first-of-type {
             padding: 0;
             width: auto;
@@ -754,6 +764,8 @@ article {
           .row {
             padding-bottom: 8%;
               p {
+              padding-left: 0;
+              padding-right: 0;
               .font-size(@parFontSize);
               &:first-of-type {
                 .font-size(@parFontSize);
