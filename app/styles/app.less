@@ -1202,72 +1202,37 @@ footer {
   }
 }
 
-//AUDIO CONTROLLER
-
 .audio-control {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 30px;
-  text-align: left;
-  font-weight: bold;
-  text-transform: uppercase;
-  background: none;
   z-index: 199;
-
   h5 {
-    width: 40px;
-   .font-size(10);
-   float: left;
-   margin: 3px 0 0;
-   color: @grayLight;
-   text-shadow: 0 -1px 0 black;
-   display: none;
+    visibility: hidden;
   }
-  .has-switch {
-    float: right;
-    border: none;
-    .box-shadow(none);
-    &.switch-small {
-      min-width: 30px;
+  .icon-volume-up,
+  .icon-volume-off {
+    color: #646464;
+    color: rgba(150, 150, 150, 0.7);
+    font-size: 24px;
+    &:hover {
+      color: #bbb;
+      color: rgba(200, 200, 200, 0.9);
     }
-    div {
-      width: 100%;
-      &.switch-off {
-        left: 0;
-        span.switch-left {
-          display: none;
-        }
-        span.switch-right {
-          display: inline-block;
-        }
-      }
-    }
-
-    label.switch-small {
+  }
+  .icon-volume-up {
+    display: block;
+  }
+  .icon-volume-off {
+    display: none;
+  }
+  &.muted {
+    .icon-volume-up {
       display: none;
     }
-    span {
-      width: 100%;
-
-    }
-    span.switch-small,
-    span.switch-left,
-    span.switch-right {
-      .font-size(24);
-      text-align: left;
-      background: transparent;
-      color: rgb(100,100,100);
-      color: rgba(150,150,150,0.7);
-      border: none;
-      padding: 0;
-      text-shadow: none;
-      &:hover {
-        color: rgb(150,150,150);
-      };
-    }
-    span.switch-right {
-      display: none;
+    .icon-volume-off {
+      display: block;
     }
   }
 }
@@ -1317,7 +1282,7 @@ article .time-lapse-big.related.large {
   overflow: hidden;
 }
 
-.ambient-audio-container {
+.ambient-audio {
   position: absolute;
   top: 0;
   left: 0;

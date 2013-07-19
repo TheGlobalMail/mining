@@ -42,7 +42,7 @@ define([
     _.each(_.range(1, 7), function(num) {
       _populateConfig('#chapter' + num);
     });
-    _populateConfig('.ambient-video, [data-ambient-audio], #footer');
+    _populateConfig('.ambient-video, .ambient-audio, #footer');
   };
 
   var initElements = function() {

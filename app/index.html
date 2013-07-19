@@ -61,12 +61,17 @@
   <div id="main" role="main">
     <article>
       <header class="article-header">
-        <div id="header-ambient-audio" class="ambient-audio-container" data-ambient-audio="Opener_Birdsong.mp3"></div>
         <div class="ambient-video-container">
           <video id="intro-video" class="ambient-video">
             <source data-src="/video/Opener.mp4" type="video/mp4"/>
             <source data-src="/video/Opener.ogg" type="video/ogg"/>
           </video>
+        </div>
+        <div id="opener-birdsong" class="ambient-audio">
+          <audio>
+            <source data-src="/audio/Opener_Birdsong.mp3" type="audio/mpeg">
+            <source data-src="/audio/Opener_Birdsong.ogg" type="audio/ogg">
+          </audio>
         </div>
         <div class="row-container">
           <h1 class="blur-on">
@@ -246,10 +251,16 @@
           </div>
         </span>
         <div class="video-container">
-          <video id="coal-train-video" class="ambient-video right-align-video" data-ambient-audio="CoalTrain.mp3" preload="none">
+          <video id="coal-train-video" class="ambient-video right-align-video">
             <source data-src="/video/CoalTrain.mp4" type="video/mp4"/>
             <source data-src="/video/CoalTrain.ogg" type="video/ogg"/>
           </video>
+          <div id="coal-train-audio" class="ambient-audio">
+            <audio>
+              <source data-src="/audio/CoalTrain.mp3" type="audio/mpeg">
+              <source data-src="/audio/CoalTrain.ogg" type="audio/ogg">
+            </audio>
+          </div>
         </div>
       </div>
 
@@ -263,10 +274,16 @@
       </p>
 
       <span class="quote albrecht short-quote italic" style="font-style: normal">
-        <div id="night-image" class="row" data-ambient-audio="NightSounds_IMG_2961.mp3">
-        <p>
-        &ldquo;These were rural people,&rdquo; <span class="non-italic">Albrecht recalls.</span>  &ldquo;And they wanted to live with clean air, beautiful night skies, wildlife, fresh water. And every one of those dimensions of the normal were being taken away from them in such a way that they had no control or power.&rdquo;
-        </p>
+        <div id="night-image" class="row">
+          <div id="night-sounds" class="ambient-audio">
+            <audio>
+              <source data-src="/audio/NightSounds_IMG_2961.mp3" type="audio/mpeg">
+              <source data-src="/audio/NightSounds_IMG_2961.ogg" type="audio/ogg">
+            </audio>
+          </div>
+          <p>
+            &ldquo;These were rural people,&rdquo; <span class="non-italic">Albrecht recalls.</span>  &ldquo;And they wanted to live with clean air, beautiful night skies, wildlife, fresh water. And every one of those dimensions of the normal were being taken away from them in such a way that they had no control or power.&rdquo;
+          </p>
         </div>
       </span>
 
@@ -315,7 +332,13 @@
 
 
       <section id="chapter2">
-        <div id="chapter-2-video-container" class="video-container" data-ambient-audio="Dragline.mp3">
+        <div id="chapter-2-video-container" class="video-container">
+          <div id="dragline" class="ambient-audio">
+            <audio>
+              <source data-src="/audio/Dragline.mp3" type="audio/mpeg">
+              <source data-src="/audio/Dragline.ogg" type="audio/ogg">
+            </audio>
+          </div>
           <h1 id="chapter2-header">
             <div class="row">
               <span>Chapter 2</span>
@@ -424,10 +447,16 @@
 
       <section id="chapter3">
         <div class="video-container">
-          <video id="the-fighter-video" class="ambient-video right-align-video" data-ambient-audio="JohnKrey_Ambient.mp3">
+          <video id="the-fighter-video" class="ambient-video right-align-video">
               <source data-src="/video/JohnKrey.mp4" type="video/mp4"/>
               <source data-src="/video/JohnKrey.ogg" type="video/ogg"/>
           </video>
+          <div id="john-krey-ambient" class="ambient-audio">
+            <audio>
+              <source data-src="/audio/JohnKrey_Ambient.mp3" type="audio/mpeg">
+              <source data-src="/audio/JohnKrey_Ambient.ogg" type="audio/ogg">
+            </audio>
+          </div>
           <h1>
             <div class="row">
               <span>Chapter 3</span>
@@ -595,10 +624,16 @@
 
       <section id="chapter4">
       <div class="video-container">
-        <video id="sunrise-hill-video" class="ambient-video" data-ambient-audio="SunriseHill.mp3">
+        <video id="sunrise-hill-video" class="ambient-video">
           <source data-src="/video/SunriseHill_Fade.mp4" type="video/mp4"/>
           <source data-src="/video/SunriseHill_Fade.ogg" type="video/ogg"/>
         </video>
+        <div id="sunrise-hill" class="ambient-audio">
+          <audio>
+            <source data-src="/audio/SunriseHill.mp3" type="audio/mpeg">
+            <source data-src="/audio/SunriseHill.ogg" type="audio/ogg">
+          </audio>
+        </div>
         <h1>
           <div class="row">
             <span>Chapter 4</span>
@@ -819,10 +854,16 @@
           </div>
         </span>
         <div class="video-container">
-          <video id="gum-leaves-video" class="ambient-video" data-ambient-audio="GumLeaves.mp3">
+          <video id="gum-leaves-video" class="ambient-video">
             <source data-src="/video/GumLeaves.mp4" type="video/mp4"/>
             <source data-src="/video/GumLeaves.ogg" type="video/ogg"/>
           </video>
+        </div>
+        <div id="gum-leaves-audio" class="ambient-audio">
+          <audio>
+            <source data-src="/audio/GumLeaves.mp3" type="audio/mpeg">
+            <source data-src="/audio/GumLeaves.ogg" type="audio/ogg">
+          </audio>
         </div>
       </div>
 
@@ -894,14 +935,20 @@
       </section>
 
       <section id="chapter5">
-      <div id="chapter-5-video-container" class="video-container" data-ambient-audio="Pub.mp3">
-        <h1>
-          <div class="row">
-            <span>Chapter 5</span>
-            A TOWN DIVIDED
+        <div id="chapter-5-video-container" class="video-container">
+          <h1>
+            <div class="row">
+              <span>Chapter 5</span>
+              A TOWN DIVIDED
+            </div>
+          </h1>
+          <div id="pub-audio" class="ambient-audio">
+            <audio>
+              <source data-src="/audio/Pub.mp3" type="audio/mpeg">
+              <source data-src="/audio/Pub.ogg" type="audio/ogg">
+            </audio>
           </div>
-        </h1>
-      </div>
+        </div>
 
       <p>
       Since the court’s decision to reject the expanded mine, the odd car has pulled up late at night outside John Krey’s isolated Bulga property. Krey adds, “We’ve had a phone call from the hotel, saying there was a threatening phone call came into them against me.”
@@ -985,10 +1032,16 @@
     </section>
     <section id="chapter6">
       <div class="video-container">
-        <video id="cat-video" class="ambient-video bottom-align-video" data-ambient-audio="Cat.mp3">
+        <video id="cat-video" class="ambient-video bottom-align-video">
             <source data-src="/video/Cat.mp4" type="video/mp4"/>
             <source data-src="/video/Cat.ogg" type="video/ogg"/>
         </video>
+        <div id="cat-audio" class="ambient-audio">
+          <audio>
+            <source data-src="/audio/Cat.mp3" type="audio/mpeg">
+            <source data-src="/audio/Cat.ogg" type="audio/ogg">
+          </audio>
+        </div>
         <h1>
           <div class="row">
             <span>Chapter 6</span>
@@ -1078,10 +1131,8 @@
     </footer>
 
     <div class="audio-control">
-      <h5>Sound Effects</h5>
-      <div class="switch switch-small" data-animated="false" data-on-label="<i class='icon-volume-up'></i>" data-off-label="<i class='icon-volume-off'></i>">
-        <input type="checkbox" checked />
-      </div>
+      <i class="icon-volume-up toggle"></i>
+      <i class="icon-volume-off toggle"></i>
     </div>
 
   </div>

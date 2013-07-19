@@ -6,8 +6,6 @@ require.config({
     config: './config',
     events: './app/events',
     fatcontroller: './libs/fatcontroller',
-    soundManager: '../components/soundmanager/script/soundmanager2',
-    bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrap-switch',
     scPlayer: './libs/sc-player',
     highcharts: '../components/highcharts.com/js/highcharts.src',
     scrollTo: '../components/jquery.scrollTo/jquery.scrollTo',
@@ -46,9 +44,7 @@ require([
   'jquery',
   'events',
   './app/main',
-  'config',
-  // dependencies
-  'bootstrapSwitch'
+  'config'
 ],
 function($, events, app, config) {
   if (config.debugEvents) {

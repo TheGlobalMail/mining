@@ -8,11 +8,9 @@
     "requirejs": "~2.1.6",
     "requirejs-plugins": "~1.0.2",
     "lodash": "~1.3.1",
-    "soundmanager": "latest",
     "font-awesome": "latest",
     "highcharts.com": "~v3.0.2",
     "jquery.scrollTo": "~1.4.5",
-    "jquery-easing": "~1.3.0",
-    "bootstrap-switch": "latest"
+    "jquery-easing": "~1.3.0"
   }
 }

@@ -1,14 +1,12 @@
 define([
   'jquery',
   'lodash',
-  'soundManager',
   'events',
   'config',
   './audio_utils',
-  './video_utils',
   // dependencies
   'scPlayer'
-], function($, _, soundManager, events, config, audio_utils, video_utils) {
+], function($, _, events, config, audio_utils) {
 
   // TODO: SEQUENTIAL LOADING
 
@@ -27,39 +25,47 @@ define([
 
   // Final step: display the footer
 
-  var maxFlashTimeouts = 5;
-  var flashTimeouts = 0;
-  var AUDIO_ROOT = '/audio/';
-
   var videos = {};
 
+  var CDN = 'bulga.theglobalmail.org';
+
+  var bindSources = function(element, useCDN) {
+    // Replace data-src attributes with src attributes
+
+    var root = '//' + (useCDN ? CDN : window.location.host);
+    element.find('source').each(function() {
+      var source = $(this);
+      source
+        .attr('src', root + source.attr('data-src'))
+        .removeAttr('data-src');
+    });
+  };
+
   var initAudio = function() {
+    $('.ambient-audio').each(function(){
+      var container = $(this);
+      var id = container.attr('id');
 
-    $('div[data-ambient-audio],video[data-ambient-audio]').each(function(){
-      var $clip = $(this);
-      var id = $clip.attr('id');
-      var clipFile = $clip.data('ambient-audio');
+      var $audio = $(this).find('audio').first();
+      var audio = $audio.get(0);
 
-      // create the soundManager clip
-      console.log('++++', id)
-      var clip = soundManager.createSound({
-        url: AUDIO_ROOT + clipFile,
-        autoLoad: true,
-        loops: 50,
-        onload: function(){
-          console.log('####',id);
-          if (id.match(/header-ambient-audio/)){
-            events.trigger('media:ready:audio');
-          }
-        }
-      });
+      bindSources($audio);
+
+      audio.load();
+      audio.loop = true;
+
+      if (id.match(/opener-birdsong/)) {
+        audio.addEventListener('canplaythrough', function() {
+          events.trigger('media:ready:audio');
+        });
+      }
 
       // listen to scroll events for this id
       events.on('scroll:enter:' + id, function() {
-        audio_utils.fadeIn(clip);
+        audio_utils.fadeIn(audio);
       });
       events.on('scroll:exit:' + id , function() {
-        audio_utils.fadeOut(clip);
+        audio_utils.fadeOut(audio);
       });
     });
   };
@@ -74,15 +80,11 @@ define([
 
     ambientVideos.each(function(){
       var $video = $(this);
-      $video.find('source').each(function() {
-        var element = $(this);
-        var src = element.attr('data-src');
-        element.attr('src', '//bulga.theglobalmail.org' + src);
-      });
+
+      bindSources($video, true);
+
       var id = $video.attr('id');
-      if (!id) {
-        throw Error('Missing ID', this, id);
-      }
+
       this.loop = true;
       this.volume = 0;
       this.load();
@@ -95,15 +97,14 @@ define([
 
   var initAndSetAudioBindings = function() {
     var audioControl = $('.audio-control');
-    audioControl.find('.switch').on('switch-change', function (e, data) {
-      var quiet = !data.value;
-      if (!config.quiet && quiet){
+    audioControl.find('.toggle').on('click', function() {
+      config.quiet = !config.quiet;
+      audioControl.toggleClass('muted');
+      if (config.quiet) {
         audio_utils.mute();
-      }else if (config.quiet && !quiet){
-        audio_utils.unmute();
+      } else {
+        events.trigger('media:audio:on');
       }
-      config.quiet = quiet;
-      events.trigger('media:audio:' + (!config.quiet ? 'on' : 'off'));
     });
   };
 
@@ -122,29 +123,6 @@ define([
 
   };
 
-  var initSoundManager = function() {
-
-    // Ensure that issues connecting to the swf file
-    // don't prevent other stages from completing
-    flashTimeouts += 1;
-    if (flashTimeouts >= maxFlashTimeouts) {
-      events.trigger('media:ready:audio');
-      return;
-    }
-
-    soundManager = window.soundManager = new SoundManager();
-
-    soundManager.setup({
-      url: '//bulga.theglobalmail.org' + '/components/soundmanager/swf/soundmanager2_debug.swf',
-      onready: initAudio,
-      debugMode: config.debug,
-      ontimeout: initSoundManager
-    });
-
-    // Ensure start-up in case document.readyState and/or DOMContentLoaded are unavailable
-    soundManager.beginDelayedInit();
-  };
-
   var init = function() {
 
     // Only if we're enabling ambient audio and video
@@ -156,7 +134,7 @@ define([
 
       initAndSetAudioBindings();
 
-      _.defer(initSoundManager);
+      initAudio();
     }
 
     $('.soundcloud-player').scPlayer();
