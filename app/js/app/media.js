@@ -37,10 +37,20 @@ define([
     // Replace data-src attributes with src attributes
 
     var root = '//' + (useCDN ? CDN : window.location.host);
+
     element.find('source').each(function() {
       var source = $(this);
+      var src = source.attr('data-src');
+
+      // Ensure that we always use a complete url, either to the local
+      // server or the CDN. This is only for dev, as the build inserts
+      // explicit urls to the CDN.
+      if (src.match(/\/\//)) {
+        src = root + src;
+      }
+
       source
-        .attr('src', root + source.attr('data-src'))
+        .attr('src', src)
         .removeAttr('data-src');
     });
   };
@@ -85,7 +95,7 @@ define([
     ambientVideos.each(function(){
       var $video = $(this);
 
-      bindSources($video);
+      bindSources($video, true);
 
       var id = $video.attr('id');
 
