@@ -25,6 +25,10 @@ define([
 
   // Final step: display the footer
 
+  var body = $('body');
+  var supportsVideo = body.hasClass('video');
+  var supportsAudio = body.hasClass('audio');
+
   var videos = {};
 
   var CDN = 'bulga.theglobalmail.org';
@@ -95,7 +99,8 @@ define([
     });
   };
 
-  var initAndSetAudioBindings = function() {
+  var setAudioBindings = function() {
+
     var audioControl = $('.audio-control');
     audioControl.find('.toggle').on('click', function() {
       config.quiet = !config.quiet;
@@ -106,6 +111,7 @@ define([
         events.trigger('media:audio:on');
       }
     });
+
   };
 
   var setVideoBindings = function() {
@@ -125,16 +131,19 @@ define([
 
   var init = function() {
 
-    // Only if we're enabling ambient audio and video
-    if (config.ambianceEnabled) {
+    if (config.ambianceEnabled && supportsVideo) {
 
       initVideos();
 
       setVideoBindings();
 
-      initAndSetAudioBindings();
+      if (supportsAudio) {
 
-      initAudio();
+        initAudio();
+
+        setAudioBindings();
+
+      }
     }
 
     $('.soundcloud-player').scPlayer();
