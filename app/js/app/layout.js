@@ -50,15 +50,20 @@ define([
     chaptersContainer.css('height', chapters.outerHeight(true));
   };
 
-  var toggleChapterInactiveState = function() {
+  var positionChaptersInactive = function() {
     var chapterHeight = $('#chapter-navigation').find('li').height();
     chapters
-      .addClass('inactive')
-      .removeClass('active')
       .css('top', -chapterHeight + 6);
   };
 
-  var toggleChapterActiveState = function() {
+  var setChaptersInactive = function() {
+    chapters
+      .addClass('inactive')
+      .removeClass('active');
+    positionChaptersInactive();
+  };
+
+  var setChaptersActive = function() {
     chapters
       .removeClass('inactive')
       .addClass('active')
@@ -68,10 +73,10 @@ define([
   var chapterButtonOnclick = function() {
     if (chapters.hasClass('fixed')) {
       if (chapters.hasClass('active')) {
-        toggleChapterInactiveState();
+        setChaptersInactive();
         window._gaq && _gaq.push(['_trackEvent', 'Click', 'Chapter Nav Toggle', 'Close']);
       } else {
-        toggleChapterActiveState();
+        setChaptersActive();
         window._gaq && _gaq.push(['_trackEvent', 'Click', 'Chapter Nav Toggle', 'Open']);
       }
     }
@@ -79,10 +84,14 @@ define([
 
   var toggleChapterState = function() {
     chaptersContainer.toggleClass('pinned-child');
-    chapters
-      .toggleClass('fixed')
-      .removeClass('active')
-      .removeClass('inactive');
+    var fixed = chaptersContainer.hasClass('pinned-child');
+    if (fixed) {
+      chapters.addClass('fixed');
+      positionChaptersInactive();
+    } else {
+      chapters
+        .removeClass('fixed active inactive');
+    }
   };
 
   var scaleTimelapseContainer = function() {
@@ -105,6 +114,7 @@ define([
   var scaleDanielleInterview = function() {
     var element = $('#danielle-interview');
     var width = element.outerWidth();
+    // Maintain the video's w/h ratio
     var height = width * (9/16);
     element.attr('height', height);
   };
@@ -117,9 +127,9 @@ define([
     scaleDanielleInterview();
     if (chapters.hasClass('fixed')) {
       if (chapters.hasClass('active')) {
-        toggleChapterActiveState();
+        setChaptersActive();
       } else {
-        toggleChapterInactiveState();
+        setChaptersInactive();
       }
     }
   }

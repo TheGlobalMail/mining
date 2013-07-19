@@ -46,7 +46,7 @@ define([
   };
 
   var initAudio = function() {
-    $('.ambient-audio').each(function(){
+    $('.ambient-audio').each(function() {
       var container = $(this);
       var id = container.attr('id');
 

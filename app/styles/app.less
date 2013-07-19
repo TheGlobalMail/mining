@@ -136,7 +136,10 @@ a:hover {
     position: fixed;
     top: -154px;
     left: 0;
-    .transition(top 250ms ease-out);
+    &.active,
+    &.inactive {
+      .transition(top 250ms ease-out);
+    }
   }
   button.open {
     color: white;
