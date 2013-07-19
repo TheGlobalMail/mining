@@ -40,17 +40,9 @@ define([
 
     element.find('source').each(function() {
       var source = $(this);
-      var src = source.attr('data-src');
-
-      // Ensure that we always use a complete url, either to the local
-      // server or the CDN. This is only for dev, as the build inserts
-      // explicit urls to the CDN.
-      if (src.match(/\/\//)) {
-        src = root + src;
-      }
 
       source
-        .attr('src', src)
+        .attr('src', source.attr('data-src'))
         .removeAttr('data-src');
     });
   };
