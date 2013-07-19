@@ -85,7 +85,7 @@ define([
     ambientVideos.each(function(){
       var $video = $(this);
 
-      bindSources($video, true);
+      bindSources($video);
 
       var id = $video.attr('id');
 
