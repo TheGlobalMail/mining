@@ -25,9 +25,9 @@ define([
 
   // Final step: display the footer
 
-  var body = $('body');
-  var supportsVideo = body.hasClass('video');
-  var supportsAudio = body.hasClass('audio');
+  var $document = $('html');
+  var supportsVideo = $document.hasClass('video');
+  var supportsAudio = $document.hasClass('audio');
 
   var videos = {};
 
@@ -131,19 +131,22 @@ define([
 
   var init = function() {
 
-    if (config.ambianceEnabled && supportsVideo) {
-
-      initVideos();
-
-      setVideoBindings();
-
-      if (supportsAudio) {
-
-        initAudio();
-
-        setAudioBindings();
-
+    if (config.ambianceEnabled) {
+      if (supportsVideo) {
+        initVideos();
+        setVideoBindings();
+        if (supportsAudio) {
+          initAudio();
+          setAudioBindings();
+        } else {
+          events.trigger('media:ready:audio');
+        }
       }
+    }
+
+    if (!config.ambianceEnabled || !supportsVideo) {
+      events.trigger('media:ready:video');
+      events.trigger('media:ready:audio');
     }
 
     $('.soundcloud-player').scPlayer();
