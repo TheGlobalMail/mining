@@ -26,6 +26,7 @@ define([
   // Cached globals values
   var scrollY;
   var windowHeight;
+  var fixedHeaderHeight;
 
   var _populateConfig = function(selector) {
     $(selector).each(function() {
@@ -101,13 +102,21 @@ define([
     }
   };
 
+  var getScrollYWrapper = function() {
+    return getScrollY() + fixedHeaderHeight;
+  };
+
+  var getWindowHeight = function() {
+    return window.innerHeight - (fixedHeaderHeight);
+  };
+
   var onScroll = function() {
-    scrollY = getScrollY();
+    scrollY = getScrollYWrapper();
     checkElements();
   };
 
   var onResize = function() {
-    windowHeight = window.innerHeight;
+    windowHeight = getWindowHeight();
     initElements();
   };
 
@@ -127,8 +136,10 @@ define([
   };
 
   var init = function() {
-    scrollY = getScrollY();
-    windowHeight = window.innerHeight;
+    fixedHeaderHeight = $('.navbar').outerHeight();
+
+    scrollY = getScrollYWrapper();
+    windowHeight = getWindowHeight();
 
     events.on('layout:end', function() {
       populateConfig();
