@@ -4,39 +4,19 @@ define([
   'events',
   'config',
   './audio_utils',
-  'modernizr',
   // dependencies
   'scPlayer'
-], function($, _, events, config, audio_utils, modernizr) {
+], function($, _, events, config, audio_utils) {
 
-  // TODO: SEQUENTIAL LOADING
+  var videoSupport = !!Modernizr.video;
+  var audioSupport = !!Modernizr.audio;
 
-  // step 1: page & css loaded
-  // display loading screen
-
-  // step 2: first video & audio loaded
-  // show header with bg & audio
-  // show loading icon instead of down arrow
-
-  // Step 3 onwards: successive chapter loads
-  // display the chapter
-  // show loading icons over other chapter's thumbnails
-  // replace header's loading icon with down arrow
-  // display a loading icon at the end of the chapter
-
-  // Final step: display the footer
-
-  var supportsVideo = !!modernizr.video;
-  var supportsAudio = !!modernizr.audio;
+  var mediaSections = [];
 
   var videos = {};
 
-  var CDN = 'bulga.theglobalmail.org';
-
-  var bindSources = function(element, useCDN) {
+  var bindSources = function(element) {
     // Replace data-src attributes with src attributes
-
-    var root = '//' + (useCDN ? CDN : window.location.host);
 
     element.find('source').each(function() {
       var source = $(this);
@@ -59,16 +39,16 @@ define([
         var mediaReady = function() {
           events.trigger('media:ready:audio');
         };
-        if (modernizr.hasEvent('canplaythrough', audio)) {
+        if (Modernizr.hasEvent('canplaythrough', audio)) {
           audio.addEventListener('canplaythrough', mediaReady);
         } else {
           mediaReady();
         }
       }
       bindSources($audio);
-      audio.load();
-
       audio.loop = true;
+
+      audio.load();
 
       // listen to scroll events for this id
       events.on('scroll:enter:' + id, function() {
@@ -89,9 +69,10 @@ define([
     });
 
     ambientVideos.each(function(){
-      var $video = $(this);
+      var video = this;
+      var $video = $(video);
 
-      bindSources($video, true);
+      bindSources($video);
 
       var id = $video.attr('id');
 
@@ -101,11 +82,59 @@ define([
 
       videos[id] = this;
 
-      onAmbientVideoLoad();
+      if (Modernizr.hasEvent('canplaythrough', video)) {
+        video.addEventListener('canplaythrough', onAmbientVideoLoad);
+      } else {
+        onAmbientVideoLoad();
+      }
+
+      events.on('scroll:enter:' + id, function() {
+        videos[id].play();
+      });
+      events.on('scroll:exit:' + id, function() {
+        videos[id].pause();
+      });
     });
   };
 
-  var setAudioBindings = function() {
+  var initMediaSections = function() {
+
+    $('.article-section').each(function() {
+      var element = $(this);
+      var section = {
+        element: element
+      };
+      element.addClass('loading');
+      var mediaSelector = '.ambient-video';
+      if (audioSupport) {
+        mediaSelector += ', .ambient-audio'
+      }
+      section.media = element.find(mediaSelector);
+
+      mediaSections.push(section);
+    });
+  };
+
+  var loadMediaBySection = function() {
+    // TODO: SEQUENTIAL LOADING
+
+    // step 1: page & css loaded
+    // display loading screen
+
+    // step 2: first video & audio loaded
+    // show header with bg & audio
+    // show loading icon instead of down arrow
+
+    // Step 3 onwards: successive chapter loads
+    // display the chapter
+    // show loading icons over other chapter's thumbnails
+    // replace header's loading icon with down arrow
+    // display a loading icon at the end of the chapter
+
+    // Final step: display the footer
+  };
+
+  var bindAudioControl = function() {
 
     var audioControl = $('.audio-control');
     audioControl.find('.toggle').on('click', function() {
@@ -120,37 +149,19 @@ define([
 
   };
 
-  var setVideoBindings = function() {
-
-    $('.ambient-video').each(function() {
-      var element = $(this);
-      var id = element.attr('id');
-      events.on('scroll:enter:' + id, function() {
-        videos[id].play();
-      });
-      events.on('scroll:exit:' + id, function() {
-        videos[id].pause();
-      });
-    });
-
-  };
-
   var init = function() {
 
-    if (config.ambianceEnabled) {
-      if (supportsVideo) {
-        initVideos();
-        setVideoBindings();
-        if (supportsAudio) {
-          initAudio();
-          setAudioBindings();
-        } else {
-          events.trigger('media:ready:audio');
-        }
+    if (config.ambianceEnabled && videoSupport) {
+      initVideos();
+      if (audioSupport) {
+        initAudio();
+        bindAudioControl();
       }
+      initMediaSections();
+      loadMediaBySection();
     }
 
-    if (!config.ambianceEnabled || !supportsVideo) {
+    if (!config.ambianceEnabled || !videoSupport) {
       events.trigger('media:ready:video');
       events.trigger('media:ready:audio');
     }
