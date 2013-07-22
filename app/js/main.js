@@ -9,7 +9,8 @@ require.config({
     scPlayer: './libs/sc-player',
     highcharts: '../components/highcharts.com/js/highcharts.src',
     scrollTo: '../components/jquery.scrollTo/jquery.scrollTo',
-    easing: '../components/jquery-easing/jquery.easing'
+    easing: '../components/jquery-easing/jquery.easing',
+    modernizr: './libs/modernizr'
   },
   shim: {
     backbone: {
@@ -33,6 +34,9 @@ require.config({
     highcharts: {
       deps: ['jquery'],
       exports: 'Highcharts'
+    },
+    modernizr: {
+      exports: 'Modernizr'
     }
   }
 });

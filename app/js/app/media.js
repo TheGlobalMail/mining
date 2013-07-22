@@ -4,9 +4,10 @@ define([
   'events',
   'config',
   './audio_utils',
+  'modernizr',
   // dependencies
   'scPlayer'
-], function($, _, events, config, audio_utils) {
+], function($, _, events, config, audio_utils, modernizr) {
 
   // TODO: SEQUENTIAL LOADING
 
@@ -25,9 +26,8 @@ define([
 
   // Final step: display the footer
 
-  var $document = $('html');
-  var supportsVideo = $document.hasClass('video');
-  var supportsAudio = $document.hasClass('audio');
+  var supportsVideo = !!modernizr.video;
+  var supportsAudio = !!modernizr.audio;
 
   var videos = {};
 
@@ -55,16 +55,20 @@ define([
       var $audio = $(this).find('audio').first();
       var audio = $audio.get(0);
 
-      bindSources($audio);
-
-      audio.load();
-      audio.loop = true;
-
       if (id.match(/opener-birdsong/)) {
-        audio.addEventListener('canplaythrough', function() {
+        var mediaReady = function() {
           events.trigger('media:ready:audio');
-        });
+        };
+        if (modernizr.hasEvent('canplaythrough', audio)) {
+          audio.addEventListener('canplaythrough', mediaReady);
+        } else {
+          mediaReady();
+        }
       }
+      bindSources($audio);
+      audio.load();
+
+      audio.loop = true;
 
       // listen to scroll events for this id
       events.on('scroll:enter:' + id, function() {
