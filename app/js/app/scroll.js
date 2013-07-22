@@ -12,7 +12,7 @@ define([
     selector: '.article-header',
     eventIdentifier: 'intro'
   }, {
-    selector: '.chapters-container',
+    selector: '#chapters-container',
     eventIdentifier: 'chapters-container',
     filter: {
       exit: function(obj) {
@@ -46,20 +46,22 @@ define([
     _populateConfig('.ambient-video, .ambient-audio, #footer');
   };
 
-  var initElements = function() {
-    // Calculate the position of each element and cache
+  var _initElement = function(obj) {
+    // Calculate the position of an element and cache
     // as many values as possible
 
-    _.map(elementsToWatch, function(obj) {
-      var element = $(obj.selector);
-      var offset = element.offset();
-      offset.bottom = offset.top + element.outerHeight();
-      return _.extend(obj, {
-        element: element,
-        offset: offset,
-        inViewport: false
-      });
+    var element = $(obj.selector);
+    var offset = element.offset();
+    offset.bottom = offset.top + element.outerHeight();
+    return _.extend(obj, {
+      element: element,
+      offset: offset,
+      inViewport: false
     });
+  };
+
+  var initElements = function() {
+    _.map(elementsToWatch, _initElement);
   };
 
   var offsetInViewport = function(offset, resetScrollY) {
@@ -72,34 +74,35 @@ define([
     );
   };
 
-  var checkElements = function() {
-    // Check if each element is within the viewport and trigger
+  var _checkElement = function(obj) {
+    // Check if an element is within the viewport and trigger
     // events when an element enters or exits.
 
-    for (var i = 0; i < elementsToWatch.length; i++) {
-      var obj = elementsToWatch[i];
-      var offset = obj.offset;
-      var event = null;
+    var offset = obj.offset;
+    var event = null;
 
-      var inViewport = offsetInViewport(offset);
+    var inViewport = offsetInViewport(offset);
 
-      var eventIdentifier = obj.eventIdentifier;
+    var eventIdentifier = obj.eventIdentifier;
 
-      if (inViewport && !obj.inViewport) {
-        obj.inViewport = true;
-        event = 'scroll:enter:' + eventIdentifier;
-      } else if (!inViewport && obj.inViewport) {
-        obj.inViewport = false;
-        if (obj.filter && obj.filter.exit && !obj.filter.exit(obj)) {
-          continue;
-        }
-        event = 'scroll:exit:' + eventIdentifier;
+    if (inViewport && !obj.inViewport) {
+      obj.inViewport = true;
+      event = 'scroll:enter:' + eventIdentifier;
+    } else if (!inViewport && obj.inViewport) {
+      obj.inViewport = false;
+      if (obj.filter && obj.filter.exit && !obj.filter.exit(obj)) {
+        return;
       }
-
-      if (event) {
-        events.trigger(event);
-      }
+      event = 'scroll:exit:' + eventIdentifier;
     }
+
+    if (event) {
+      events.trigger(event);
+    }
+  };
+
+  var checkElements = function() {
+    _.each(elementsToWatch, _checkElement);
   };
 
   var getScrollYWrapper = function() {
@@ -133,6 +136,19 @@ define([
     $(window).on('scroll', _.throttle(onScroll, 50));
     $(window).on('resize', _.debounce(onResize, 50));
     events.on('layout:change', _.throttle(onResize, 100));
+
+    $('article-section').each(function() {
+      var element = $(this);
+      if (element.attr('id') !== undefined) {
+        events.on('media:section:loaded:' + element.attr('id'), function() {
+          _.each(elementsToWatch, function(obj) {
+            if (obj.element.is(element)) {
+              _checkElement(element);
+            }
+          });
+        });
+      }
+    });
   };
 
   var init = function() {

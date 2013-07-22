@@ -28,47 +28,22 @@ define([
   };
 
   var initAudio = function() {
+
     $('.ambient-audio').each(function() {
       var container = $(this);
       var id = container.attr('id');
 
-      var $audio = $(this).find('audio').first();
+      var $audio = container.find('audio').first();
       var audio = $audio.get(0);
 
-      if (id.match(/opener-birdsong/)) {
-        var mediaReady = function() {
-          events.trigger('media:ready:audio');
-        };
-        if (Modernizr.hasEvent('canplaythrough', audio)) {
-          audio.addEventListener('canplaythrough', mediaReady);
-        } else {
-          mediaReady();
-        }
-      }
-      bindSources($audio);
       audio.loop = true;
-
-      audio.load();
-
-      // listen to scroll events for this id
-      events.on('scroll:enter:' + id, function() {
-        audio_utils.fadeIn(audio);
-      });
-      events.on('scroll:exit:' + id , function() {
-        audio_utils.fadeOut(audio);
-      });
+      bindSources($audio);
     });
   };
 
   var initVideos = function(){
 
-    var ambientVideos = $('.ambient-video');
-
-    var onAmbientVideoLoad = _.after(ambientVideos.length, function() {
-      events.trigger('media:ready:video');
-    });
-
-    ambientVideos.each(function(){
+    $('.ambient-video').each(function(){
       var video = this;
       var $video = $(video);
 
@@ -78,22 +53,6 @@ define([
 
       this.loop = true;
       this.volume = 0;
-      this.load();
-
-      videos[id] = this;
-
-      if (Modernizr.hasEvent('canplaythrough', video)) {
-        video.addEventListener('canplaythrough', onAmbientVideoLoad);
-      } else {
-        onAmbientVideoLoad();
-      }
-
-      events.on('scroll:enter:' + id, function() {
-        videos[id].play();
-      });
-      events.on('scroll:exit:' + id, function() {
-        videos[id].pause();
-      });
     });
   };
 
@@ -101,17 +60,19 @@ define([
 
     $('.article-section').each(function() {
       var element = $(this);
-      var section = {
-        element: element
-      };
       element.addClass('loading');
+
+      // Pull in all the media that we're supporting
       var mediaSelector = '.ambient-video';
       if (audioSupport) {
         mediaSelector += ', .ambient-audio'
       }
-      section.media = element.find(mediaSelector);
+      var media = element.find(mediaSelector);
 
-      mediaSections.push(section);
+      mediaSections.push({
+        element: element,
+        media: media
+      });
     });
   };
 
@@ -132,6 +93,55 @@ define([
     // display a loading icon at the end of the chapter
 
     // Final step: display the footer
+
+    _.each(mediaSections, function(section, i) {
+
+      // When this section's loading has been triggered
+      events.on('media:load-section:' + i, function() {
+
+        // When this section has loaded
+        var onMediaLoad = _.after(section.media.length, function() {
+          section.element.removeClass('loading');
+          setTimeout(function() {
+            events.trigger('media:load-section:' + (i + 1));
+          }, 2000);
+          // Trigger loading on the next section
+          // Notify that this section has loaded
+          events.trigger('media:section-loaded:' + (section.element.attr('id') || i));
+        });
+
+        // Trigger loading of each media element
+        section.media.each(function() {
+          var element = $(this);
+          var id = element.attr('id');
+          var mediaElement = this;
+          if (element.hasClass('ambient-audio')) {
+            mediaElement = element.find('audio').get(0);
+          }
+
+          if (Modernizr.hasEvent('canplaythrough', mediaElement)) {
+            mediaElement.addEventListener('canplaythrough', onMediaLoad);
+          } else {
+            onMediaLoad();
+          }
+
+          mediaElement.load();
+
+          events.on('scroll:enter:' + id, function() {
+            mediaElement.play();
+          });
+          events.on('scroll:exit:' + id, function() {
+            mediaElement.pause();
+          });
+        });
+
+      });
+
+    });
+
+    _.defer(function() {
+      events.trigger('media:load-section:0');
+    });
   };
 
   var bindAudioControl = function() {

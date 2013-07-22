@@ -21,6 +21,7 @@ body {
   color: #222;
   &.loading {
     height: 100%;
+    width: 100%;
     position: fixed;
     overflow: hidden;
     background: rgba(22,22,21,.9) url('/images/noise-overlay.png') center center repeat;
@@ -87,7 +88,29 @@ a:hover {
   @-ms-keyframes spin {.rotation-frames}
   @-o-keyframes spin {.rotation-frames}
   @keyframes spin {.rotation-frames}
-  .pre-load & {
+  .pre-load &,
+  .section-load-background & {
+    display: block;
+  }
+}
+
+.section-load-background {
+  height: 100px;
+  display: none;
+  background-color: #222;
+  #gradient.vertical-three-colors(#000,#111,2%,#222);
+  .pre-load-background {
+    height: 100px;
+    position: static;
+  }
+}
+
+.article-section.loading {
+  height: 0 !important;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  & + .section-load-background {
     display: block;
   }
 }
@@ -119,7 +142,7 @@ a:hover {
 //CHAPTER CONTROLS
 // This is a hack to get around any millisecond delays in the
 // the browsers positioning of the element after `fixed` is removed.
-.chapters-container.pinned-child {
+#chapters-container.pinned-child {
   background: rgba(22,22,21,.9) url('/images/noise-overlay.png') center center repeat;
 }
 .chapters {

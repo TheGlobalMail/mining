@@ -47,7 +47,9 @@ define([
   var scaleChapterContainer = function() {
     // Expand the placeholder to prevent the pinning of the
     // chapters from changing the positioning of other elements
-    chaptersContainer.css('height', chapters.outerHeight(true));
+    if (!chaptersContainer.hasClass('loading')) {
+      chaptersContainer.css('height', chapters.outerHeight(true));
+    }
   };
 
   var positionChaptersInactive = function() {
@@ -143,6 +145,7 @@ define([
 
     $(window).on('resize', _.debounce(scaleLayout, 50));
 
+    events.on('media:section-loaded:chapters-container', scaleChapterContainer);
     events.on('scroll:enter:chapters-container', function() {
       if (chapters.hasClass('fixed')) {
         toggleChapterState();
@@ -162,7 +165,7 @@ define([
     introImage = introContainer.find('img');
     introh1 = introContainer.find('h1');
     videoContainers = $('.video-container');
-    chaptersContainer = $('.chapters-container');
+    chaptersContainer = $('#chapters-container');
     chapters = chaptersContainer.find('.chapters');
     chaptersButton = chapters.find('.open');
 

@@ -15,8 +15,7 @@ define([
 
   var removeGlobalLoadingAfter = [
     'scroll:end',
-    'media:ready:audio',
-    'media:ready:video'
+    'media:section-loaded:0'
   ];
   var removeGlobalLoading = _.after(removeGlobalLoadingAfter.length, function() {
     body.removeClass('loading');
