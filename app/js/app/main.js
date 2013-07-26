@@ -7,8 +7,9 @@ define([
   './visualisations',
   './scroll',
   './chapters',
-  './analytics'
-], function($, _, events, layout, media, visualisations, scroll, chapters, analytics) {
+  './analytics',
+  './elements'
+], function($, _, events, layout, media, visualisations, scroll, chapters, analytics, elements) {
   'use strict';
 
   var body;
@@ -39,6 +40,7 @@ define([
     chapters.init();
     scroll.init();
     analytics.init();
+    elements.init();
 
     _.defer(function() {
       events.trigger('init:end');

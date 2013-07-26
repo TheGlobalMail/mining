@@ -7,7 +7,7 @@ define([
     window._gaq && _gaq.push(['_trackEvent', 'Page load']);
 
     // Log the user passing the fold
-    events.on('scroll:exit:intro', function() {
+    events.on('scroll:exit:article-header', function() {
       window._gaq && _gaq.push(['_trackEvent', 'Read to', 'ID', 'The fold']);
     });
 

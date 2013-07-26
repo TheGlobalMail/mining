@@ -161,7 +161,7 @@ define([
 
   var init = function() {
     navBar = $('.navbar');
-    introContainer = $('.article-header');
+    introContainer = $('#article-header');
     introImage = introContainer.find('img');
     introh1 = introContainer.find('h1');
     videoContainers = $('.video-container');

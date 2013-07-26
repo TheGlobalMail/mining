@@ -23,7 +23,7 @@
 .videoFallbacks() {
   article {
     // video fallbacks (mobile)
-    .article-header {
+    #article-header {
       video { display: none; };
       .videoFallback('Opener');
     }
@@ -117,7 +117,7 @@ html.ie6, html.ie7, html.ie8 {
       margin-left: 10%;
       margin-right: 10%;
     }
-    .article-header{
+    #article-header{
       background-position-x: center;
       background-repeat: no-repeat;
       background-position-y: center;
@@ -198,7 +198,7 @@ article {
         .font-size(@parFontSize);
       }
     }
-    .article-header {
+    #article-header {
       h1 {
         .font-size(110);
       }
@@ -297,7 +297,7 @@ article {
   }
   article {
     @parFontSize: 16;
-    .article-header {
+    #article-header {
       h1 {
         .font-size(100);
       }
@@ -428,7 +428,7 @@ article {
     }
   }
   article {
-    .article-header {
+    #article-header {
       h1 {
         .font-size(60);
       }
@@ -615,7 +615,7 @@ article {
   }
   article {
     @parFontSize: 16;
-    .article-header {
+    #article-header {
       background-attachment: scroll;
       .box-shadow(inset 0 0 150px rgba(0,0,0,0.8));
       h1 {
@@ -846,7 +846,7 @@ article {
 // SHORT DESKTOP DIPLAYS  
 @media only screen and (max-height: @smallerWidth) and (min-width: @smallerWidth) {
   article {
-    .article-header {
+    #article-header {
       h1 {
         .font-size(80);
       }

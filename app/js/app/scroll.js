@@ -8,10 +8,11 @@ define([
   'scrollTo'
 ], function ($, _, events, config, getScrollY) {
 
+  var selectorsToWatch = [
+
+  ];
+
   var elementsToWatch = [{
-    selector: '.article-header',
-    eventIdentifier: 'intro'
-  }, {
     selector: '#chapters-container',
     eventIdentifier: 'chapters-container',
     filter: {
@@ -32,16 +33,21 @@ define([
     $(selector).each(function() {
       var element = $(this);
       var id = element.attr('id');
-      elementsToWatch.push({
-        selector: '#' + id,
-        eventIdentifier: id
+      var matches = _(elementsToWatch).filter(function(obj) {
+        return obj.selector = selector;
       });
+      if (!matches.length) {
+        elementsToWatch.push({
+          selector: '#' + id,
+          eventIdentifier: id
+        });
+      }
     });
   };
 
   var populateConfig = function() {
-    _.each(_.range(1, 7), function(num) {
-      _populateConfig('#chapter' + num);
+    $('.article-section').each(function() {
+      _populateConfig('#' + $(this).attr('id'));
     });
     _populateConfig('.ambient-video, .ambient-audio, #footer');
   };
@@ -164,25 +170,6 @@ define([
       setBindings();
       checkElements();
       events.trigger('scroll:end');
-    });
-
-    $('a[data-return-to-main]').on('click', function(e){
-      e.preventDefault();
-      var options = {
-        duration: 2000,
-        easing: 'easeInOutCubic'
-      };
-      $.scrollTo('#main', options);
-    });
-
-    $('#story-kickoff').on('click', function(e){
-      e.preventDefault();
-      var options = {
-        duration: 700,
-        easing: 'easeInOutCubic'
-      };
-      $.scrollTo('#chapter1', options);
-      window._gaq && _gaq.push(['_trackEvent', 'Click', 'ID', 'Story kickoff arrow']);
     });
 
     // Bit of a hack to trigger scroll events immediately after audio is loaded
