@@ -56,7 +56,7 @@ define([
       $video.find('source').each(function() {
         var element = $(this);
         var src = element.attr('data-src');
-        element.attr('src', '//bulga.theglobalmail.org' + src);
+        element.attr('src', src);
       });
       var id = $video.attr('id');
       if (!id) {

@@ -10,7 +10,7 @@ require.config({
     videojs: './libs/video.dev',
     bootstrapSwitch: '../components/bootstrap-switch/static/js/bootstrap-switch',
     scPlayer: './libs/sc-player',
-    highcharts: '../components/highcharts.com/js/highcharts.src',
+    highcharts: './libs/highcharts',
     scrollTo: '../components/jquery.scrollTo/jquery.scrollTo',
     easing: '../components/jquery-easing/jquery.easing'
   },

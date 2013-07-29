@@ -354,26 +354,27 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', function(target) {
     // Build and deploy
 
-    var tasks = [
-      'build'
-    ];
-
     if (process.env['RACKSPACE_API_KEY'] === undefined) {
       throw new TypeError('Specify the `RACKSPACE_API_KEY` property in local_config.json');
     }
 
     // Deploy targets
     var targetToTask = {
-      'production': 'cloudfiles:dist',
-      'staging': 'cloudfiles:staging'
+      production: [
+        'build:dist',
+        'cloudfiles:dist'
+      ],
+      staging: [
+        'build:staging',
+        'cloudfiles:staging'
+      ]
     };
 
     if (targetToTask[target] === undefined) {
       throw new TypeError('Select a target destination from: ' + _(targetToTask).keys().join(', '));
     }
 
-    tasks = tasks.concat([
-      targetToTask[target],
+    var tasks = targetToTask[target].concat([
       'clean:dist'
     ]);
 
