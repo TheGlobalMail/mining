@@ -16,7 +16,7 @@ define([
 
   var removeGlobalLoadingAfter = [
     'scroll:end',
-    'media:section-loaded:0'
+    'media:section-loaded:article-header'
   ];
   var removeGlobalLoading = _.after(removeGlobalLoadingAfter.length, function() {
     body.removeClass('loading');

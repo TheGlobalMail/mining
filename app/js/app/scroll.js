@@ -8,10 +8,6 @@ define([
   'scrollTo'
 ], function ($, _, events, config, getScrollY) {
 
-  var selectorsToWatch = [
-
-  ];
-
   var elementsToWatch = [{
     selector: '#chapters-container',
     eventIdentifier: 'chapters-container',
@@ -29,28 +25,28 @@ define([
   var windowHeight;
   var fixedHeaderHeight;
 
-  var _populateConfig = function(selector) {
-    $(selector).each(function() {
-      var element = $(this);
-      var id = element.attr('id');
-      var matches = _(elementsToWatch).filter(function(obj) {
-        return obj.selector = selector;
-      });
-      if (!matches.length) {
-        elementsToWatch.push({
-          selector: '#' + id,
-          eventIdentifier: id
-        });
-      }
-    });
-  };
-
-  var populateConfig = function() {
-    $('.article-section').each(function() {
-      _populateConfig('#' + $(this).attr('id'));
-    });
-    _populateConfig('.ambient-video, .ambient-audio, #footer');
-  };
+//  var _populateConfig = function(selector) {
+//    $(selector).each(function() {
+//      var element = $(this);
+//      var id = element.attr('id');
+//      var matches = _(elementsToWatch).filter(function(obj) {
+//        return obj.selector = selector;
+//      });
+//      if (!matches.length) {
+//        elementsToWatch.push({
+//          selector: '#' + id,
+//          eventIdentifier: id
+//        });
+//      }
+//    });
+//  };
+//
+//  var populateConfig = function() {
+//    $('.article-section').each(function() {
+//      _populateConfig('#' + $(this).attr('id'));
+//    });
+//    _populateConfig('.ambient-video, .ambient-audio, #footer');
+//  };
 
   var _initElement = function(obj) {
     // Calculate the position of an element and cache
@@ -143,18 +139,18 @@ define([
     $(window).on('resize', _.debounce(onResize, 50));
     events.on('layout:change', _.throttle(onResize, 100));
 
-    $('article-section').each(function() {
-      var element = $(this);
-      if (element.attr('id') !== undefined) {
-        events.on('media:section:loaded:' + element.attr('id'), function() {
-          _.each(elementsToWatch, function(obj) {
-            if (obj.element.is(element)) {
-              _checkElement(element);
-            }
-          });
-        });
-      }
-    });
+//    $('.article-section').each(function() {
+//      var element = $(this);
+//      if (element.attr('id') !== undefined) {
+//        events.on('media:section:loaded:' + element.attr('id'), function() {
+//          _.each(elementsToWatch, function(obj) {
+//            if (obj.element.is(element)) {
+//              _checkElement(element);
+//            }
+//          });
+//        });
+//      }
+//    });
   };
 
   var init = function() {
@@ -164,10 +160,9 @@ define([
     windowHeight = getWindowHeight();
 
     events.on('layout:end', function() {
-      populateConfig();
+//      populateConfig();
       setBindings();
-      initElements();
-      setBindings();
+//      initElements();
       checkElements();
       events.trigger('scroll:end');
     });

@@ -118,6 +118,7 @@ define([
           if (element.hasClass('ambient-audio')) {
             mediaElement = element.find('audio').get(0);
           }
+          var tagName = $(mediaElement).prop('tagName');
 
           if (Modernizr.hasEvent('canplaythrough', mediaElement)) {
             mediaElement.addEventListener('canplaythrough', onMediaLoad);
@@ -128,10 +129,18 @@ define([
           mediaElement.load();
 
           events.on('scroll:enter:' + id, function() {
-            mediaElement.play();
+            if (tagName === 'audio') {
+              audio_utils.fadeIn(mediaElement);
+            } else if (tagName === 'video') {
+              mediaElement.play();
+            }
           });
           events.on('scroll:exit:' + id, function() {
-            mediaElement.pause();
+            if (tagName === 'audio') {
+              audio_utils.fadeOut(mediaElement);
+            } else if (tagName === 'video') {
+              mediaElement.pause();
+            }
           });
         });
 
