@@ -143,7 +143,6 @@ define([
 
     events.on('layout:end', function() {
       populateConfig();
-      setBindings();
       initElements();
       setBindings();
       checkElements();
